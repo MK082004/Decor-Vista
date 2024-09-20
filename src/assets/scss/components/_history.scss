@@ -1,0 +1,58 @@
+.history {
+  &__tab {
+    &-nav {
+      @extend %flex,
+      %align-i-center;
+      gap: 1rem;
+
+      @include breakpoint(md) {
+        gap: 1.5rem
+      }
+    }
+
+    &-btn {
+      @include font-size(24px);
+      background-color: $section-bg-color;
+      border: none;
+      border-radius: .25rem;
+      color: $title-color;
+      font-weight: 500;
+      flex: 1;
+      padding: 1rem 1.5rem;
+
+      &.active {
+        background-color: $theme-color !important;
+      }
+    }
+
+    &-details {
+      @extend %p-30,
+      %flex,
+      %align-i-center;
+      background-color: $section-bg-color;
+      gap: 30px;
+
+      @include breakpoint(xl) {
+        padding: 50px;
+        gap: 50px;
+      }
+
+    }
+
+    &-content {
+      h3 {
+        @extend %mb-20;
+      }
+
+      @include breakpoint(xl) {
+        flex: 1;
+      }
+    }
+
+    &-image {
+      @include breakpoint(xl) {
+        flex: 1;
+      }
+    }
+  }
+}

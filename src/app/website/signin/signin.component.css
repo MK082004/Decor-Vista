@@ -1,0 +1,8 @@
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  height: 35px !important;
+}
+
+::ng-deep .mat-form-field-subscript-wrapper {
+  margin-top: 3em !important;
+  margin-left: -0.8em;
+}

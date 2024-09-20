@@ -1,0 +1,17 @@
+.sponsor {
+  padding-block: 50px;
+
+  @include breakpoint(lg) {
+    padding-block: 60px;
+  }
+
+  &__item {
+    @extend %d-grid,
+    %place-i-center;
+    height: 90px;
+
+    img {
+      display: block;
+    }
+  }
+}

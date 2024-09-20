@@ -1,0 +1,73 @@
+.gallery {
+  &__grid {
+    &-image {
+      @extend %p-rel,
+      %of-hidden;
+      border-radius: .25rem;
+
+      &:after {
+        @extend %p-abs,
+        %h-100,
+        %w-100;
+        @include add-prefix(transition, $transition);
+        @include add-prefix(transform, translate(-50%, -50%) scale(0));
+        background-color: rgba($black-color, $alpha: .8);
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        opacity: 0;
+      }
+
+      img {
+        @extend %w-100;
+        @include add-prefix(transition, $transition);
+        object-fit: cover;
+      }
+
+      &:hover {
+        &:after {
+          @include add-prefix(transform, translate(-50%, -50%) scale(1.5));
+          opacity: 1;
+        }
+
+        img {
+          @include add-prefix(transform, scale(1.1));
+        }
+
+        .gallery__view {
+          &-btn {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  &__view {
+    &-btn {
+      @extend %p-abs,
+      %d-grid,
+      %place-i-center;
+      @include add-prefix(transition, $transition);
+      @include add-prefix(transform, translate(-50%, -50%));
+      @include box(50px);
+      background-color: $theme-color;
+      border-radius: 50%;
+      color: $title-color;
+      top: 50%;
+      left: 50%;
+      z-index: 2;
+      opacity: 0;
+
+      i,
+      svg {
+        @include font-size(24px);
+        color: inherit;
+      }
+
+      &:hover {
+        color: $title-color;
+      }
+    }
+  }
+}

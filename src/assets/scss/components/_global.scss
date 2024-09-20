@@ -1,0 +1,216 @@
+//Global Form select style.
+
+
+//Custom Cursor Effect
+body #magicMouseCursor {
+  border-color: $theme-color;
+}
+
+.form-select {
+  background-image: none;
+  color: $text-color;
+}
+
+.form-control {
+  background-color: $white-color;
+  padding-inline: 1.5rem;
+
+  &::placeholder {
+    color: $text-color;
+    opacity: .7;
+  }
+
+  &:focus {
+    box-shadow: none;
+    border-color: $theme-color;
+  }
+
+  &.date-input {
+    @extend %c-pointer;
+    background-color: $white-color;
+  }
+
+  &.textarea {
+    min-height: 160px;
+    padding-block: 1rem;
+  }
+
+  &:not(textarea) {
+    height: 56px;
+  }
+
+}
+
+.form-check-input {
+
+
+  &:checked {
+    background-color: $theme-color;
+    border-color: $theme-color;
+  }
+
+  &:focus {
+    border-color: rgba($theme-color, $alpha: .7);
+    box-shadow: 0 0 0 .25rem rgba($theme-color, $alpha:.30);
+  }
+}
+
+.form-label {
+  color: $title-color;
+  font-weight: 600;
+}
+
+
+//default breadcrumb style
+.breadcrumb {
+  &-item {
+    @extend %text-semibold;
+
+    a {
+      color: $white-color;
+    }
+
+    &.active {
+      color: $theme-color;
+    }
+  }
+}
+
+
+//default pagination
+.pagination {
+  gap: 10px;
+
+  .page-item {
+    &:first-child .page-link {
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+    }
+
+    &:last-child .page-link {
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+
+    &.active {
+      .page-link {
+        background-color: $theme-color;
+        color: $black-color;
+        border-color: rgba($theme-color, $alpha: .2);
+      }
+    }
+
+    &.disabled {
+      .page-link {
+        background-color: rgba($section-bg-color, $alpha: .2);
+        color: $text-color;
+        border-color: rgba($theme-color, $alpha: .2);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .page-link {
+    @extend %d-inline-grid,
+    %place-i-center,
+    %text-bold;
+    @include box(50px);
+    background-color: $section-bg-color;
+    border-color: rgba($theme-color, $alpha: .2);
+    border-radius: 50%;
+    color: $text-color;
+
+
+    &:hover {
+      background-color: $theme-color;
+      color: $black-color;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+
+
+//date picker default theme color 
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected.inRange,
+.flatpickr-day.startRange.inRange,
+.flatpickr-day.endRange.inRange,
+.flatpickr-day.selected:focus,
+.flatpickr-day.startRange:focus,
+.flatpickr-day.endRange:focus,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover,
+.flatpickr-day.selected.prevMonthDay,
+.flatpickr-day.startRange.prevMonthDay,
+.flatpickr-day.endRange.prevMonthDay,
+.flatpickr-day.selected.nextMonthDay,
+.flatpickr-day.startRange.nextMonthDay,
+.flatpickr-day.endRange.nextMonthDay {
+  background: $theme-color;
+  border-color: $theme-color;
+  color: $title-color;
+}
+
+
+
+
+
+//common filter button
+.common-filter {
+  @extend %flex,
+  %align-i-center;
+  gap: 20px;
+
+  &__btn {
+    @extend %d-inline-grid,
+    %place-i-center,
+    %text-semibold,
+    %text-uppercase;
+    @include add-prefix(transition, $transition);
+    background-color: $section-bg-color;
+    border: 0;
+    border-radius: .25rem;
+    padding: .65rem 1.25rem;
+
+    &:hover,
+    &.active {
+      background-color: $theme-color;
+    }
+  }
+}
+
+
+// scrollTop
+.scrollToTop {
+  position: fixed;
+  bottom: -30%;
+  right: 5%;
+  z-index: 99;
+  @extend %d-inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  @extend %text-center;
+  color: $white-color;
+  background: $theme-color;
+
+  @include add-prefix(transition, $transition);
+
+  i,
+  svg {
+    color: $title-color;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 20px 0px rgba($theme-color, $alpha: .50);
+  }
+}

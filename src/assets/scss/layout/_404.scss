@@ -1,0 +1,20 @@
+.error {
+  @extend %d-grid,
+  %place-i-center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+
+  &__content {
+    @extend %text-center;
+
+    h1 {
+      @include font-size(300px);
+      color: $theme-color;
+    }
+
+    h2 {
+      color: $white-color;
+    }
+  }
+}

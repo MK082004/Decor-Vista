@@ -1,0 +1,292 @@
+.service {
+  @extend %of-hidden;
+
+  &__wrapper {
+    @extend %p-rel;
+
+
+    &--home1 {
+      @include breakpoint(lg) {
+        padding-inline: 8%;
+      }
+    }
+  }
+
+  &__slider {
+
+    &-prev,
+    &-next {
+      @extend %d-none;
+
+      @include breakpoint(lg) {
+        @include box(60px);
+        @include add-prefix(transition, $transition);
+        @include add-prefix(transform, translateY(-50%));
+        border: 2px solid $theme-color;
+        border-radius: 50%;
+        display: inline-grid;
+        place-items: center;
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+      }
+
+      i,
+      svg {
+        @include font-size(20px);
+        @include add-prefix(transition, $transition);
+        color: $theme-color;
+      }
+
+      &:hover,
+      &.active {
+        background-color: $theme-color;
+
+        i,
+        svg {
+          color: $white-color;
+        }
+      }
+    }
+
+    &-prev {
+      left: 0;
+    }
+
+    &-next {
+      right: 0;
+    }
+  }
+
+
+
+  &__item1 {
+    background-color: $white-color;
+    box-shadow: 0px 4px 15px rgba(228, 226, 238, 0.8);
+
+    &-inner {
+
+      @include breakpoint(lg) {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+      }
+    }
+
+    &-thumb {
+      flex: 1;
+
+      img {
+        @extend %w-100,
+        %h-100;
+        object-fit: cover;
+      }
+    }
+
+    &-content {
+      @extend %p-25;
+      flex: 1;
+
+      @include breakpoint(xl) {
+        padding: 50px;
+      }
+    }
+  }
+
+  &__item2 {
+    &-inner {
+      @extend %p-30,
+      %text-center;
+      @include add-prefix(transition, $transition);
+      border: 2px solid $border-color;
+      border-radius: .25rem;
+    }
+
+    &-thumb {
+      @extend %d-inline-grid,
+      %place-i-center,
+      %mb-25;
+      @include add-prefix(transition, $transition);
+      @include box(80px);
+      background-color: $white-color;
+      border-radius: .25rem;
+    }
+
+    &-content {
+      p {
+        @extend %mb-0;
+      }
+    }
+
+    &:hover {
+      .service__item2 {
+        &-inner {
+          background-color: $white-color;
+        }
+
+        &-thumb {
+          background-color: $theme-color;
+        }
+      }
+    }
+  }
+
+
+
+  &__aminities {
+    @extend %mb-35,
+    %mt-25;
+
+    &-item {
+      @extend %flex,
+      %align-i-start;
+      gap: 10px;
+
+      &:not(:last-child) {
+        @extend %mb-20;
+      }
+    }
+
+    &-name {
+      @extend %flex,
+      %align-i-center,
+      %p-rel;
+      gap: 10px;
+      flex: 1.6;
+
+      @include breakpoint(sm) {
+        flex: 1.1;
+      }
+
+      &:after {
+        @extend %p-abs;
+        @include font-size($fs-h5);
+        content: ':';
+        color: $title-color;
+        font-family: $title-font;
+        font-weight: 700;
+        right: 0;
+
+        @include breakpoint(sm) {
+          right: 30px;
+        }
+
+        @include breakpoint(lg) {
+          right: 0;
+        }
+
+        @include breakpoint(xl) {
+          right: 10px;
+        }
+
+        @include breakpoint(xxl) {
+          right: 30px;
+        }
+      }
+
+
+      h5 {
+        @extend %mb-0;
+      }
+
+      i,
+      svg {
+        color: $theme-color;
+      }
+    }
+
+    &-value {
+      @extend %mb-0;
+      @include font-size(20px);
+      flex: 1;
+      line-height: 1.3;
+    }
+  }
+
+
+
+  /*============<< Service Details CSS Start here>>======*/
+  &__details {
+    @extend %of-hidden;
+    background-color: $section-bg-color;
+    border-radius: .25rem;
+
+    &-image {
+      @extend %mb-10;
+    }
+
+    &-content {
+      @extend %p-30;
+
+      .rating {
+        @extend %mb-10;
+      }
+
+      >h3 {
+        @extend %mb-30;
+      }
+
+      .room__feature {
+        @extend %flex,
+        %justify-between;
+
+        @include breakpoint(lg) {
+          max-width: 80%;
+        }
+
+        &-item {
+          @extend %flex-column;
+        }
+      }
+    }
+  }
+
+
+  /*=============<< Sevice Video Start herer >>=============*/
+  &__video {
+    &-wrapper {
+      @extend %p-rel,
+      %of-hidden;
+      border-radius: .25rem;
+
+      img {
+        @extend %w-100,
+        %h-100;
+        object-fit: cover;
+      }
+
+      &::after {
+        @extend %p-abs,
+        %w-100,
+        %h-100;
+        left: 0;
+        top: 0;
+        background-color: rgba($black-color, $alpha: .50);
+      }
+    }
+
+    &-btn {
+      @extend %p-abs,
+      %d-grid,
+      %place-i-center;
+      @include add-prefix(transform, translate(-50%, -50%));
+      @include add-prefix(transition, $transition);
+      @include box(50px);
+      @include font-size(20px);
+      background-color: $white-color;
+      border-radius: 50%;
+      color: $theme-color;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+
+      @include breakpoint(lg) {
+        @include box(60px);
+      }
+
+      &:hover {
+        @include add-prefix(transform, translate(-50%, -50%) scale(1.1));
+      }
+    }
+  }
+}

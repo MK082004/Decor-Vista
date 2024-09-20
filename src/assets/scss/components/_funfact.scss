@@ -1,0 +1,109 @@
+.funfact {
+  @extend %of-hidden,
+  %p-rel;
+
+&--shape{
+  @extend %p-rel;
+  &:after{
+    @include breakpoint(lg){
+      background-image: url(../images/funfact/shape.png);
+      background-size: cover;
+      position: absolute;
+      content: "";
+      width: 50%;
+      height: 100%;
+      left: 0;
+      top: 0;
+
+    }
+  }
+}
+
+  &__video {
+    @extend %h-100;
+
+    @include breakpoint(lg) {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 50%;
+      height: 100%;
+    }
+
+    img {
+      @extend %w-100,
+      %h-100;
+      object-fit: cover;
+      filter: brightness(.35);
+    }
+
+    &-wrapper {
+      @extend %p-rel,
+      %h-100;
+    }
+
+    &-play {
+      @extend %p-abs,
+      %d-inline-grid,
+      %place-i-center;
+      @include box(60px);
+      @include add-prefix(transform, translate(-50%, -50%));
+      background-color: $white-color;
+      border: 2px solid $white-color;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+  &__content {
+    @extend %h-100,
+    %d-grid,
+    %align-c-center;
+
+
+    .common-header {
+      h2 {
+        max-inline-size: 100%;
+      }
+    }
+
+    >p {
+      max-inline-size: 60ch;
+    }
+
+    @include breakpoint(lg) {
+      padding-inline-end: 60px;
+      padding-block-end: 80px;
+    }
+
+    @include breakpoint(xl) {
+      padding-block-end: 120px;
+    }
+  }
+
+
+  &__list {
+    @extend %flex,
+    %justify-between,
+    %mt-25;
+    gap: 1rem;
+  }
+
+  &__item {
+    &-icon {
+      @extend %mb-20;
+    }
+
+    &-content {
+      h3 {
+        @extend %mb-0;
+      }
+
+      p {
+        color: $title-color;
+        font-weight: 500;
+      }
+    }
+  }
+}

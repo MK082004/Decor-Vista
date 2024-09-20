@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+
+// 1. Configuration and helpers
+@import 'abstracts/variables',
+'abstracts/functions',
+'abstracts/extends',
+'abstracts/mixins';
+
+// 2. Vendors
+@import 'vendors/normalize',
+'vendors/rfs',
+'vendors//custom-cursor/kursor.scss',
+'vendors/nice-select/scss/nice-select.scss';
+
+
+// 3. Base stuff
+@import 'base/base',
+'base/fonts',
+'base/typography',
+'base/animation',
+'base/helpers';
+
+// 4. Layout-related sections
+@import 'layout/header',
+'layout/account',
+'layout/hero',
+'layout/contact',
+'layout/404',
+'layout/footer';
+
+// 5. Components
+@import 'components/button',
+'components/global',
+'components/section-header',
+'components/booking',
+'components/feature',
+'components/room',
+'components/about',
+'components/service',
+'components/gallery',
+'components/testimonial',
+'components/funfact',
+'components/facilities',
+'components/team',
+'components/faq',
+'components/history',
+'components/pricing',
+'components/sponsor',
+'components/blog',
+'components/newsletter',
+'components/rating',
+'components/social',
+'components/preloader',
+'components/button',
+'components/widget';
+
+// 6. Page-specific styles
+@import 'pages/home';
+
+// 7. Themes
+@import 'themes/default';

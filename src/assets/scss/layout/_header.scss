@@ -1,0 +1,912 @@
+/*================*** Header Section Start Here     ***===================*/
+
+.header-section {
+  @extend %p-rel;
+  box-shadow: 0px 10px 10px 0px rgba($black-color, $alpha: .10);
+  z-index: 99;
+
+  &.header-fixed {
+    position: fixed;
+    background-color: $body-bg-color;
+    @extend %w-100;
+    top: 0;
+    left: 0;
+    animation: fadeInDown .5s;
+    -webkit-animation: fadeInDown .5s;
+    -moz-animation: fadeInDown .5s;
+    border-bottom: 1px solid rgba($white-color, $alpha: .10);
+    z-index: 999;
+
+    @include breakpoint(lg) {
+      top: -60px;
+    }
+
+    .header-holder {
+      @extend %p-rel;
+    }
+
+  }
+
+  &.header-1 {
+    background: $secondary-color;
+
+    .header-top {
+      background-color: $theme-color;
+
+      * {
+        color: $title-color;
+      }
+    }
+
+    .nice-select {
+      &::after {
+        border-bottom-color: $title-color;
+        border-right-color: $title-color;
+      }
+
+      .list {
+        background-color: $body-bg-color;
+      }
+
+
+    }
+
+    .nice-select .option:hover,
+    .nice-select .option.focus,
+    .nice-select .option.selected.focus {
+      background-color: darken($body-bg-color, 10);
+    }
+
+    .menu>li>a {
+      color: $white-color;
+    }
+
+    .header-bar span {
+      background-color: $white-color;
+    }
+
+    .header-wrapper .menu-area .ellepsis-bar {
+
+      i,
+      svg {
+        color: $white-color;
+      }
+    }
+  }
+
+  &.header-3 {
+    @extend %p-abs,
+    %w-100;
+    background-color: transparent;
+    top: 0;
+
+    .menu>li>a {
+      color: $white-color;
+    }
+
+    .header-bar {
+      margin-inline-end: 15px;
+
+      span {
+        background-color: $white-color;
+      }
+    }
+
+    .header-wrapper .menu-area .ellepsis-bar {
+
+      i,
+      svg {
+        color: $white-color;
+      }
+    }
+
+    &.header-fixed {
+      background-color: $secondary-color;
+    }
+  }
+}
+
+.lang-select {
+  @extend %flex,
+  %align-i-center;
+  gap: 5px;
+
+  .nice-select {
+    @extend %ps-5,
+    %text-semibold;
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+
+
+.header-top {
+  @extend %p-rel;
+  z-index: 2;
+  background-color: $secondary-color;
+  border-bottom: 1px solid rgba($white-color, $alpha: .10);
+
+  * {
+    color: $white-color;
+  }
+
+  @include breakpoint(max-lg) {
+    display: none;
+  }
+}
+
+
+
+.header-top-area {
+  @extend %flex;
+  @extend %justify-center;
+  @extend %align-i-center;
+
+  @include breakpoint(lg) {
+    justify-content: space-between
+  }
+
+  .left {
+    @extend %flex;
+    // margin: 0 -25px;
+    @extend %mb-0;
+
+    li {
+      padding: 13px 25px;
+      @extend %text-semibold;
+
+      @include breakpoint(lg) {
+        &:not(:last-child) {
+          border-right: 1px solid rgba($white-color, $alpha: .10);
+        }
+      }
+
+      i,
+      svg {
+        @extend %me-5;
+      }
+    }
+  }
+
+  .nice-select {
+    .list {
+      background-color: $secondary-color;
+    }
+  }
+
+  .nice-select .option:hover,
+  .nice-select .option.focus,
+  .nice-select .option.selected.focus {
+    background-color: darken($secondary-color, 10);
+  }
+
+  @include breakpoint(max-xl) {
+    .left {
+      li {
+        font-size: 14px;
+        padding: 9px 15px;
+      }
+    }
+
+  }
+
+  @include breakpoint(max-lg) {
+    .left {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      margin: 0;
+      border: 1px solid rgba($white-color, $alpha: .10);
+
+      li {
+        flex-grow: 1;
+        border-top: 1px solid rgba($white-color, $alpha: .10);
+        border-right: none;
+
+        &:first-child {
+          border-top: none;
+        }
+      }
+    }
+
+  }
+}
+
+.header-bottom {
+  @extend %p-rel;
+}
+
+.header-wrapper {
+  @extend %w-100;
+  @extend %flex;
+  @extend %justify-between;
+  @extend %align-i-center;
+
+  @include breakpoint(sm) {
+    position: relative;
+    padding-block: 1rem;
+  }
+
+  @include breakpoint(md) {
+    padding-block: 1.25rem;
+  }
+
+  @include breakpoint(lg) {
+    width: auto;
+  }
+
+  .logo {
+    a {
+      @extend %d-block;
+
+      img {
+        max-width: 100%;
+      }
+    }
+
+    @include breakpoint(max-sm) {
+      width: 160px;
+    }
+
+    @include breakpoint(max-xl) {
+      @include breakpoint(lg) {
+        width: 200px;
+      }
+    }
+  }
+
+  .menu-area {
+    @extend %flex;
+    @extend %align-i-center;
+
+    .booking-btn {
+      display: none;
+      @extend %p-rel;
+
+      @include breakpoint(md) {
+        background-color: $theme-color;
+        border-radius: .25rem;
+        color: $title-color;
+        display: inline-block;
+        font-weight: 600;
+        padding: .5rem 1.5rem;
+        text-transform: uppercase;
+      }
+
+      @include breakpoint(xl) {
+        padding: .75rem 1.5rem;
+      }
+
+      span {
+        z-index: 1;
+        @extend %p-rel;
+      }
+    }
+
+    .search-container {
+      @include breakpoint(md) {
+        margin-inline-end: 25px;
+      }
+    }
+
+
+
+    .search-btn {
+      @extend %d-inline-grid,
+      %place-i-center;
+      @include box(35px);
+      border: 1px solid rgba($theme-color, $alpha: .30);
+      border-radius: 50%;
+
+      @include breakpoint(md) {
+        @include box(45px);
+      }
+    }
+
+
+    .ellepsis-bar {
+      font-size: 20px;
+      @extend %ms-20;
+
+      i,
+      svg {
+        @extend %c-pointer;
+        color: $title-color;
+      }
+    }
+
+
+    @include breakpoint(max-sm) {
+      padding: 15px 0;
+
+      .ellepsis-bar {
+        margin-left: 25px;
+      }
+    }
+  }
+}
+
+
+//-------------------------Header search css start
+.search-container {
+  position: relative;
+}
+
+.search-btn {
+  cursor: pointer;
+}
+
+.search-bar {
+  @extend %p-abs,
+  %p-10;
+  min-width: 250px;
+  top: 100%;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform: translateY(-10px);
+  background-color: $body-bg-color;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+
+  @include breakpoint(sm) {
+    min-width: 300px;
+    padding: 15px;
+  }
+
+  button {
+    background-color: $theme-color;
+    border-radius: .25rem;
+    border: none;
+    color: $title-color;
+    cursor: pointer;
+    padding-inline: 1rem;
+    @extend %text-bold;
+  }
+}
+
+.search-bar.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+//-------------------------Header search css end
+
+.mobile-logo {
+  max-width: 110px;
+}
+
+.menu {
+  @extend %flex;
+
+  @include breakpoint(lg) {
+    margin-right: 30px;
+    margin-bottom: 0;
+    gap: 10px;
+  }
+
+  @include breakpoint(xl) {
+    gap: 15px;
+  }
+
+  >li {
+    >a {
+      color: $title-color;
+      font-size: $fs-base;
+      font-weight: 700;
+      padding: 15px 22px;
+      text-transform: uppercase;
+
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  @include breakpoint(lg) {
+    li {
+      position: relative;
+
+      .submenu {
+        position: absolute;
+        top: calc(100%);
+        left: 0;
+        -webkit-transition: all ease 0.3s;
+        -moz-transition: all ease 0.3s;
+        transition: all ease 0.3s;
+        z-index: 9;
+        background: $secondary-color;
+        width: 220px;
+        padding: 0;
+        -webkit-transform: translateY(35px);
+        -ms-transform: translateY(35px);
+        transform: translateY(35px);
+        opacity: 0;
+        visibility: hidden;
+        border: 1px solid rgba($theme-color, $alpha: .30);
+        border-radius: .25rem;
+
+        li {
+          padding: 0;
+
+          a {
+            padding: 10px 20px;
+            text-transform: capitalize;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 15px;
+            color: $white-color;
+            font-weight: 500;
+            border-bottom: 1px solid rgba($border-color, $alpha: .10);
+
+            &:hover,
+            &.active {
+              background: $theme-color;
+              padding-left: 22px;
+              color: $title-color;
+            }
+          }
+
+          &:last-child {
+            a {
+              border-bottom: none;
+            }
+          }
+
+          .submenu {
+            left: 100%;
+            top: 20px;
+            border-left: 3px solid $theme-color;
+          }
+        }
+      }
+
+      &:hover {
+        >.submenu {
+          -webkit-transform: translateY(15px);
+          -ms-transform: translateY(15px);
+          transform: translateY(15px);
+          opacity: 1;
+          visibility: visible;
+
+          a {
+            &::before {
+              right: 14px;
+            }
+
+            &::after {
+              right: 10px;
+            }
+
+            &::after,
+            &::before {
+              background: currentColor;
+            }
+          }
+
+          .submenu {
+            transform: translateY(0px);
+          }
+        }
+      }
+    }
+
+    @include breakpoint(max-xl) {
+      li {
+        a {
+          padding: 10px 12px;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(max-lg) {
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    overflow: auto;
+    max-height: 400px;
+    -webkit-transition: all ease 0.3s;
+    -moz-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+    -webkit-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
+    transform-origin: top;
+
+    //glassmorphism
+    background: rgba($secondary-color, $alpha: .98);
+    backdrop-filter: blur(20.0px);
+    -webkit-backdrop-filter: blur(20.0px);
+
+    li {
+      width: 100%;
+      padding: 0;
+
+      a {
+        display: block;
+        padding: 10px 25px;
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: capitalize;
+        border-top: 1px solid rgba($white-color, $alpha: .10);
+        color: $white-color;
+
+        &:hover {
+          background: rgba($theme-color, $alpha: .60);
+        }
+      }
+
+      .submenu {
+        padding-left: 20px;
+        display: none;
+
+        li {
+          width: 100%;
+
+          a {
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+
+    &.active {
+      -webkit-transform: scaleY(1);
+      -ms-transform: scaleY(1);
+      transform: scaleY(1);
+    }
+  }
+}
+
+.header-bar {
+  @extend %p-rel;
+  @extend %c-pointer;
+  width: 25px;
+  height: 20px;
+  @extend %ms-30;
+
+  span {
+    @extend %p-abs;
+    @extend %d-inline-block;
+    @extend %w-100;
+    height: 3px;
+    @include add-prefix(transition, $transition);
+    background-color: $title-color;
+    left: 0;
+
+    &:first-child {
+      top: 0;
+    }
+
+    &:nth-child(2) {
+      top: 52%;
+      transform: translateY(-65%);
+    }
+
+    &:last-child {
+      bottom: 0;
+    }
+  }
+
+  &.active {
+    span {
+      &:first-child {
+        @include add-prefix(transform, rotate(45deg) translate(3px, 9px));
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:last-child {
+        @include add-prefix(transform, rotate(-45deg) translate(3px, -9px));
+      }
+    }
+  }
+
+  @include breakpoint(max-sm) {
+    width: 15px;
+    height: 16px;
+
+    span {
+      height: 2px;
+      width: 20px;
+    }
+
+    &.active {
+      span {
+        &:first-child {
+          @include add-prefix(transform, rotate(45deg) translate(4px, 6px));
+        }
+
+        &:nth-child(2) {
+          opacity: 0;
+        }
+
+        &:last-child {
+          @include add-prefix(transform, rotate(-45deg) translate(4px, -6px));
+        }
+      }
+    }
+  }
+}
+
+.menu-item-has-children {
+  >a {
+    @extend %p-rel;
+
+    &.active {
+
+      &::after,
+      &::before {
+        background-color: currentColor;
+      }
+    }
+
+    &::after {
+      @extend %p-abs;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 25px;
+      width: 10px;
+      height: 2px;
+      background-color: currentColor;
+    }
+
+    &::before {
+      @extend %p-abs;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 29px;
+      width: 2px;
+      height: 10px;
+      background-color: currentColor;
+      @include add-prefix(transition, $transition);
+    }
+
+    @include breakpoint(lg) {
+      &::after {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        width: 10px;
+        height: 2px;
+        background-color: currentColor;
+      }
+
+      &::before {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 4px;
+        width: 2px;
+        height: 10px;
+        background-color: currentColor;
+        @include add-prefix(transition, $transition);
+      }
+    }
+
+
+  }
+
+  &:hover {
+    >a {
+
+      &:before {
+        transform: rotate(90deg);
+        opacity: 0;
+      }
+    }
+  }
+
+  &.open {
+    >a {
+
+      &:before {
+        transform: rotate(90deg);
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.header-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  z-index: 999;
+  visibility: hidden;
+  @extend %flex;
+  justify-content: center;
+  align-items: center;
+  @include add-prefix(transition, $transition);
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  -color-lay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($color: $white-color, $alpha:.8);
+
+    .cross {
+      position: absolute;
+      color: $white-color;
+      cursor: pointer;
+      right: 15px;
+      top: 15px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      background: $theme-color;
+    }
+  }
+
+  .form-container {
+    margin: 15px;
+    max-width: 700px;
+    width: 100%;
+    @extend %flex;
+    padding: 30px;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+
+    button {
+      width: 120px;
+      height: 60px;
+      background: $theme-color;
+      border: none;
+      outline: none;
+      font-weight: 700;
+      color: $white-color;
+      text-transform: uppercase;
+    }
+
+    input {
+      width: calc(100% - 120px);
+      height: 60px;
+      border: none;
+      outline: none;
+      padding: 20px;
+    }
+
+    @include breakpoint(max-sm) {
+      padding: 1px;
+      margin: 10px;
+
+      button {
+        width: 100px;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      input {
+        width: calc(100% - 100px);
+      }
+    }
+  }
+}
+
+/*================*** Header Section End Here     ***===================*/
+
+// page header section start here
+.page-header-section {
+
+  &.style-1 {
+    background-position: center !important;
+    background-size: cover !important;
+    @extend %p-0;
+    @extend %m-0;
+    @extend %of-hidden;
+    border: none;
+    padding-top: 200px;
+    padding-bottom: 60px;
+    @extend %text-center;
+
+    @include breakpoint(lg) {
+      padding-top: 280px;
+      padding-bottom: 100px;
+    }
+
+    .page-header-content {
+
+      .page-header-inner {
+
+        .page-title {
+          h2 {
+            @extend %text-regular;
+          }
+        }
+
+        .breadcrumb {
+          @extend %pt-0;
+          @extend %ps-0;
+          @extend %justify-center;
+
+          li {
+            color: $white-color;
+            margin: 0 5px;
+            text-transform: capitalize;
+
+            &.active {
+              @extend %text-regular;
+              @extend %ms-10;
+            }
+
+            a {
+              color: $white-color;
+              @extend %text-bold;
+              @extend %p-rel;
+              padding: 0 5px;
+              outline: none;
+              @include add-prefix(transition, $transition);
+
+              &:hover {
+                color: $theme-color;
+              }
+
+              &::before {
+                background: $white-color;
+                @extend %p-abs;
+                width: 8px;
+                height: 1px;
+                transform: translateY(-50%);
+                top: 60%;
+                right: -10px;
+                @include add-prefix(transition, $transition);
+              }
+            }
+
+            &:first-child {
+              margin-left: 0;
+            }
+          }
+        }
+
+        .page-title {
+          .title-text {
+            font-size: $fs-h4;
+            color: $white-color;
+            text-transform: capitalize;
+            @extend %text-bold;
+
+            @include breakpoint(md) {
+              font-size: 3.5rem;
+              line-height: 4.125rem;
+            }
+
+            span {
+              color: $theme-color;
+            }
+          }
+
+          p {
+            color: $white-color;
+            font-size: $fs-h6;
+            text-transform: capitalize;
+            @extend %mb-0;
+          }
+        }
+      }
+    }
+  }
+}

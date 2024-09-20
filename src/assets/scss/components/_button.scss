@@ -1,0 +1,138 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+.custom-btn {
+  $btn-lh: 60px;
+  $btn-lh-sm: 56px;
+  @extend %d-inline-block,
+  %p-rel,
+  %text-bold,
+  %text-uppercase,
+  %of-hidden;
+  @include add-prefix(transition, $transition);
+  border: 1px solid $theme-color;
+  border-radius: .25rem;
+  background-color: $theme-color;
+  color: $title-color;
+  padding-inline: 2rem;
+  line-height: calc($btn-lh - 8px);
+
+
+  &:before,
+  &:after {
+    @extend %p-abs;
+    @include add-prefix(transition, $transition);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &:before {
+    right: calc(-#{$btn-lh} - 5px);
+    border-right: calc(#{$btn-lh} + 5px) solid transparent;
+    border-bottom: calc(#{$btn-lh} + 5px) solid $secondary-color;
+    transform: translateX(-100%);
+  }
+
+  &:after {
+    left: calc(-#{$btn-lh} - 5px);
+    border-left: calc(#{$btn-lh} + 5px) solid transparent;
+    border-top: calc(#{$btn-lh} + 5px) solid $secondary-color;
+    transform: translateX(100%);
+  }
+
+  &:hover {
+    color: $white-color;
+    border-color: $secondary-color;
+
+    &:before {
+      transform: translateX(-49%);
+    }
+
+    &:after {
+      transform: translateX(49%);
+    }
+  }
+
+  span {
+    position: inherit;
+    z-index: 1;
+  }
+
+  &--fluid {
+    @extend %w-100;
+  }
+
+  &--bordered {
+    background-color: transparent;
+    color: $title-color;
+
+    &:hover {
+      color: $title-color;
+      border-color: $theme-color;
+
+      &::before {
+        border-bottom-color: $theme-color;
+      }
+
+      &::after {
+        border-top-color: $theme-color;
+      }
+    }
+  }
+
+  &--sm {
+    padding-inline: 1.5rem;
+    height: $btn-lh-sm;
+    line-height: $btn-lh-sm;
+  }
+}
+
+.text-btn {
+  color: $title-color;
+  font-weight: 600;
+
+  span {
+    color: inherit;
+    font-weight: inherit;
+  }
+}
+
+.fb-btn {
+  background-color: $facebook;
+  border-radius: .25rem;
+  color: $white-color;
+  padding: .85rem 1.75rem;
+  @extend %d-inline-block;
+
+  span {
+    @extend %me-10;
+  }
+
+  &:hover {
+    color: $white-color;
+  }
+}
+
+.btn-group {
+  @extend %flex,
+  %align-i-center;
+  gap: 1rem;
+
+  &--gap-xs {
+    gap: .75rem;
+  }
+
+  &--gap-sm {
+    gap: 1rem;
+  }
+
+  &--gap-md {
+    gap: 1.5rem;
+  }
+
+  &--gap-lg {
+    gap: 2rem;
+  }
+}

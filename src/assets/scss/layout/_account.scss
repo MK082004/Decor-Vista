@@ -1,0 +1,79 @@
+.account {
+  &__or {
+    @extend %p-rel,
+    %my-20;
+
+    span {
+      @extend %p-rel,
+      %d-inline-block,
+      %text-bold;
+      background-color: $white-color;
+      padding: .25rem 1.25rem;
+      z-index: 1;
+    }
+
+    &:after {
+      background-color: $border-color;
+      height: 1px;
+      top: 50%;
+      left: 0;
+      @extend %p-abs,
+      %w-100;
+      @include add-prefix(transform, translateY(-50%));
+    }
+  }
+
+  &__tab {
+    background-color: $body-bg-color;
+    @extend %text-center;
+
+    &-nav {
+      border: none;
+
+      .nav-item {
+        flex: 1;
+      }
+
+      .nav-link {
+        @extend %w-100,
+        %text-capitalize,
+        %text-bold;
+        border-color: transparent !important;
+        color: $title-color;
+        padding-block: .85rem;
+
+        &.active {
+          background-color: $section-bg-color;
+          color: $theme-color;
+        }
+      }
+    }
+
+    .tab-content {
+      @extend %p-30;
+      background-color: $section-bg-color;
+    }
+  }
+
+  &__switcher {
+    @extend %mt-20;
+
+    a {
+      @extend %text-bold;
+      color: $theme-color;
+    }
+  }
+
+  &__meta {
+    @extend %flex,
+    %justify-between;
+  }
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane:target {
+  display: block;
+}

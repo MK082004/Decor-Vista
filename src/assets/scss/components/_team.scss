@@ -1,0 +1,223 @@
+.team {
+
+  //Team card item style 1
+  &__item1 {
+    @extend %of-hidden;
+    background-color: $section-bg-color;
+    border-radius: .25rem;
+
+    &-inner {
+      @extend %flex,
+      %align-i-center;
+      gap: 15px;
+    }
+
+    &-thumb {
+      @extend %w-100,
+      %of-hidden;
+
+      img {
+        @extend %w-100,
+        %h-100;
+        @include add-prefix(transition, $transition);
+        object-fit: cover;
+      }
+
+      @include breakpoint(sm) {
+        width: 45%;
+      }
+    }
+
+    &-content {
+      @extend %w-100;
+      padding: 1rem 1.5rem 1.5rem;
+
+
+      >p {
+        @include text-clamp(3);
+      }
+
+      @include breakpoint(sm) {
+        padding: 1rem;
+        width: calc(100% - 45% - 15px);
+      }
+    }
+
+    &-author {
+      h3 {
+        @extend %mb-0;
+        @include add-prefix(transition, $transition);
+      }
+    }
+
+    &:hover {
+      .team__item1 {
+        &-thumb {
+          img {
+            @include add-prefix(transform, scale(1.1));
+          }
+        }
+
+        &-author {
+          h3 {
+            color: $theme-color;
+          }
+        }
+      }
+    }
+  }
+
+
+  //Team card item style 2
+  &__item2 {
+    @extend %p-10;
+    background-color: $section-bg-color;
+    border-radius: .25rem;
+
+    &-thumb {
+      @extend %of-hidden;
+
+      img {
+        @extend %w-100;
+        @include add-prefix(transition, $transition);
+        object-fit: cover;
+      }
+    }
+
+    &-content {
+      @extend %p-25,
+      %text-center;
+
+      h3 {
+        @extend %mb-5;
+        @include add-prefix(transition, $transition);
+      }
+
+      p {
+        @extend %mb-0;
+      }
+    }
+
+    &:hover {
+      .team__item2 {
+        &-thumb {
+          img {
+            @include add-prefix(transform, scale(1.1));
+          }
+        }
+
+        &-content {
+          h3 {
+            color: $theme-color;
+          }
+        }
+      }
+    }
+  }
+
+
+}
+
+
+
+
+
+
+/*================>> Team single CSS Start <<==================*/
+
+.team-single {
+  &__wrapper {
+    @extend %p-30;
+    background-color: $section-bg-color;
+    border-radius: .25rem;
+  }
+
+  &__staff {
+    @extend %mb-30;
+
+    &-name {
+      @extend %mb-30;
+
+      h3 {
+        @extend %mb-5,
+        %text-capitalize;
+      }
+    }
+
+    &-infoitem {
+      @extend %flex,
+      %align-i-center;
+      gap: 15px;
+
+      &:not(:last-child) {
+        @extend %mb-20;
+      }
+
+      p {
+        @extend %mb-0;
+      }
+    }
+
+    &-infoname {
+      @extend %text-medium,
+      %p-rel;
+      color: $title-color;
+      width: 25%;
+
+      &::after {
+        @extend %p-abs;
+        content: ':';
+        right: 0;
+      }
+    }
+
+    &-infovalue {
+      flex: 1;
+    }
+  }
+}
+
+.skills {
+  max-width: 500px;
+
+  &__item {
+    @extend %p-rel,
+    %mb-35;
+
+    >p {
+      @extend %text-medium;
+      color: $title-color;
+      font-family: $title-font;
+    }
+
+    &-wrapper,
+    &-bar {
+      @extend %p-abs;
+      left: 0;
+      height: 5px;
+      border-radius: 5px;
+    }
+
+    &-wrapper {
+      bottom: -10px;
+      width: 100%;
+      background-color: $body-bg-color;
+      text-align: right;
+    }
+
+    &-bar {
+      top: 0;
+    }
+
+    &-data {
+      @extend %p-abs,
+      %text-medium;
+      top: -30px;
+      right: 0;
+      opacity: 0;
+      transition: opacity 0.3s linear;
+    }
+  }
+}
+
+/*================>> Team single CSS Start <<==================*/

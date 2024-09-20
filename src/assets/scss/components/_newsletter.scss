@@ -1,0 +1,56 @@
+.newsletter {
+  &--lowerd {
+    @extend %p-rel;
+    margin-bottom: -150px;
+    z-index: 1;
+  }
+
+  &__wrapper {
+    @extend %p-40;
+    background-color: $section-bg-color;
+    border-radius: .75rem;
+
+    @include breakpoint(lg) {
+      padding: 60px;
+    }
+  }
+
+  .common-header {
+    @extend %mb-30;
+
+    @include breakpoint(lg) {
+      margin-block-end: 40px;
+    }
+
+    h2 {
+      max-inline-size: 100%;
+    }
+
+
+  }
+
+  .form-control {
+    padding-inline: 1.5rem;
+    height: auto;
+
+    &:focus {
+      box-shadow: none;
+      border-color: $theme-color;
+    }
+  }
+
+  .subscribe-btn {
+    @extend %text-bold,
+    %text-uppercase;
+    background-color: $theme-color;
+    border: none;
+    box-shadow: none;
+    color: $title-color;
+    padding: 1rem 1.25rem;
+
+    @include breakpoint(lg) {
+      padding: 1.35rem 1.75rem;
+    }
+
+  }
+}

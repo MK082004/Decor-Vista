@@ -1,0 +1,58 @@
+.about {
+  @extend %of-hidden;
+
+  &--shape {
+    @extend %p-rel;
+
+    &:after {
+      @extend %p-abs;
+      right: 0;
+      bottom: 0;
+      width: 40%;
+      height: 100%;
+      background-image: url(../images/about/shape.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &__image {
+    @extend %p-rel;
+
+    &-sm {
+      @extend %p-abs;
+      @include add-prefix(animation, floating 4s linear alternate infinite);
+      max-width: 60%;
+      right: -20px;
+      bottom: -30px;
+
+      @include breakpoint(md) {
+        right: 10px;
+        max-width: 100%;
+      }
+
+      @include breakpoint(lg) {
+        right: -30px;
+        bottom: -50px;
+      }
+    }
+  }
+
+  &__item {
+    &-inner {
+      @extend %flex;
+      gap: 20px;
+    }
+
+    &-thumb {
+      @extend %d-inline-grid,
+      %place-i-center;
+      @include box(60px);
+      box-shadow: 0px 4px 15px rgba($border-color, $alpha:.8);
+    }
+
+    &-content {
+      width: calc(100% - 60px - 20px);
+    }
+  }
+}

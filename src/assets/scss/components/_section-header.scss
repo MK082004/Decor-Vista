@@ -1,0 +1,88 @@
+.section-header {
+  @extend %text-center;
+  max-inline-size: 600px;
+  margin-inline: auto;
+  margin-block-end: 40px;
+
+  @include breakpoint(lg) {
+    margin-block-end: 60px;
+  }
+
+  &__content {
+    p {
+      @extend %mb-0;
+    }
+
+    h2 {
+      @extend %mb-15;
+    }
+  }
+
+
+  &--withnav {
+    @extend %flex,
+    %justify-between,
+    %align-i-end;
+    max-inline-size: 100%;
+    gap: 20px;
+
+    .section-header {
+      &__content {
+        @extend %text-start;
+
+        p {
+          max-inline-size: 45ch;
+        }
+      }
+    }
+  }
+}
+
+
+
+//common header
+.common-header {
+  @extend %mb-20;
+
+  @include breakpoint(lg) {
+    margin-block-end: 25px;
+  }
+
+  h2,
+  h3 {
+    @extend %text-capitalize;
+    max-inline-size: 25ch;
+  }
+}
+
+.subtitle {
+  @extend %text-semibold,
+  %text-uppercase;
+  color: $title-color;
+  letter-spacing: .2em;
+  margin-bottom: 1rem !important;
+}
+
+
+
+
+
+//page header 
+.page-header {
+  padding-block: 70px;
+
+  @include breakpoint(md) {
+    padding-block: 90px;
+  }
+
+  @include breakpoint(xl) {
+    padding-block: 130px;
+  }
+
+  &__content {
+    h2 {
+      @extend %text-capitalize;
+      color: $white-color;
+    }
+  }
+}

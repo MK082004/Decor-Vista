@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/myApp'),
+      dir: require('path').join(__dirname, './coverage/Decor-Vista'),
       subdir: '.',
       reporters: [
         { type: 'html' },

@@ -1,0 +1,77 @@
+.contact {
+  @extend %of-hidden;
+
+  &__info {
+    >p {
+      max-inline-size: 65ch;
+    }
+
+    &-list {
+      @extend %mt-30;
+    }
+
+    &-item {
+      @extend %flex;
+      gap: 20px;
+
+      &:not(:last-child) {
+        @extend %mb-25;
+      }
+    }
+
+    &-icon {
+      @extend %d-grid,
+      %place-i-center;
+      @include box(50px);
+      background-color: $theme-color;
+      border-radius: 50%;
+      color: $title-color;
+    }
+
+    &-content {
+      flex: 1;
+
+      h6 {
+        @extend %mb-5;
+      }
+
+      p {
+        @extend %mb-0;
+      }
+    }
+  }
+
+
+
+  //Contact Form CSS
+  &__form {
+    background-color: $section-bg-color;
+    border-radius: .25rem;
+    padding: 2rem 1.5rem;
+
+    @include breakpoint(md) {
+      padding: 3rem 2rem;
+    }
+
+    >h4 {
+      @extend %mb-30;
+    }
+  }
+}
+
+
+.map {
+  &__wrapper {
+    iframe {
+      @include add-prefix(transition, $transition);
+      @extend %w-100;
+      border-radius: .5rem;
+      filter: grayscale(1);
+      min-height: 500px;
+
+      &:hover {
+        filter: grayscale(0);
+      }
+    }
+  }
+}

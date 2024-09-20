@@ -1,0 +1,144 @@
+// -----------------------------------------------------------------------------
+// This file contains CSS helper classes.
+// -----------------------------------------------------------------------------
+
+/*=========<<Margin & padding property Ulitilies start>>=========*/
+
+$space-stops: ('10': 10px,
+  '15': 15px,
+  '20': 20px,
+  '25': 25px,
+  '30': 30px,
+  '35': 35px,
+  '40': 40px,
+  '45': 45px,
+  '50': 50px,
+  '55': 55px,
+  '60': 60px,
+  '65': 65px,
+  '70': 70px,
+  '75': 75px,
+  '80': 80px,
+);
+
+@each $key,
+$val in $space-stops {
+
+  /*-------<< margin properties >>-------*/
+  .m-#{$key} {
+    margin: #{$val};
+  }
+
+  .mt-#{$key} {
+    margin-block-start: #{$val};
+  }
+
+  .mb-#{$key} {
+    margin-block-end: #{$val};
+  }
+
+  .ms-#{$key} {
+    margin-inline-start: #{$val};
+  }
+
+  .me-#{$key} {
+    margin-inline-end: #{$val};
+  }
+
+  .my-#{$key} {
+    margin-block: #{$val};
+  }
+
+  .mx-#{$key} {
+    margin-inline: #{$val};
+  }
+}
+
+
+/*------<< Paddings >>---------*/
+@each $key,
+$val in $space-stops {
+
+  .p-#{$key} {
+    padding: #{$val};
+  }
+
+  .pt-#{$key} {
+    padding-block-start: #{$val};
+  }
+
+  .pb-#{$key} {
+    padding-block-end: #{$val};
+  }
+
+  .ps-#{$key} {
+    padding-inline-start: #{$val};
+  }
+
+  .pe-#{$key} {
+    padding-inline-start: #{$val};
+  }
+
+  .py-#{$key} {
+    padding-block: #{$val};
+  }
+
+  .px-#{$key} {
+    padding-inline: #{$val};
+  }
+}
+
+/*=========<<Margin property extends end>>=========*/
+
+
+
+.gradient-text--theme {
+  background: -webkit-linear-gradient($theme-color, $secondary-color);
+  @include add-prefix(background-clip, text);
+  @include add-prefix(text-fill-color, transparent);
+}
+
+
+.padding-top {
+  padding-block-start: 80px;
+
+  @include breakpoint(xl) {
+    padding-block-start: 120px;
+  }
+
+  &--2x {
+    padding-block-start: 220px;
+
+    @include breakpoint(lg) {
+      padding-block-start: 240px;
+    }
+  }
+}
+
+.padding-bottom {
+  padding-block-end: 80px;
+
+  @include breakpoint(xl) {
+    padding-block-end: 120px;
+  }
+}
+
+
+//Background related utilites
+
+.bg {
+  &--section-color {
+    background-color: $section-bg-color !important;
+  }
+
+  &--cover {
+    background-size: cover;
+    background-position: center;
+  }
+
+  &--contain {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+  }
+}

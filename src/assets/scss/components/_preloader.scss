@@ -1,0 +1,55 @@
+.preloader {
+  @extend %p-fixed,
+  %d-grid,
+  %place-i-center,
+  %w-100,
+  %h-100;
+  background-color: $body-bg-color;
+  z-index: 999;
+
+  .loader {
+    @extend %p-rel,
+    %d-inline-block;
+    @include box(53px);
+    border: 5px dotted $secondary-color;
+    border-style: solid solid dotted dotted;
+    border-radius: 50%;
+    animation: rotation 2s linear infinite;
+
+    &:after {
+      @extend %p-abs;
+      @include box(30px);
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      border: 4px dotted $theme-color;
+      border-style: solid solid dotted;
+      border-radius: 50%;
+      animation: rotationBack 1s linear infinite;
+      transform-origin: center center;
+    }
+  }
+}
+
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+}

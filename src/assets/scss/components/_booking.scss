@@ -1,0 +1,64 @@
+.booking {
+  &--uplifted {
+    @extend %p-rel;
+    margin-top: -100px;
+    z-index: 1;
+
+    @include breakpoint(lg) {
+      margin-top: -150px;
+    }
+  }
+
+  &--uplifted-sm {
+    @extend %p-rel;
+    // margin-top: -90px;
+    margin-top: -45px;
+    z-index: 1;
+
+    // @include breakpoint(lg) {
+    //   margin-top: -150px;
+    // }
+  }
+
+  &__wrapper {
+    @extend %p-30;
+    background-color: $white-color;
+    border-radius: .25rem;
+
+    @include breakpoint(lg) {
+      padding: 50px;
+    }
+
+    &--has-shadow {
+      box-shadow: 0px 10px 20px rgba(228, 226, 238, 0.4);
+    }
+  }
+
+  &__form {
+
+    &-date {
+      @extend %p-rel;
+
+      &:after {
+        @extend %p-abs;
+        @include add-prefix(transform, translateY(-50%));
+        @include font-size(14px);
+        content: '\f107';
+        color: $theme-color;
+        font-family: $icon-font;
+        font-weight: 900;
+        right: 24px;
+        top: 50%;
+      }
+    }
+
+
+    &-btn {
+      @extend %d-inline-flex,
+      %align-i-end,
+      %h-100,
+      %w-100;
+
+    }
+  }
+}

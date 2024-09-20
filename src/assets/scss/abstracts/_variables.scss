@@ -1,0 +1,73 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+
+
+
+//*-----------------------------------
+//*** Custom variables for this template
+//*-----------------------------------
+
+//Template Theme colors
+$theme-color:#E8A41D;
+$secondary-color:#13172B;
+$body-bg-color:#fff;
+$section-bg-color:#F8F5F0;
+
+//Template Text colors
+$title-color:#1F3347;
+$text-color: #70717B;
+$white-color:#fff;
+$black-color:#000;
+
+//Template Accent colors
+$border-color:#D9D9D9;
+
+
+// social-media color
+$facebook: #3b5998;
+$twitter: #55acee;
+$linkedin: #007bb5;
+$skype: #2fb7df;
+$youtube: #cd201f;
+$google: #dd4b39;
+$camera: #e4405f;
+$instagram: #e4405f;
+$tumblr: #34465d;
+$behance: #1769ff;
+$star: #e9ba17;
+$green: #0be881;
+$green-h: #0fbcf9;
+$red: #f53b57;
+$yellow: #dec32b;
+$nell: #212fb4;
+$navy: #d8e0f3;
+$placeholder: #a0a6bc;
+
+
+
+
+//Template Font family
+$title-font:'Gilda Display',
+serif;
+$text-font:'Barlow',
+sans-serif;
+
+//icon font family
+$icon-font: 'Font Awesome 6 Free';
+
+//Template font sizes
+$fs-base: 16px !default;
+$fs-small:14px;
+
+$fs-h1: 72px;
+$fs-h2: 36px;
+$fs-h3: 30px;
+$fs-h4: 24px;
+$fs-h5: 20px;
+$fs-h6: 18px;
+
+
+//Template transition
+$transition:all .3s ease-in-out;

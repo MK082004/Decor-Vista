@@ -1,1 +1,769 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+@font-face {
+  font-family: Rejouice;
+  src: url(./assets/font/Rejouice-Headline.ttf);
+}
+
+@font-face {
+  font-family: NBInternational;
+  src: url(./assets/font/NBInternationalProBoo.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Rejouice", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+body, html {
+  max-width: 100%;
+  max-height: 100%;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: var(--app-dark-theme);
+}
+
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: text;
+}
+
+.no-select-cursor {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.no-select-context {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: context-menu;
+}
+
+::-webkit-scrollbar {
+  width: 0.2em;
+  overflow-y: scroll;
+  box-shadow: inset 0 0 5px var(--color-white);
+  height: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--app-linear);
+  border-radius: 0.1em;
+}
+
+ul,
+ol {
+  padding-left: 0 !important;
+  list-style: none;
+  margin-bottom: 0 !important;
+}
+
+:root {
+  --app-linear: -webkit-linear-gradient(0deg, #8490ff 0%, #62bdfc 100%);
+  --app-linear-hover: -webkit-linear-gradient(0deg, #8490ffe0 0%, #62bcfcda 100%);
+  --app-secondary-color: #dcb658;
+  --app-dark-theme: #000000;
+  --app-light-theme: #ffffff;
+  --color-white: #ffffff;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+  --color-lighter-blue: #0d6dfd1c;
+  --color-blue: #0d6efd;
+  --color-normal: #525252;
+  --color-lighter: #858585;
+  --color-more-lighter: #f2f8fd;
+  --color-darker: rgb(31, 31, 31);
+  --font-xsmall: 0.6em;
+  --font-xxsmall: 0.7em;
+  --font-button: 0.73em;
+  --font-small: 0.8em;
+  --font-medium: 1em;
+  --font-large: 1.2em;
+  --font-xlarge: 1.5em;
+  --font-fulllarge: 4.8em;
+  --font-navicon: 2.1em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.form-reg input:-webkit-autofill,
+.form-reg input:-webkit-autofill:hover,
+.form-reg input:-webkit-autofill:focus,
+.form-reg input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #23232329;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: var(--blue) auto 1px !important;
+}
+
+img {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+/* remove material all over the classes */
+.mat-toolbar,
+.mat-toolbar h1,
+.mat-toolbar h2,
+.mat-toolbar h3,
+.mat-toolbar h4,
+.mat-toolbar h5,
+.mat-toolbar h6 {
+  font: unset !important;
+  font-weight: 500 !important;
+  letter-spacing: normal;
+}
+
+.mat-button-wrapper,
+.mat-icon {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.custom-menu-width {
+  width: 12em !important;
+}
+
+.custom-mat-menu-item-height {
+  height: 35px !important;
+}
+
+/* mat toolbar classes start here */
+.mat-toolbar-single-row {
+  height: 3.2em;
+}
+/* mat toolbar classes end here */
+
+/* mat card classes start here */
+.mat-card-header {
+  background-color: #f8f8f8;
+}
+
+.mat-card-header .mat-card-header-text {
+  margin: 0 !important;
+}
+
+.mat-card-header hr {
+  border-top: 2px solid var(--color-blue) !important;
+  opacity: 0.8;
+}
+
+.mat-card-header .mat-card-title h5 {
+  font-size: var(--font-small);
+  color: var(--heading-color-normal);
+  white-space: nowrap;
+}
+
+.mat-card-header .mat-card-title.flex-column h5 {
+  color: var(--color-darker);
+}
+
+.mat-card-header .mat-card-title span {
+  font-size: var(--font-small);
+  color: var(--color-lighter);
+  bottom: 0.2em !important;
+  left: 0.2em !important;
+  position: sticky;
+}
+
+.mat-icon-button.mat-custom-button {
+  min-width: auto !important;
+  padding: 0 !important;
+  line-height: inherit !important;
+  width: 35px !important;
+  height: 35px !important;
+  border-radius: 50%;
+  background: var(--color-white) !important;
+}
+
+.mat-card-content>:last-child:not(.mat-card-footer) {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.mat-card-actions {
+  margin-left: 0;
+  margin-right: 0;
+}
+/* mat card classes end here */
+
+/* mat grid classes start here */
+.mat-grid-list {
+  padding-bottom: 0 !important;
+  height: 3em;
+}
+
+.mat-grid-tile {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  height: 100% !important;
+}
+
+.mat-grid-tile .mat-figure{
+  padding: 0.3em !important;
+}
+
+.mat-grid-list .mat-grid-tile .mat-form-field {
+  max-width: 25em !important;
+}
+/* mat grid classes end here */
+
+/* mat form field classes start here */
+/* .mat-form-field {
+  max-width: 15em;
+  min-width: 13em;
+  width: 100%;
+} */
+
+.mat-paginator {
+  background: transparent !important;
+}
+
+.mat-form-field.mat-paginator-page-size-select {
+  min-width: auto !important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple,
+.mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: var(--color-blue) !important;
+}
+
+.mat-form-field,
+.mat-form-field .mat-select,
+.mat-form-field-appearance-outline .mat-form-field-infix,
+.mat-form-field-appearance-outline .mat-form-field-flex,
+.mat-form-field-appearance-outline .mat-form-field-wrapper,
+.mat-form-field-appearance-outline .mat-form-field-outline,
+.mat-select-trigger {
+  height: 100%;
+  padding: 0;
+  margin: 0 !important;
+  top: 0 !important;
+}
+
+.mat-select-value {
+  max-width: none !important;
+}
+
+.mat-select-trigger {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-form-field-infix {
+  border-top: none !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  padding: 0 .75em 0 .75em;
+}
+
+.mat-form-field-appearance-outline:hover .mat-select-trigger::after {
+  color: #000;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline,
+.mat-form-field-appearance-outline.mat-focused .mat-select-trigger::after,
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled)  {
+  color: var(--color-blue) !important;
+}
+
+.mat-option.mat-selected::after {
+  content: '✔';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-blue);
+}
+
+.mat-select-arrow {
+  display: none;
+}
+
+.mat-form-field.auto-serach .mat-form-field-infix {
+  top: -0.2em !important;
+  padding: 0 0.5em !important;
+}
+
+.mat-form-field.auto-serach .mat-form-field-suffix {
+  top: 0.2em !important;
+}
+
+.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+  font-size: var(--font-xxsmall);
+}
+/* Hide the default mat-select arrow */
+.mat-select-arrow {
+  display: none;
+}
+
+.mat-form-field-appearance-outline.rounded .mat-form-field-outline-start {
+  border-radius: 28px 0 0 28px !important;
+  min-width: 28px !important;
+}
+
+.mat-form-field-appearance-outline.rounded .mat-form-field-outline-end {
+  border-radius: 0 28px 28px 0 !important;
+  min-width: 28px !important;
+}
+
+/* Add padding to move the label and input into the center to prevent overlapping the rounded border */
+.mat-form-field-appearance-outline.rounded .mat-form-field-flex {
+  padding: 0.4em 0.3em !important;
+  background: var(--color-white);
+  border-radius: 28px;
+}
+/* Add the expand_more icon instead of the default arrow */
+.mat-select-trigger::after {
+  position: relative;
+  font-family: 'Material Icons';
+  content: "expand_more";
+  font-size: 24px;
+  color: #808080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+  font-size: var(--font-xsmall) !important;
+} */
+/* mat form field classes end here */
+
+/* mat accrordian classes start here */
+.mat-expansion-panel-header {
+  height: 3.8em !important;
+  justify-content: space-between;
+}
+
+.mat-expansion-panel,
+.mat-accordion {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.mat-expansion-panel.mat-expanded {
+  order: -1;
+}
+
+.mat-expansion-panel-spacing {
+  margin-top: 0 !important;
+}
+
+.mat-expansion-panel-header .mat-content {
+  overflow: visible !important;
+}
+
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+  flex-grow: unset !important;
+}
+
+.mat-expansion-panel.mat-expanded .mat-expansion-panel-header {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-lighter-blue) !important;
+}
+
+.mat-expansion-panel.mat-expanded .mat-expansion-panel-header .left .mat-icon {
+  background-color: var(--color-white) !important;
+}
+
+.mat-expansion-panel-body {
+  padding: 0.8em !important;
+}
+/* mat accrordian classes end here */
+
+/* mat toggle classes start here */
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar,
+.mat-slide-toggle.mat-checked .mat-ripple-element {
+  background-color: var(--color-blue) !important;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: var(--color-white);
+}
+
+.mat-slide-toggle {
+  height: 1.3em !important;
+}
+
+.mat-slide-toggle *:not(.mat-slide-toggle-ripple) {
+  height: 100% !important;
+  top: 0 !important;
+}
+
+.cdk-visually-hidden {
+  left: 0 !important;
+  margin: 0 !important;
+  position: absolute;
+}
+
+.mat-slide-toggle-bar {
+  border-radius: 10em !important;
+}
+/* mat toggle classes end here */
+
+/* mat some classes remove line height specify in this section classes start here */
+.mat-stroked-button, .mat-flat-button, .material-icons {
+  line-height: inherit !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.mat-icon-button {
+  line-height: inherit !important;
+}
+
+.mat-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-button-wrapper>* {
+  vertical-align: inherit !important;
+  height: auto !important;
+}
+/* mat some classes remove line height specify in this section classes end here */
+
+/* mat table classes start here  */
+.mat-table {
+  background: none !important;
+}
+
+.mat-header-row {
+  min-height: 2.5em !important;
+  background: var(--color-more-lighter) !important;
+  border-bottom: 2px solid #0d6efd;
+  color: var(--color-blue) !important;
+}
+
+.mat-header-cell {
+  color: var(--color-blue) !important;
+}
+
+.mat-header-cell,
+.mat-cell, .mat-footer-cell {
+  font-size: 0.8em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: text;
+  overflow: visible;
+}
+
+.mat-row, .mat-footer-row {
+  min-height: 2.8em !important;
+  max-height: 2.8em !important;
+}
+
+/* .mat-row:last-child {
+  border-bottom: none !important;
+} */
+
+.mat-table-column-width-5 {
+  max-width: 5%;
+}
+
+.mat-table-column-width-10 {
+  max-width: 10%;
+}
+
+.mat-table-column-width-15 {
+  max-width: 15%;
+}
+
+.mat-table-column-width-20 {
+  max-width: 20%;
+}
+
+.mat-table-column-width-25 {
+  max-width: 25%;
+}
+
+.mat-table-column-width-30 {
+  max-width: 30%;
+}
+
+.mat-table-column-width-35 {
+  max-width: 35%;
+}
+
+.mat-table-column-width-40 {
+  max-width: 40%;
+}
+
+.mat-table-column-width-45 {
+  max-width: 45%;
+}
+
+.mat-table-column-width-50 {
+  max-width: 50%;
+}
+
+.mat-table-column-width-55 {
+  max-width: 55%;
+}
+
+.mat-table-column-width-60 {
+  max-width: 60%;
+}
+
+.mat-table-column-width-65 {
+  max-width: 65%;
+}
+
+.mat-table-column-width-70 {
+  max-width: 70%;
+}
+
+.mat-table-column-width-75 {
+  max-width: 75%;
+}
+
+.mat-table-column-width-80 {
+  max-width: 80%;
+}
+
+.mat-table-column-width-85 {
+  max-width: 85%;
+}
+
+.mat-table-column-width-90 {
+  max-width: 90%;
+}
+
+.mat-table-column-width-95 {
+  max-width: 95%;
+}
+
+.mat-table-column-width-100 {
+  max-width: 100%;
+}
+/* mat table classes end here  */
+
+/* mat tabs classes start here  */
+.mat-tab-label {
+  height: 3em !important;
+}
+/* mat tabs classes end here  */
+
+/* transition classes start here */
+.transition {
+  transition: 0.2s all ease-in-out;
+}
+/* transition classes start here */
+
+/* remove mat button ripple css start here */
+.no-ripple {
+  --mat-ripple-color: transparent;
+  pointer-events: none;
+}
+/* remove mat button ripple css end here */
+
+/* cursor classes start here */
+.cursor-pointer {
+  cursor: pointer;
+}
+/* cursor classes end here */
+
+/* for font sizes classes start here  */
+body .font-xsmall {
+  font-size: var(--font-xsmall) !important;
+}
+
+body .font-small {
+  font-size: var(--font-small) !important;
+}
+
+body .font-medium {
+  font-size: var(--font-medium) !important;
+}
+
+body .font-large {
+  font-size: var(--font-large) !important;
+}
+
+body .font-fulllarge {
+  font-size: var(--font-fulllarge) !important;
+  line-height: 1em;
+  font-weight: 700;
+}
+
+body .font-xlarge {
+  font-size: var(--font-xlarge) !important;
+}
+
+body .font-button {
+  font-size: var(--font-button) !important;
+}
+
+body .font-navicon {
+  font-size: var(--font-navicon) !important;
+}
+/* for font sizes classes end here  */
+
+/* color classes start here */
+.color-app {
+  color: var(--app-linear);
+}
+
+.color-blue {
+  color: var(--color-blue);
+}
+
+.color-dark {
+  color: var(--color-darker);
+}
+
+.color-danger {
+  color: var(--color-danger);
+}
+
+.color-white {
+  color: var(--color-white);
+}
+
+.color-lighter {
+  color: var(--color-lighter);
+}
+
+.color-normal {
+  color: var(--color-normal);
+}
+/* color classes end here */
+
+/* background color classes start here */
+.bgcolor-app {
+  background: var(--app-linear) !important;
+}
+
+.bgcolor-lighter-blue {
+  background-color: var(--color-lighter-blue);
+}
+
+.bgcolor-blue {
+  background-color: var(--color-blue);
+}
+
+.bgcolor-dark {
+  background-color: var(--color-darker);
+}
+
+.bgcolor-white {
+  background-color: white !important;
+}
+
+.bgcolor-transparent {
+  background-color: transparent !important;
+}
+/* background color classes end here */
+
+/* border classes start here */
+.border-grey-all-1 {
+  border: 1px solid var( --color-more-lighter);
+}
+
+.border-grey-top-1 {
+  border-top: 1px solid var( --color-more-lighter);
+}
+
+.border-grey-bottom-1 {
+  border-bottom: 1px solid var( --color-more-lighter);
+}
+
+.border-grey-left-1 {
+  border-left: 1px solid var( --color-more-lighter);
+}
+
+.border-grey-right-1 {
+  border-right: 1px solid var( --color-more-lighter);
+}
+/* border classes end here */
+
+/* height classes start here */
+.h50vh {
+  height: 50dvh;
+}
+
+.minh65vh {
+  min-height: 65vh;
+}
+
+.mh70vh {
+  min-height: 70dvh;
+}
+
+.h80vh {
+  height: 8cqh;
+}
+/* height classes end here */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.header.open {
+  left: 250px;
+  width: calc(100% - 250px);
+}
+
+.snackbar-success {
+  background-color: var(--success);
+}
+
+.snackbar-danger {
+  background-color: var(--danger);
+}

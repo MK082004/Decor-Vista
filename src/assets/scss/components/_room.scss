@@ -1,0 +1,594 @@
+.room {
+  @extend %of-hidden;
+
+  &__item {
+    &-inner {
+      @extend %p-rel,
+      %of-hidden;
+    }
+
+    &-thumb {
+      @extend %p-rel,
+      %of-hidden;
+      border-radius: .25rem;
+
+      img {
+        @extend %w-100,
+        %h-100;
+        @include add-prefix(transition, $transition);
+        object-fit: cover;
+      }
+
+      &:after {
+        @extend %p-abs,
+        %w-100,
+        %h-100;
+        background-image: linear-gradient(179.89deg, rgba(0, 0, 0, 0) 58.73%, rgba(7, 7, 7, 0.9) 89.09%);
+        top: 0;
+        left: 0;
+      }
+    }
+
+    &-content {
+      @extend %p-abs;
+      @include add-prefix(transform, translateX(-50%));
+      @include add-prefix(transition, $transition);
+      background-color: transparent;
+      bottom: calc(-100% + 145px);
+      border-radius: .25rem;
+      padding: 1.25rem;
+      left: 50%;
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);
+
+      @include breakpoint(lg) {
+        bottom: calc(-100% + 150px);
+      }
+
+      @include breakpoint(xl) {
+        padding: 1.5rem;
+        bottom: calc(-100% + 155px);
+
+      }
+
+      @include breakpoint(xxl) {
+        bottom: calc(-100% + 170px);
+      }
+    }
+
+    &-header {
+      @extend %flex,
+      %align-i-end,
+      %justify-between,
+      %mb-20;
+
+      @include breakpoint(xxl) {
+        margin-block-end: 20px;
+      }
+
+      .rating {
+        @extend %mb-5;
+      }
+
+      h3 {
+        @extend %mb-0;
+        color: $white-color;
+      }
+
+      p {
+        @extend %text-semibold,
+        %text-capitalize,
+        %mb-0;
+        color: $white-color;
+      }
+    }
+
+    &-body {
+      >p {
+        @include text-clamp(2);
+
+        @include breakpoint(max-xxl) {
+          display: none !important;
+        }
+      }
+    }
+
+    &-price {
+      h3 {
+        @extend %mb-0;
+        font-family: $text-font;
+      }
+
+      p {
+        @extend %text-semibold,
+        %text-capitalize,
+        %mb-0;
+      }
+    }
+
+
+
+
+    //room item style 1
+    &--style1 {
+      .room__item {
+
+
+        &-content {
+          background-color: transparent;
+          bottom: calc(-100% + 145px);
+
+          @include breakpoint(lg) {
+            bottom: calc(-100% + 150px);
+          }
+
+          @include breakpoint(xl) {
+            padding: 1.5rem;
+            bottom: calc(-100% + 155px);
+
+          }
+
+          @include breakpoint(xxl) {
+            bottom: calc(-100% + 160px);
+          }
+        }
+      }
+
+      &:hover,
+      &.active {
+        .room__item {
+          &-thumb {
+            img {
+              @include add-prefix(transform, scale(1.2));
+            }
+          }
+
+          &-content {
+            background-color: $white-color;
+            bottom: 10px;
+          }
+
+          &-header {
+            h3 {
+              color: $title-color;
+            }
+
+            p {
+              color: $text-color;
+            }
+          }
+        }
+      }
+    }
+
+    //room item style 2
+    &--style2 {
+      .room__item {
+        &-thumb {
+          &::after {
+            background-image: linear-gradient(179.89deg, rgba(0, 0, 0, 0) 40.84%, rgba(7, 7, 7, 0.9) 76.2%);
+          }
+        }
+
+        &-content {
+          width: 100%;
+          bottom: calc(-100% + 200px);
+
+          @include breakpoint(xl) {
+            padding: 1.5rem;
+            bottom: calc(-100% + 210px);
+          }
+
+        }
+
+        &-header {
+          .custom-btn {
+            @extend %mt-15;
+
+            &--bordered {
+              color: $white-color;
+            }
+
+          }
+        }
+      }
+
+      &:hover,
+      &.active {
+        .room__item {
+          &-thumb {
+            img {
+              @include add-prefix(transform, scale(1.1));
+            }
+          }
+
+          &-header {
+
+            h3,
+            p {
+              color: $white-color;
+            }
+
+            .custom-btn {
+              &--bordered {
+                color: $title-color;
+
+                &::before {
+                  border-bottom-color: $theme-color;
+                  transform: translateX(-49%);
+                }
+
+                &::after {
+                  border-top-color: $theme-color;
+                  transform: translateX(49%);
+                }
+              }
+            }
+          }
+
+          &-content {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    //room item style 3
+    &--style3 {
+      @extend %p-10;
+      background-color: $white-color;
+      border-radius: .25rem;
+
+      .room__item {
+        &-thumb {
+          &::after {
+            background-image: none;
+          }
+        }
+
+        &-content {
+          @include add-prefix(transform, none);
+          position: static;
+          padding: 1rem;
+          width: 100%;
+
+        }
+
+        &-header {
+          @extend %mb-20;
+
+          h3 {
+            color: $title-color;
+          }
+
+          p {
+            color: $text-color;
+          }
+
+          .custom-btn {
+            @extend %mt-15;
+          }
+        }
+
+        &-price {
+          h3 {
+            color: $theme-color;
+            font-weight: 600;
+          }
+        }
+      }
+
+      &:hover,
+      &.active {
+        .room__item {
+          &-thumb {
+            img {
+              @include add-prefix(transform, scale(1.1));
+            }
+          }
+
+          &-header {
+
+            .custom-btn {
+              &--bordered {
+                color: $title-color;
+
+                &::before {
+                  border-bottom-color: $theme-color;
+                  transform: translateX(-49%);
+                }
+
+                &::after {
+                  border-top-color: $theme-color;
+                  transform: translateX(49%);
+                }
+              }
+            }
+          }
+
+          &-content {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    //room item style 3
+    &--style4 {
+      @extend %p-10;
+      background-color: $white-color;
+      border-radius: .25rem;
+      &.room__item--reverse{
+        .room__item-inner{
+          @include breakpoint(lg){
+            flex-direction: row-reverse;
+          }
+        }
+        .room__item-content{
+          @include add-prefix(transform,translateY(-30px));
+          @include breakpoint(lg){
+            @include add-prefix(transform,translateX(50px));
+          }
+        }
+      }
+      .room__item {
+        &-inner{
+          @include breakpoint(lg){
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+          }
+        }
+        &-thumb {
+          flex: 1;
+          &::after {
+            background-image: none;
+          }
+        }
+
+        &-content {
+          @include add-prefix(transform,translateY(-30px));
+          flex: 1;
+          position: static;
+          padding: 1rem;
+          width: 95%;
+          background-color: $white-color;
+          z-index: 1;
+          margin-inline: auto;
+          box-shadow: 0px 10px 20px rgba(228, 226, 238, 0.4);
+          border-radius: .25rem;
+          @include breakpoint(lg){
+            width: 100%;
+            @include add-prefix(transform, translateX(-50px));
+          }
+        }
+
+        &-header {
+          @extend %mb-20;
+
+          h3 {
+            color: $title-color;
+          }
+
+          p {
+            color: $text-color;
+          }
+
+          .custom-btn {
+            @extend %mt-15;
+          }
+        }
+
+        &-price {
+          h3 {
+            color: $theme-color;
+            font-weight: 600;
+          }
+        }
+
+      }
+
+      &:hover,
+      &.active {
+        .room__item {
+          &-thumb {
+            img {
+              @include add-prefix(transform, scale(1.1));
+            }
+          }
+
+          &-header {
+
+            .custom-btn {
+              &--bordered {
+                color: $title-color;
+
+                &::before {
+                  border-bottom-color: $theme-color;
+                  transform: translateX(-49%);
+                }
+
+                &::after {
+                  border-top-color: $theme-color;
+                  transform: translateX(49%);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__feature {
+    @extend %mb-20;
+    column-count: 2;
+
+    &-item {
+      @extend %flex,
+      %align-i-center,
+      %mb-15;
+      gap: 15px;
+
+      p {
+        @extend %mb-0,
+        %text-semibold,
+        %text-capitalize;
+      }
+    }
+  }
+
+  &__amenities {
+    @extend %flex,
+    %align-i-center,
+    %justify-center;
+
+    @include breakpoint(md) {
+      flex-direction: row-reverse;
+    }
+
+    &-content {
+      @extend %p-25,
+      %pe-40,
+      %p-rel;
+      @include add-prefix(transform, translateY(-30px));
+      background-color: $white-color;
+      border-radius: 1rem;
+      z-index: 1;
+
+      h4 {
+        @extend %mb-10;
+      }
+
+      @include breakpoint(md) {
+        @include add-prefix(transform, none);
+        width: 45%;
+      }
+
+      @include breakpoint(lg) {
+        width: 50%;
+      }
+
+      @include breakpoint(xl) {
+        width: 40%;
+      }
+    }
+
+    &-image {
+      @include breakpoint(md) {
+        width: 55%;
+        @include add-prefix(transform, translateX(-50px));
+      }
+
+      @include breakpoint(lg) {
+        width: 50%;
+      }
+
+      @include breakpoint(xl) {
+        width: 60%;
+      }
+    }
+
+    &-item {
+      &:not(:last-child) {
+        @extend %mb-10;
+      }
+
+      span {
+        @extend %me-15;
+
+        i,
+        svg {
+          color: $theme-color;
+        }
+      }
+
+    }
+  }
+
+
+  /*============<< Room Details CSS Start here>>======*/
+  &__details {
+    @extend %of-hidden;
+    background-color: $section-bg-color;
+    border-radius: .25rem;
+
+    &-image {
+      @extend %mb-10;
+    }
+
+    &-content {
+      @extend %p-30;
+
+      .rating {
+        @extend %mb-10;
+      }
+
+      >h3 {
+        @extend %mb-30;
+      }
+
+      .room__feature {
+        @extend %flex,
+        %justify-between;
+
+        @include breakpoint(lg) {
+          max-width: 80%;
+        }
+
+        &-item {
+          @extend %flex-column;
+        }
+      }
+    }
+  }
+
+
+  /*=============<< Room Video Start herer >>=============*/
+  &__video {
+    &-wrapper {
+      @extend %p-rel,
+      %of-hidden;
+      border-radius: .25rem;
+
+      img {
+        @extend %w-100,
+        %h-100;
+        object-fit: cover;
+      }
+
+      &::after {
+        @extend %p-abs,
+        %w-100,
+        %h-100;
+        left: 0;
+        top: 0;
+        background-color: rgba($black-color, $alpha: .50);
+      }
+    }
+
+    &-btn {
+      @extend %p-abs,
+      %d-grid,
+      %place-i-center;
+      @include add-prefix(transform, translate(-50%, -50%));
+      @include add-prefix(transition, $transition);
+      @include box(50px);
+      @include font-size(20px);
+      background-color: $white-color;
+      border-radius: 50%;
+      color: $theme-color;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+
+      @include breakpoint(lg) {
+        @include box(60px);
+      }
+
+      &:hover {
+        @include add-prefix(transform, translate(-50%, -50%) scale(1.1));
+      }
+    }
+  }
+}

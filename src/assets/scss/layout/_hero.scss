@@ -1,0 +1,151 @@
+.hero {
+  @extend %of-hidden;
+
+  &__slider {
+
+    &-prev,
+    &-next {
+      display: none;
+
+      @include breakpoint(lg) {
+        @include add-prefix(transform, translateY(-50%));
+        @include add-prefix(transition, $transition);
+        @include box(60px);
+        border: 2px solid $white-color;
+        border-radius: 50%;
+        color: $white-color;
+        display: inline-grid;
+        top: 50%;
+        place-items: center;
+        position: absolute;
+        z-index: 1;
+
+        i,
+        svg {
+          @include font-size(24px);
+        }
+
+        &:hover {
+          border-color: $theme-color;
+          color: $theme-color;
+        }
+      }
+
+    }
+
+    &-prev {
+      left: 7%;
+    }
+
+    &-next {
+      right: 7%;
+    }
+
+    &--hover-navigation {
+      .hero__slider {
+
+        &-prev,
+        &-next {
+          opacity: 0;
+        }
+      }
+
+      &:hover {
+        .hero__slider {
+
+          &-prev,
+          &-next {
+            opacity: 1;
+          }
+
+          &-prev {
+            left: 5%;
+          }
+
+          &-next {
+            right: 5%;
+          }
+        }
+      }
+    }
+
+  }
+
+  &__wrapper {
+    background-color: rgba($black-color, $alpha: .70);
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+    padding-block-start: 120px;
+    padding-block-end: 220px;
+
+    @include breakpoint(md) {
+      padding-block-start: 150px;
+      padding-block-end: 250px;
+    }
+
+    @include breakpoint(lg) {
+      padding-block-start: 150px;
+      padding-block-end: 300px;
+    }
+
+    @include breakpoint(xxl) {
+      padding-block-start: 200px;
+      padding-block-end: 300px;
+    }
+  }
+
+  &__content {
+
+
+    h1 {
+      @extend %mb-10;
+      color: $white-color;
+      max-inline-size: 25ch;
+      margin-inline: auto;
+    }
+
+    .text-lg {
+      @extend %text-semibold;
+      @include font-size(36px);
+      color: $white-color;
+    }
+
+    >p {
+      @extend %mb-0;
+      color: $white-color;
+    }
+
+    .custom-btn {
+      @extend %mt-30;
+    }
+
+    &--center {
+      text-align: center;
+    }
+
+  }
+
+  &--home2 {
+    .hero {
+      &__wrapper {
+        padding-block: 150px;
+
+        @include breakpoint(xxl) {
+          padding-block: 170px;
+        }
+      }
+
+      &__content {
+        h1 {
+          max-inline-size: 18ch;
+          margin-inline: initial;
+        }
+
+        p {
+          max-inline-size: 65ch;
+        }
+      }
+    }
+  }
+}

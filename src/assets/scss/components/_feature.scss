@@ -1,0 +1,32 @@
+.feature {
+  &__item {
+    @extend %text-center;
+    @include add-prefix(transition, $transition);
+    background-color: $white-color;
+    box-shadow: 0px 6px 20px rgba($border-color, 0.8);
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    padding: 40px 20px;
+
+    &-thumb {
+      @extend %mb-30;
+    }
+
+    &-content {
+
+      h3 {
+        @extend %mb-5;
+      }
+
+      p {
+        @extend %mb-0;
+      }
+    }
+
+    &:hover {
+      border-color: rgba($theme-color, $alpha:.5);
+    }
+  }
+
+
+}

@@ -1,0 +1,162 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// -----------------------------------------------------------------------------
+.footer {
+  @extend %of-hidden;
+
+  &__wrapper {
+    background-color: $secondary-color;
+  }
+
+
+
+  //footer block css
+  &__block {
+    &-title {
+      @extend %mb-20;
+
+      @include breakpoint(lg) {
+        margin-block-end: 30px;
+      }
+
+      h3 {
+        @extend %mb-0;
+        color: $white-color;
+      }
+    }
+  }
+
+
+
+  //Footer about css
+  &__about {
+    .footer__brand {
+      @extend %d-inline-block,
+      %mb-20;
+    }
+
+    >p {
+      @extend %mb-30;
+      color: $white-color;
+    }
+
+    .social__block {
+      h6 {
+        color: $white-color;
+      }
+
+      .social__link {
+        color: $white-color;
+      }
+    }
+  }
+
+  &__logo {
+    @extend %d-inline-block,
+    %mb-25;
+  }
+
+
+
+
+
+  //footer links css
+  &__links {
+    &-item {
+      @include add-prefix(transition, $transition);
+
+      &:not(:last-child) {
+        @extend %mb-15;
+      }
+
+      a {
+        @extend %text-medium;
+        color: $white-color;
+
+        span {
+          @extend %me-10;
+
+          i,
+          svg {
+            color: $theme-color;
+          }
+        }
+      }
+
+      &:hover {
+        @include add-prefix(transform, translateX(10px));
+
+        a {
+          color: $theme-color;
+        }
+      }
+    }
+  }
+
+
+
+  // footer infos css
+  &__info {
+    &-item {
+      &:not(:last-child) {
+        @extend %mb-20;
+      }
+
+      @extend %flex;
+
+      span {
+        @include box(30px);
+
+        i,
+        svg {
+          @include font-size(18px);
+          color: $theme-color;
+        }
+      }
+
+      p {
+        @extend %mb-0;
+        color: $white-color;
+        flex: 1;
+        max-inline-size: 21ch;
+      }
+
+    }
+  }
+
+
+
+  //footer gallery
+  &__gallery {
+    @extend %flex;
+    gap: 10px;
+
+    &-item {
+
+      a {
+        @extend %of-hidden,
+        %d-block;
+        @include box(80px);
+        border-radius: .25rem;
+
+        @include breakpoint(md) {
+          @include box(80px);
+        }
+
+        img {
+          @extend %w-100,
+          %h-100;
+          @include add-prefix(transition, $transition);
+          object-fit: cover;
+        }
+
+        &:hover {
+          img {
+            @include add-prefix(transform, scale(1.1));
+          }
+        }
+      }
+    }
+  }
+
+}
