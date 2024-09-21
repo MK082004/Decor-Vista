@@ -1,0 +1,40 @@
+.cancel-button {
+  background-color: #eef7ff;
+  transition: 0.2s all ease;
+}
+
+.cancel-button:hover {
+  background-color: #e8f4ff;
+}
+
+.icon-wrap {
+  position: absolute;
+  top: -1.4em;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f44336;
+  color: white;
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  text-align: center;
+  align-content: center;
+}
+
+.icon-wrap i {
+  transform: rotate(270deg);
+  font-size: 1.3em;
+}
+
+::ng-deep .mat-dialog-container {
+  padding: 0;
+  overflow: visible;
+}
+
+.p-4 {
+  padding: 3rem !important;
+}
+
+.rotate-270 {
+  transform: rotate(270deg);
+}

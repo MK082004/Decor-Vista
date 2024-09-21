@@ -1,1 +1,177 @@
-<p>signup works!</p>
+<div class="container-fluid mb-4">
+  <div class="col-lg-6 mx-auto">
+    <div class="contact__form">
+      <h4>Sign Up</h4>
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <!-- Name -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name">
+              <mat-error *ngIf="signUpForm.controls['name'].hasError('required')">
+                Name is required
+              </mat-error>
+              <mat-error *ngIf="signUpForm.controls['name'].hasError('pattern')">
+                Name cannot contain numbers
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Username -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="username">
+              <mat-error *ngIf="signUpForm.controls['username'].hasError('required')">
+                Username is required
+              </mat-error>
+              <mat-error *ngIf="signUpForm.controls['username'].hasError('minlength')">
+                Minimum 3 characters required
+              </mat-error>
+              <mat-error *ngIf="signUpForm.controls['username'].hasError('maxlength')">
+                Maximum 10 characters allowed
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Email -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="userEmail">
+              <mat-error *ngIf="signUpForm.controls['userEmail'].hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="signUpForm.controls['userEmail'].hasError('email')">
+                Invalid email format
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="userPhoneNumber" type="tel">
+              <mat-error *ngIf="signUpForm.controls['userPhoneNumber'].hasError('required')">
+                Phone number is required
+              </mat-error>
+              <mat-error *ngIf="signUpForm.controls['userPhoneNumber'].hasError('pattern')">
+                Phone number must be 10 digits
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- User Role -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>User Role</mat-label>
+              <mat-select formControlName="userRole">
+                <mat-option *ngFor="let role of userRoles" [value]="role">{{ role }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="signUpForm.controls['userRole'].hasError('required')">
+                Role is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- State -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>State</mat-label>
+              <mat-select formControlName="userState" (selectionChange)="onStateChange($event.value)">
+                <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="signUpForm.controls['userState'].hasError('required')">
+                State is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- City -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>City</mat-label>
+              <mat-select formControlName="userCity" [disabled]="!selectedState">
+                <mat-option *ngFor="let city of filteredCities" [value]="city">{{ city }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="signUpForm.controls['userCity'].hasError('required')">
+                City is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Street -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>Street</mat-label>
+              <input matInput formControlName="userStreet" [disabled]="!filteredCities.length">
+              <mat-error *ngIf="signUpForm.controls['userStreet'].hasError('required')">
+                Street is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Postal Code -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>Postal Code</mat-label>
+              <input matInput type="number" formControlName="userPostalCode">
+              <mat-error *ngIf="signUpForm.controls['userPostalCode'].hasError('required')">
+                Postal code is required
+              </mat-error>
+              <mat-error *ngIf="signUpForm.controls['userPostalCode'].hasError('pattern')">
+                Postal code must be 5 digits
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Password -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="userPassword">
+              <button style="background-color: transparent; outline: none; border: none;" matSuffix
+                (click)="hidePassword = !hidePassword">
+                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error *ngIf="signUpForm.controls['userPassword'].hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="signUpForm.controls['userPassword'].hasError('minlength')">
+                Minimum 5 characters required
+              </mat-error>
+              <mat-error *ngIf="signUpForm.controls['userPassword'].hasError('maxlength')">
+                Maximum 20 characters allowed
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="col-12 my-3">
+            <mat-form-field appearance="outline" class="booking__form-inputgroup w-100">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="userConfirmPassword">
+              <button style="background-color: transparent; outline: none; border: none;" matSuffix
+                (click)="hideConfirmPassword = !hideConfirmPassword">
+                <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error *ngIf="signUpForm.controls['userConfirmPassword'].hasError('required')">
+                Confirm Password is required
+              </mat-error>
+              <mat-error *ngIf="signUpForm.hasError('passwordMismatch')">
+                Passwords do not match
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button color="primary" class="custom-btn mt-40 w-100" type="submit" [disabled]="signUpForm.invalid">
+          <span>Sign Up</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

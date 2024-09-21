@@ -1,0 +1,4 @@
+::ng-deep .mat-form-field .mat-form-field-prefix {
+  top: 0 !important;
+  font-size: 0.8em !important;
+}

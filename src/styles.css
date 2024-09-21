@@ -26,6 +26,7 @@ body, html {
   max-width: 100%;
   max-height: 100%;
   overflow-x: hidden;
+  background: url(./assets/images/bg-banner.gif);
 }
 
 a {
@@ -65,7 +66,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--app-linear);
+  background: var(--app-secondary-color);
   border-radius: 0.1em;
 }
 
@@ -74,6 +75,41 @@ ol {
   padding-left: 0 !important;
   list-style: none;
   margin-bottom: 0 !important;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0) inset !important;
+}
+
+button:disabled {
+  background-color: rgba(0, 0, 0, 0.57); /* Adjusted for better readability */
+  cursor: not-allowed; /* Show a not-allowed cursor */
+  opacity: 0.5; /* Optionally, make the button slightly transparent */
+  color: white;
+  border: none;
+}
+
+button:disabled:hover {
+  background-color: rgba(0, 0, 0, 0.57); /* Maintain the same background on hover */
+  cursor: not-allowed; /* Ensure the cursor remains the same */
+  opacity: 0.5; /* Optionally, make the button slightly transparent */
+  color: white;
+  border: none;
+}
+
+.custom-btn:disabled:hover::after {
+  display: none; /* Maintain the same background on hover */
+  cursor: not-allowed; /* Ensure the cursor remains the same */
+}
+
+.custom-btn:disabled:hover::before {
+  display: none; /* Maintain the same background on hover */
+  cursor: not-allowed; /* Ensure the cursor remains the same */
 }
 
 :root {
@@ -184,7 +220,7 @@ img {
 }
 
 .mat-card-header hr {
-  border-top: 2px solid var(--color-blue) !important;
+  border-top: 2px solid var(--app-secondary-theme) !important;
   opacity: 0.8;
 }
 
@@ -250,11 +286,15 @@ img {
 /* mat grid classes end here */
 
 /* mat form field classes start here */
-/* .mat-form-field {
-  max-width: 15em;
-  min-width: 13em;
+.mat-form-field {
+  height: 2.2em !important;
   width: 100%;
-} */
+}
+
+.mat-form-field .mat-form-field-subscript-wrapper {
+  margin-top: 2.3em !important;
+  margin-left: -0.8em !important;
+}
 
 .mat-paginator {
   background: transparent !important;
@@ -264,10 +304,10 @@ img {
   min-width: auto !important;
 }
 
-.mat-form-field.mat-focused .mat-form-field-ripple,
+/* .mat-form-field.mat-focused .mat-form-field-ripple,
 .mat-tab-group.mat-primary .mat-ink-bar {
-  background-color: var(--color-blue) !important;
-}
+  background-color: var(--app-secondary-theme) !important;
+} */
 
 .mat-form-field,
 .mat-form-field .mat-select,
@@ -296,6 +336,10 @@ img {
   border-top: none !important;
 }
 
+.mat-form-field .mat-form-field-infix input {
+  height: 100% !important;
+}
+
 .mat-form-field-appearance-outline .mat-form-field-flex {
   padding: 0 .75em 0 .75em;
 }
@@ -306,8 +350,20 @@ img {
 
 .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline,
 .mat-form-field-appearance-outline.mat-focused .mat-select-trigger::after,
-.mat-primary .mat-option.mat-selected:not(.mat-option-disabled)  {
-  color: var(--color-blue) !important;
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled),
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: var(--app-secondary-color) !important;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-outline,
+.mat-form-field.mat-form-field-invalid .mat-select-trigger::after,
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled),
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: var(--color-danger) !important;
+}
+
+.mat-form-field-appearance-outline.mat-focused.mat-form-field-invalid .mat-form-field-label {
+  top: 2.4em !important;
 }
 
 .mat-option.mat-selected::after {
@@ -316,7 +372,7 @@ img {
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--color-blue);
+  color: var(--app-secondary-theme);
 }
 
 .mat-select-arrow {
@@ -419,7 +475,7 @@ img {
 /* mat toggle classes start here */
 .mat-slide-toggle.mat-checked .mat-slide-toggle-bar,
 .mat-slide-toggle.mat-checked .mat-ripple-element {
-  background-color: var(--color-blue) !important;
+  background-color: var(--app-secondary-theme) !important;
 }
 
 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
@@ -477,12 +533,12 @@ img {
 .mat-header-row {
   min-height: 2.5em !important;
   background: var(--color-more-lighter) !important;
-  border-bottom: 2px solid #0d6efd;
-  color: var(--color-blue) !important;
+  border-bottom: 2px solid var(--app-secondary-color);
+  color: var(--app-secondary-color) !important;
 }
 
 .mat-header-cell {
-  color: var(--color-blue) !important;
+  color: var(--app-secondary-color) !important;
 }
 
 .mat-header-cell,
@@ -652,8 +708,8 @@ body .font-navicon {
   color: var(--app-linear);
 }
 
-.color-blue {
-  color: var(--color-blue);
+.app-secondary-color {
+  color: var(--app-secondary-color);
 }
 
 .color-dark {
@@ -686,8 +742,8 @@ body .font-navicon {
   background-color: var(--color-lighter-blue);
 }
 
-.bgcolor-blue {
-  background-color: var(--color-blue);
+.bgapp-secondary-color {
+  background-color: var(--app-secondary-color);
 }
 
 .bgcolor-dark {
@@ -696,6 +752,10 @@ body .font-navicon {
 
 .bgcolor-white {
   background-color: white !important;
+}
+
+.bgcolor-danger {
+  background-color: var(--color-danger);
 }
 
 .bgcolor-transparent {
@@ -761,9 +821,9 @@ body .font-navicon {
 }
 
 .snackbar-success {
-  background-color: var(--success);
+  background-color: var(--color-success);
 }
 
 .snackbar-danger {
-  background-color: var(--danger);
+  background-color: var(--color-danger);
 }

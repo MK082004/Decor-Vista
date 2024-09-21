@@ -1,0 +1,134 @@
+<section>
+  <app-page-toolbar [pageName]="'Products'"></app-page-toolbar>
+  <mat-card>
+    <div class="full-screen-container mat-elevation-z8 bgColor-transparent rounded h-100">
+      <!-- HTML Template -->
+      <mat-card-header
+        class="position-relative d-flex align-items-center justify-content-between py-2 px-3 rounded-top">
+        <mat-card-title class="m-0 ms-1 no-select d-flex align-items-center gap-3">
+          <h5>Products View</h5>
+        </mat-card-title>
+        <mat-form-field appearance="outline" class="filter-input w-50">
+          <mat-label>Search Products</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Type to filter..." />
+        </mat-form-field>
+
+        <ng-container>
+          <ul class="d-flex">
+            <li>
+              <mat-card-actions class="ms-auto p-0 m-0">
+
+                <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color" matTooltip="Add Product"
+                  (click)="addProduct()">
+                  <mat-icon class="font-xlarge">add</mat-icon> <!-- Static icon name -->
+                </button>
+              </mat-card-actions>
+
+            </li>
+          </ul>
+        </ng-container>
+
+        <hr class="position-absolute w-100 mb-0 start-0 bottom-0" />
+      </mat-card-header>
+
+      <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" class="mat-table">
+
+          <!-- Product ID Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{ product.id }} </mat-cell>
+          </ng-container>
+
+          <!-- Title Column -->
+          <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{ product.title }} </mat-cell>
+          </ng-container>
+
+          <!-- SKU Column -->
+          <ng-container matColumnDef="sku">
+            <mat-header-cell *matHeaderCellDef> SKU </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{ product.sku }} </mat-cell>
+          </ng-container>
+
+          <!-- Author Column -->
+          <ng-container matColumnDef="author">
+            <mat-header-cell *matHeaderCellDef> Author </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{ product.author }} </mat-cell>
+          </ng-container>
+
+          <!-- List Price Column -->
+          <ng-container matColumnDef="listPrice">
+            <mat-header-cell *matHeaderCellDef> List Price </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{ product.listPrice }} </mat-cell>
+          </ng-container>
+
+          <!-- Price Column -->
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{ product.price }} </mat-cell>
+          </ng-container>
+
+          <!-- Price50 Column -->
+          <ng-container matColumnDef="price50">
+            <mat-header-cell *matHeaderCellDef> Price (50+) </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{ product.price50 }} </mat-cell>
+          </ng-container>
+
+          <!-- Price100 Column -->
+          <ng-container matColumnDef="price100">
+            <mat-header-cell *matHeaderCellDef> Price (100+) </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{ product.price100 }} </mat-cell>
+          </ng-container>
+
+          <!-- Category Column -->
+          <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{ product.category.name }} </mat-cell>
+          </ng-container>
+
+          <!-- Image URL Column -->
+          <ng-container matColumnDef="imageUrl">
+            <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+            <mat-cell *matCellDef="let product">
+              <img [src]="product.imageUrl" alt="{{ product.title }}" width="50" />
+            </mat-cell>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let product">
+              <mat-card-actions class="ms-auto p-0 m-0">
+
+                <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color" matTooltip="Edit Product"
+                  (click)="editProduct(product)">
+                  <mat-icon class="font-xlarge color-blue">edit</mat-icon> <!-- Static icon name -->
+                </button>
+              </mat-card-actions>
+              <mat-card-actions class="ms-auto p-0 m-0">
+
+                <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color" matTooltip="Delete Product"
+                  (click)="deleteProduct(product)">
+                  <mat-icon class="font-xlarge color-danger">delete</mat-icon> <!-- Static icon name -->
+                </button>
+              </mat-card-actions>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Header Row -->
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <!-- Data Rows -->
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <div *ngIf="products.length === 0" class="text-center mt-2"><span>No data found</span></div>
+
+        <!-- Paginator -->
+        <mat-paginator [length]="length" class="pb-3" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"
+          showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </mat-card>
+</section>

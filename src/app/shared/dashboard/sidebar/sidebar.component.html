@@ -1,3 +1,60 @@
+<!-- SIDEBAR SECTION STARTS HERE -->
 <aside>
+  <div class="sidebar" [ngClass]="status ? 'open' : ''">
+    <div class="logo">
+      <img src="../../../../assets/images/logo/Decor-Vista.png" alt="logo-image">
+      <img class="no-select" src="../../../../assets/images/bar.png" alt="menu-toggle" (click)="clickEvent()">
+    </div>
 
+    <ul class="nav_links">
+      <!-- Dashboard Link -->
+      <li>
+        <a class="btns" [routerLink]="['/', loginUser.userRole, 'dashboard']" routerLinkActive="active">
+          <mat-icon class="no-cursor">dashboard</mat-icon>
+          <span class="links no-cursor">Dashboard</span>
+        </a>
+        <span class="close_links no-select">Dashboard</span>
+      </li>
+
+      <!-- Orders Link -->
+      <li>
+        <a class="btns" [routerLink]="['/', loginUser.userRole, 'orders']" routerLinkActive="active">
+          <mat-icon class="no-cursor">cart</mat-icon>
+          <span class="links no-cursor">Orders</span>
+        </a>
+        <span class="close_links no-select">Orders</span>
+      </li>
+
+      <!-- Category Link -->
+      <li>
+        <a class="btns" [routerLink]="['/', loginUser.userRole, 'category']" routerLinkActive="active">
+          <mat-icon class="no-cursor">category</mat-icon>
+          <span class="links no-cursor">Category</span>
+        </a>
+        <span class="close_links no-select">Category</span>
+      </li>
+
+      <!-- Products Link -->
+      <li>
+        <a class="btns" [routerLink]="['/', loginUser.userRole, 'products']" routerLinkActive="active">
+          <mat-icon class="no-cursor">cart</mat-icon>
+          <span class="links no-cursor">Products</span>
+        </a>
+        <span class="close_links no-select">Products</span>
+      </li>
+
+      <!-- Profile Section -->
+      <li class="profile d-flex align-items-center">
+        <div class="profile_desc">
+          <div class="name_portal">
+            <div class="name no-select">
+              {{ loginUser.userName }}
+            </div>
+          </div>
+        </div>
+        <mat-icon class="color-white log_out cursor-pointer ms-auto" (click)="logout()">logout</mat-icon>
+      </li>
+    </ul>
+  </div>
 </aside>
+<!-- SIDEBAR SECTION ENDS HERE -->

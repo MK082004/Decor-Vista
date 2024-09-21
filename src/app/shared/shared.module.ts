@@ -7,6 +7,9 @@ import { HeaderComponent } from './featured/header/header.component';
 import { FooterComponent } from './featured/footer/footer.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { AppLoaderComponent } from './app-loader/app-loader.component';
+import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard.component';
+import { CapitalizePipe } from '../core/pipes/capitalize.pipe';
+import { PageToolbarComponent } from './page-toolbar/page-toolbar.component';
 // import { MaterialModule } from './material.module';
 
 // Components
@@ -19,8 +22,10 @@ import { AppLoaderComponent } from './app-loader/app-loader.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    HeaderComponent,
-    AppLoaderComponent
+    DashboardHeaderComponent,
+    AppLoaderComponent,
+    CapitalizePipe,
+    PageToolbarComponent
   ],
   imports: [
     CommonModule,
@@ -39,8 +44,10 @@ import { AppLoaderComponent } from './app-loader/app-loader.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    HeaderComponent,
-    AppLoaderComponent
+    DashboardHeaderComponent,
+    AppLoaderComponent,
+    CapitalizePipe,
+    PageToolbarComponent
   ]
 })
 export class SharedModule { }

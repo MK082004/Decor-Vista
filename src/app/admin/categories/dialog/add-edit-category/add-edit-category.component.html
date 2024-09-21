@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>{{ isEditMode ? 'Edit' : 'Add' }} Category</h1>
+<div mat-dialog-content class="p-3">
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="row">
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+    <mat-form-field appearance="outline">
+      <mat-label>Category Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter category name" />
+      <mat-error *ngIf="categoryForm.controls.name.invalid && categoryForm.controls.name.touched">
+        Category name is required.
+      </mat-error>
+    </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+    <mat-form-field appearance="outline">
+      <mat-label>Display Order</mat-label>
+      <input matInput type="number" formControlName="displayOrder" placeholder="Enter display order" />
+      <mat-error *ngIf="categoryForm.controls.displayOrder.invalid && categoryForm.controls.displayOrder.touched">
+        Display order must be greater than 0.
+      </mat-error>
+    </mat-form-field>
+    </div>
+
+    <mat-dialog-actions class="position-sticky bottom-0 mt-2">
+      <div class="dialog-actions col-xs-12 col-md-12 col-lg-12 text-end">
+        <button mat-button type="button" color="warn" (click)="onCancel()">Cancel</button>
+        <button mat-raised-button class="bgapp-secondary-color color-white" type="submit">{{ categoryForm.get('id').value ? 'Update' : 'Add' }}</button>
+      </div>
+    </mat-dialog-actions>
+  </form>
+</div>

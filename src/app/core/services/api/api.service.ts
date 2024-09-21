@@ -33,7 +33,6 @@ export class ApiService {
    * @returns Observable of the API response.
    */
   getRequest<T>(apiUrl: string, params?: any): Observable<T> {
-    alert('trigger')
     let httpParams = new HttpParams();
     if (params) {
       for (const key in params) {

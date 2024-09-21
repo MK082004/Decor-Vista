@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { AppLoaderService } from '../core/services/app-Loader/app-loader.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appLoaderService: AppLoaderService) { }
 
-  ngOnInit(): void {
+  status: boolean = false;
+  handleToggleSidebar(value: boolean) {
+    this.status = value;
   }
 
+  isLoading: boolean = false;
+  private loaderSubscription: Subscription;
+
+
+  ngOnInit(): void {
+    this.loaderSubscription = this.appLoaderService.getLoaderState().subscribe(
+      (state: boolean) => {
+        this.isLoading = state;
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.loaderSubscription) {
+      this.loaderSubscription.unsubscribe();
+    }
+  }
 }

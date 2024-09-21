@@ -1,3 +1,7 @@
+::ng-deep .container-mt-5  {
+  margin-top: 0 !important;
+}
+
 .slider {
   position: relative;
   width: 100vw;

@@ -25,6 +25,7 @@ import { TitleService } from './core/services/title-Service/title.service';
 import { FeaturedComponent } from './featured-layout/featured.component';
 import { DashboardComponent } from './dashboard-layout/dashboard.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
+import { ConfirmationDialogComponent } from './core/services/dialog/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
     FeaturedComponent,
     DashboardComponent,
     PagenotfoundComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

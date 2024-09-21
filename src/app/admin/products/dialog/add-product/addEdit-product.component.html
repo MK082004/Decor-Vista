@@ -1,0 +1,112 @@
+<h2 mat-dialog-title>{{ productForm.get('id').value ? 'Edit Product' : 'Add Product' }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="row">
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" required>
+        <mat-error *ngIf="productForm.get('title').hasError('required')">Title is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" required></textarea>
+        <mat-error *ngIf="productForm.get('description').hasError('required')">Description is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>SKU</mat-label>
+        <input matInput formControlName="sku" required>
+        <mat-error *ngIf="productForm.get('sku').hasError('required')">SKU is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Author</mat-label>
+        <input matInput formControlName="author" required>
+        <mat-error *ngIf="productForm.get('author').hasError('required')">Author is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>List Price</mat-label>
+        <input matInput formControlName="listPrice" type="number" required>
+        <mat-error *ngIf="productForm.get('listPrice').hasError('required')">List Price is required</mat-error>
+        <mat-error *ngIf="productForm.get('listPrice').hasError('min')">List Price must be a positive number</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" type="number" required>
+        <mat-error *ngIf="productForm.get('price').hasError('required')">Price is required</mat-error>
+        <mat-error *ngIf="productForm.get('price').hasError('min')">Price must be a positive number</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Price (50+)</mat-label>
+        <input matInput formControlName="price50" type="number" required>
+        <mat-error *ngIf="productForm.get('price50').hasError('required')">Price (50+) is required</mat-error>
+        <mat-error *ngIf="productForm.get('price50').hasError('min')">Price (50+) must be a positive number</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Price (100+)</mat-label>
+        <input matInput formControlName="price100" type="number" required>
+        <mat-error *ngIf="productForm.get('price100').hasError('required')">Price (100+) is required</mat-error>
+        <mat-error *ngIf="productForm.get('price100').hasError('min')">Price (100+) must be a positive number</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId" required>
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="productForm.get('categoryId').hasError('required')">Category is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
+      <!-- <mat-form-field appearance="outline" class="w-100">
+        <mat-label>File matInput</mat-label>
+        <button mat-icon-button matPrefix (click)="f_input.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <input type="text" readonly matInput formControlName="imageUrl" placeholder="No file chosen" />
+        <input
+          type="file"
+          hidden
+          #f_input
+          (click)="$event.stopPropagation()"
+          (change)="handleFileInputChange($event)"
+        />
+        <mat-error *ngIf="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched">
+          This field is required
+        </mat-error>
+      </mat-form-field> -->
+    </div>
+
+    <mat-dialog-actions class="position-sticky bottom-0 mt-2">
+      <div class="dialog-actions col-xs-12 col-md-12 col-lg-12 text-end">
+      <button mat-button type="button" color="warn" (click)="onCancel()">Cancel</button>
+      <button mat-raised-button class="bgapp-secondary-color color-white" type="submit">{{ productForm.get('id').value ? 'Update' : 'Add' }}</button>
+    </div>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>

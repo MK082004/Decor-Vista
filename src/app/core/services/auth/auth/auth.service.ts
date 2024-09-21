@@ -1,3 +1,4 @@
+import { Role } from './../../../enums/role.enum';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError, of } from 'rxjs';
@@ -9,9 +10,10 @@ import { StorageService } from '../secureStorage/storage.service';
 import { LoginModel } from 'src/app/core/models/login.model';
 import { UserMenuModel } from 'src/app/core/models/userMenu.model';
 import { ClaimUserModel } from 'src/app/core/models/claimUser.model';
+import { RegisterModel } from 'src/app/core/models/register.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   public storageCurrentUser = 'accessUser';
@@ -26,7 +28,6 @@ export class AuthService {
     private jwtService: JwtService,
     private apiService: ApiService
   ) {
-
     this.currentUserSubject$ = new BehaviorSubject<ClaimUserModel>(
       this.getEncryptedItemToSession(this.storageCurrentUser)
     );
@@ -35,27 +36,27 @@ export class AuthService {
       this.getEncryptedItemToSession(this.storageCurrentUserPermissions)
     );
 
-    // let encryptDataNote = localStorage.getItem(this.encryptKey('NotificationData'));
+      // let encryptDataNote = localStorage.getItem(this.encryptKey('NotificationData'));
 
-    // if (encryptDataNote) {
-    //   const decryptedData = this.decryptData(encryptDataNote);
-    //   this.NotifictionsData$.next(decryptedData);
-    // }
+      // if (encryptDataNote) {
+      //   const decryptedData = this.decryptData(encryptDataNote);
+      //   this.NotifictionsData$.next(decryptedData);
+      // }
   }
 
   loginUser(loginUser: LoginModel): Observable<ApiResponseModel> {
-    return this.apiService.postRequest<ApiResponseModel>(`${this.baseServerUrl}/LoginUser`, loginUser)
+    return this.apiService
+      .postRequest<ApiResponseModel>(`${this.baseServerUrl}/LoginUser`, loginUser)
       .pipe(
         map((response: ApiResponseModel) => {
           const jwtToken = response.data;
           if (jwtToken !== null) {
             try {
               const claimUser = this.jwtService.decodeToken<ClaimUserModel>(jwtToken.token);
-              console.log('Auth Service', claimUser.userPermissions);
               this.currentUserSubject$.next(claimUser);
-              this.currentUserPermissions$.next(claimUser.userPermissions);
               this.setEncryptedItemToSession(this.storageCurrentUser, claimUser);
-              this.setEncryptedItemToSession(this.storageCurrentUserPermissions, claimUser.userPermissions);
+
+              // Navigate to the appropriate route based on the role
               this.handleUserNavigation(claimUser);
             } catch (decodeError) {
               console.error('Token decoding failed:', decodeError.message || decodeError);
@@ -71,12 +72,43 @@ export class AuthService {
       );
   }
 
+  registerUser(registerUser: RegisterModel): Observable<ApiResponseModel> {
+    return this.apiService
+    .postRequest<ApiResponseModel>(`${this.baseServerUrl}/RegisterUser`, registerUser)
+    .pipe(
+      map((response: ApiResponseModel) => {
+        const jwtToken = response.data;
+        if (jwtToken !== null) {
+          try {
+            const claimUser = this.jwtService.decodeToken<ClaimUserModel>(jwtToken.token);
+            this.currentUserSubject$.next(claimUser);
+            this.setEncryptedItemToSession(this.storageCurrentUser, claimUser);
+
+            // Navigate to the appropriate route based on the role
+            this.handleUserNavigation(claimUser);
+          } catch (decodeError) {
+            console.error('Token decoding failed:', decodeError.message || decodeError);
+            this.logout();
+          }
+        }
+        return response;
+      }),
+      catchError((error) => {
+        console.error('Login failed:', error.message || error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+
   public get currentUserValue(): ClaimUserModel | null {
     return this.currentUserSubject$.value;
   }
 
   public get currentUserRole(): string | null {
-    return this.currentUserSubject$.value ? this.currentUserSubject$.value.userRole : null;
+    return this.currentUserSubject$.value
+      ? this.currentUserSubject$.value.userRole
+      : null;
   }
 
   public getCurrentUser(): Observable<ClaimUserModel | null> {
@@ -96,18 +128,29 @@ export class AuthService {
   }
 
   handleUserNavigation(claimUser: ClaimUserModel) {
-    let response = claimUser;
-    if (response) {
-      this.router.navigate([`/${response.userRole}`]);
+    if (claimUser) {
+      switch (claimUser.userRole) {
+        case Role.admin:
+          this.router.navigate(['/admin']);  // Navigate to admin dashboard
+          break;
+        case Role.designer:
+          this.router.navigate(['/designer']);  // Navigate to designer dashboard
+          break;
+        case Role.user:
+          this.router.navigate(['/home']);  // Navigate to the home page
+          break;
+        default:
+          this.router.navigate(['/signin']);  // Redirect to sign-in
+          break;
+      }
     }
   }
 
   logout() {
     this.storageService.secureStorage.clear();
-    localStorage.removeItem(this.storageCurrentUser);
     this.currentUserSubject$.next(null);
     this.currentUserPermissions$.next([]);
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/home']);
     return of({ success: false });
   }
 

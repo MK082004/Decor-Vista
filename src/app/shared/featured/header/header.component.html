@@ -35,8 +35,38 @@
       </div>
       <div class="col-3 d-flex align-items-center justify-content-center">
         <ul class="d-flex align-items-center gap-2 h-100 nav-right-button">
-          <li><a [routerLink]="['/signin']" routerLinkActive="router-link-active" >SignIn</a></li>
-          <li><a [routerLink]="['/signup']" routerLinkActive="router-link-active" >SignUp</a></li>
+          <li *ngIf="loginUser">
+            <button mat-icon-button matTooltip="Profile" [ngStyle]="profileButton"
+              class="bgcolor-app rounded-full overflow-hidden" [matMenuTriggerFor]="userMenu">
+              <img src="../../../../assets/images/male-icon.png" class="mat-icon">
+            </button>
+            <!-- User Menu Template -->
+            <mat-menu #userMenu="matMenu" class="custom-menu-width jerk-bounce-animation">
+              <div class="mat-toolbar-row d-flex align-items-center gap-2 mb-2">
+                <button mat-icon-button class="bgcolor-app rounded-full" [ngStyle]="profileButton">
+                  <img src="../../../../assets/images/male-icon.png" class="mat-icon">
+                </button>
+                <div class="w-100">
+                  <span class="mat-body-1">{{ loginUser?.userName | capitalize }}</span>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <button mat-menu-item class="custom-mat-menu-item-height d-flex align-items-center justify-content-between"
+                [routerLink]="['/profile']">
+                <span class="mat-body-1">Profile</span>
+                <mat-icon class="me-0">person</mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item class="custom-mat-menu-item-height d-flex align-items-center justify-content-between"
+                (click)="logout()">
+                <span class="mat-body-1">Logout</span>
+                <mat-icon class="me-0">logout</mat-icon>
+              </button>
+            </mat-menu>
+          </li>
+          <!-- Show SignIn/SignUp only if the user is not logged in -->
+          <li *ngIf="!loginUser" class="nav-links"><a class="color-white" [routerLink]="['/signin']" routerLinkActive="router-link-active">SignIn</a></li>
+          <li *ngIf="!loginUser" class="nav-links"><a class="color-white" [routerLink]="['/signup']" routerLinkActive="router-link-active">SignUp</a></li>
         </ul>
       </div>
     </div>

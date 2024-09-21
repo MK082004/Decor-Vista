@@ -1,16 +1,23 @@
-import { Component, AfterViewInit, ElementRef, HostListener } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth/auth/auth.service';
+import { Component, AfterViewInit, ElementRef, HostListener, OnInit } from '@angular/core';
 import { gsap } from 'gsap';
 import SplitType from 'split-type';
+import { UserModel } from 'src/app/core/models/user.model';
+import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements AfterViewInit, OnInit {
   private headerElement: HTMLElement;
-
-  constructor(private elRef: ElementRef) { }
+  loginUser: UserModel | null = null;  // Set initial value to null
+  profileButton = {
+    width: '37px',
+    height: '37px'
+  };
+  constructor(private elRef: ElementRef, private authService: AuthService, private notificationService: DialogService) { }
 
   ngAfterViewInit(): void {
     this.headerElement = this.elRef.nativeElement.querySelector('header');
@@ -43,6 +50,27 @@ export class HeaderComponent implements AfterViewInit {
         });
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.fetchUserData();
+  }
+
+  fetchUserData() {
+    let res = this.authService.currentUserValue;
+    if (res as UserModel) {
+      this.loginUser = res;
+    }
+  }
+
+  logout() {
+    this.notificationService.notifiedStatusRequestDialog('Logout Account', 'Are you sure you want to logout? Once you logout you need to login again. Are you Ok?', '550px', 'Logout', 'Cancle', 'logout')
+      .subscribe((res) => {
+        if (res) {
+          this.authService.logout();
+          this.loginUser = null;  // Set user to null after logout
+        }
+      });
   }
 
   @HostListener('window:scroll', ['$event'])

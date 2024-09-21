@@ -1,0 +1,305 @@
+/* SIDEBAR sTYLING STARTS HERE */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background-color: var(--app-dark-theme);
+  padding: 6px 14px;
+  z-index: 5;
+  transition: all 0.5s ease;
+}
+
+.sidebar.open {
+  width: 250px;
+}
+
+.sidebar .logo {
+  height: 3em;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.sidebar .logo img:first-child {
+  width: 3em;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.sidebar.open .logo img:first-child {
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+
+.sidebar .logo img:last-child {
+  position: absolute;
+  top: 50%;
+  right: 0.9em;
+  transform: translateY(-50%);
+  transition: all 0.4s ease;
+  text-align: center;
+  cursor: pointer;
+  width: 1.5em;
+  transition: all 0.5s ease;
+}
+
+.sidebar.open .logo #btn {
+  text-align: right;
+}
+
+.sidebar mat-icon {
+  color: var(--color-white);
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+
+.sidebar .nav_links {
+  height: 0;
+}
+
+.sidebar.open .nav_links {
+  height: 80dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar li {
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+
+.sidebar.open li:not(:last-child) {
+  margin: 8px 8px 8px 0;
+}
+
+.sidebar li .close_links {
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background-color: var(--app-secondary-color);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+
+.sidebar li:hover .close_links {
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sidebar.open li .close_links {
+  display: none;
+}
+
+.sidebar input {
+  font-size: 15px;
+  color: var(--color-white);
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background-color: var(--app-secondary-color);
+}
+
+.sidebar.open input {
+  padding: 0 20px 0 50px;
+  width: 100%;
+}
+
+.sidebar li a {
+  display: flex;
+  height: 2.2em;
+  width: 100%;
+  border-radius: 0.5em;
+  align-items: center;
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  /* background-color: var(--app-secondary-color); */
+}
+
+.sidebar li a:hover {
+  background-color: var(--app-secondary-color);
+}
+
+.sidebar li a.open {
+  background-color: var(--app-secondary-color);
+}
+
+.sidebar li a.active {
+  background-color: var(--app-secondary-color);
+}
+
+.sidebar li a.active span {
+    color: #11101D;
+}
+
+.sidebar li a.active mat-icon {
+    color: #11101D;
+}
+
+.sidebar li a .links {
+  color: var(--color-white);
+  font-size: 0.7em;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+.sidebar.open li a .links {
+  opacity: 1;
+  width: 5em;
+  pointer-events: auto;
+}
+
+.sidebar li a:hover .links,
+.sidebar li a:hover mat-icon {
+  transition: all 0.5s ease;
+  color: #11101D;
+}
+
+.sidebar li mat-icon {
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+
+.sidebar li.profile {
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background-color: var(--app-secondary-color);
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.sidebar.open li.profile {
+  width: 250px;
+}
+
+.sidebar li .profile_desc {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.sidebar li img {
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.sidebar li.profile .name,
+.sidebar li.profile .portal {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-white);
+  white-space: nowrap;
+}
+
+.sidebar li.profile .portal {
+  font-size: 12px;
+}
+
+.sidebar .profile .log_out {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: var(--app-secondary-color);
+  width: 100% !important;
+  height: 60px !important;
+  line-height: 60px !important;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+
+.sidebar.open .profile .log_out {
+  width: 60px !important;
+  background-color: var(--app-secondary-color)none;
+}
+
+.sidebar ul.subMenus.collapsed {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.sidebar ul.subMenus {
+  max-height: 500px;
+}
+
+.sidebar ul.subMenus li a {
+  border-radius: 0.3em;
+}
+
+.sidebar ul.subMenus li a mat-icon {
+  height: 32px;
+  line-height: 32px;
+  font-size: 0.9em;
+}
+
+.sidebar ul.subMenus li a span {
+  font-size: 0.7em;
+}
+
+.sidebar ul.subMenus li {
+  margin-left: 2em;
+}
+/* SIDEBAR STYLING ENDS HERE */
+
+@media (max-width: 767px) {
+  .sidebar,
+  .sidebar li.profile {
+    left: -78px;
+  }
+
+  .sidebar .logo #btn {
+    left: 78px;
+    filter: invert(100%);
+    transform: translateY(-57%);
+  }
+
+  .sidebar.open,
+  .sidebar.open li.profile {
+    left: 0;
+  }
+
+  .sidebar.open .logo #btn {
+    left: 180px;
+    transition-delay: 0.05s;
+  }
+
+  .sidebar {
+    z-index: 5;
+  }
+}
