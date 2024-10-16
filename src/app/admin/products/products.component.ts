@@ -6,7 +6,6 @@ import { ProductService } from './product.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { AddEditProductComponent } from './dialog/add-product/addEdit-product.component';
 import { DialogService } from 'src/app/core/services/dialog/dialog.service';
-import { ApiResponseModel } from 'src/app/core/models/apiResponse.model';
 
 @Component({
   selector: 'app-products',
@@ -58,11 +57,9 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  applyFilter(event: any) {
-    this.dataSource.filter = event.target.value.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   addProduct() {
@@ -74,10 +71,10 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.loadProducts();
-        this.notificationService.showNotification(res.message, res.isSuccessfull);
+        this.notificationService.showMessage(res.message, res.isSuccessfull);
       }
       else {
-        this.notificationService.showNotification(res.message, res.isSuccessfull);
+        this.notificationService.showMessage(res.message, res.isSuccessfull);
       }
     });
   }
@@ -91,10 +88,10 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.loadProducts();
-        this.notificationService.showNotification(res.message, res.isSuccessfull);
+        this.notificationService.showMessage(res.message, res.isSuccessfull);
       }
       else {
-        this.notificationService.showNotification(res.message, res.isSuccessfull);
+        this.notificationService.showMessage(res.message, res.isSuccessfull);
       }
     });
   }
@@ -105,9 +102,9 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         this.productService.deleteProduct(product.id).subscribe(res => {
           if (res) {
             this.loadProducts();
-            this.notificationService.showNotification(res.message, res.isSuccessfull);
+            this.notificationService.showMessage(res.message, res.isSuccessful);
           } else {
-            this.notificationService.showNotification(res.message, res.isSuccessfull);
+            this.notificationService.showMessage(res.message, res.isSuccessful);
           }
         });
       }

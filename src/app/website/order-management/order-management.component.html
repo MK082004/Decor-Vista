@@ -1,0 +1,6 @@
+<div *ngFor="let order of orders">
+  <h3>Order #{{ order.id }}</h3>
+  <p>Product: {{ order.productName }}</p>
+  <p>Price: {{ order.price }}</p>
+  <button (click)="payNow(order.id)">Pay Now</button>
+</div>

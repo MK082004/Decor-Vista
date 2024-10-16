@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
 @font-face {
   font-family: Rejouice;
   src: url(./assets/font/Rejouice-Headline.ttf);
@@ -26,12 +26,22 @@ body, html {
   max-width: 100%;
   max-height: 100%;
   overflow-x: hidden;
-  background: url(./assets/images/bg-banner.gif);
+  background-image: url(./assets/images/app-bg-banner/bg-banner.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 a {
+  display: inline-block;
   text-decoration: none;
+  height: 100%;
   color: var(--app-dark-theme);
+}
+
+sup {
+  top: -0.3em;
 }
 
 .no-select {
@@ -48,6 +58,82 @@ a {
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
+}
+
+.anchor-hover:hover {
+  transition: 0.2s all ease-in-out;
+  text-decoration: underline;
+  color: var(--app-secondary-color);
+}
+
+.mat-flat-button:hover {
+  background-color: var(--app-secondary-color-hover);
+}
+
+button:disabled {
+  background-color: #dcb7587d !important;
+  color: #fcfcfc9e !important;
+  cursor: not-allowed !important;
+}
+
+body .loader-ripple {
+  display: inline-block;
+  position: relative;
+  width: 24px;
+  height: 24px !important;
+}
+
+.loader-ripple div {
+  position: absolute;
+  animation: loader-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  border: 4px solid;
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.loader-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+.dots::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  text-align: left;
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% {
+      content: '';
+  }
+  40% {
+      content: '.';
+  }
+  60% {
+      content: '..';
+  }
+  80%, 100% {
+      content: '...';
+  }
+}
+
+@keyframes loader-ripple {
+  0% {
+    top: 10px;
+    left: 3px;
+    opacity: 1;
+    width: 4px;
+    height: 4px;
+  }
+
+  100% {
+    top: -3px;
+    left: -10px;
+    opacity: 0;
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .no-select-context {
@@ -81,41 +167,18 @@ ol {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active{
-    background-color: transparent !important;
-    -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0) inset !important;
-}
-
-button:disabled {
-  background-color: rgba(0, 0, 0, 0.57); /* Adjusted for better readability */
-  cursor: not-allowed; /* Show a not-allowed cursor */
-  opacity: 0.5; /* Optionally, make the button slightly transparent */
-  color: white;
-  border: none;
-}
-
-button:disabled:hover {
-  background-color: rgba(0, 0, 0, 0.57); /* Maintain the same background on hover */
-  cursor: not-allowed; /* Ensure the cursor remains the same */
-  opacity: 0.5; /* Optionally, make the button slightly transparent */
-  color: white;
-  border: none;
-}
-
-.custom-btn:disabled:hover::after {
-  display: none; /* Maintain the same background on hover */
-  cursor: not-allowed; /* Ensure the cursor remains the same */
-}
-
-.custom-btn:disabled:hover::before {
-  display: none; /* Maintain the same background on hover */
-  cursor: not-allowed; /* Ensure the cursor remains the same */
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-text-fill-color: var(--color-white) !important;
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 :root {
   --app-linear: -webkit-linear-gradient(0deg, #8490ff 0%, #62bdfc 100%);
   --app-linear-hover: -webkit-linear-gradient(0deg, #8490ffe0 0%, #62bcfcda 100%);
   --app-secondary-color: #dcb658;
+  --app-secondary-color-hover: #dcb758e5;
   --app-dark-theme: #000000;
   --app-light-theme: #ffffff;
   --color-white: #ffffff;
@@ -126,16 +189,34 @@ button:disabled:hover {
   --color-normal: #525252;
   --color-lighter: #858585;
   --color-more-lighter: #f2f8fd;
-  --color-darker: rgb(31, 31, 31);
-  --font-xsmall: 0.6em;
-  --font-xxsmall: 0.7em;
-  --font-button: 0.73em;
-  --font-small: 0.8em;
-  --font-medium: 1em;
-  --font-large: 1.2em;
-  --font-xlarge: 1.5em;
-  --font-fulllarge: 4.8em;
-  --font-navicon: 2.1em;
+  --color-darker: rgb(39, 39, 39);
+  --font-xsmall: 0.7em;
+  --font-small: 1em;
+  --font-medium: 2em;
+  --font-large: 3em;
+  --max-widthpx: 980px;
+  --max-widthper: 83.3333%;
+  --heightfull: 100%;
+  --heighthalf: 50%;
+  --widthfull: 100%;
+  --widthhalf: 50%;
+  --width10: 10%;
+  --width20: 20%;
+  --width24: 24%;
+  --width25: 25%;
+  --width30: 30%;
+  --width40: 40%;
+  --width50: 50%;
+  --width60: 60%;
+  --width70: 70%;
+  --width80: 80%;
+  --width90: 90%;
+  --heightfullvh: 100vh;
+  --heighthalfvh: 50vh;
+  --widthfullvw: 100vw;
+  --widthhalfvw: 50vw;
+  --unit-fx: calc(var(--widthfullvw) / 1440);
+  --unit-fy: calc(var(--heightfullvh) / 996);
 }
 
 h1,
@@ -147,16 +228,6 @@ h6,
 p {
   padding: 0 !important;
   margin: 0 !important;
-}
-
-.form-reg input:-webkit-autofill,
-.form-reg input:-webkit-autofill:hover,
-.form-reg input:-webkit-autofill:focus,
-.form-reg input:-webkit-autofill:active {
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: #ffffff;
-  transition: background-color 5000s ease-in-out 0s;
-  box-shadow: inset 0 0 20px 20px #23232329;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -204,10 +275,70 @@ img {
   height: 35px !important;
 }
 
+/* auth layout Styling  */
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 99.9dvh;
+}
+
+.auth-wrapper .container {
+  margin-top: 10em;
+}
+
+.auth-wrapper .logo {
+  height: 6.5em;
+}
+
+.auth-wrapper header {
+  position: fixed;
+  top: 0;
+  padding-top: 1.5em;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 100;
+  background-image: url(./assets/images/app-bg-banner/bg-banner.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.auth-wrapper footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.auth-wrapper .form-wrapper > .bg-form-wrap {
+  background-color: #3b3b3b18;
+  backdrop-filter: blur(0.3em);
+  padding: 2em;
+  border-radius: 0.4em;
+}
+/* auth layout Styling  */
+
+/* mat progress bar loader classes start here */
+.mat-progress-bar {
+  position: fixed !important;
+  top: 0;
+  max-width: 100%;
+  z-index: 1000000;
+}
+
+.mat-progress-bar .mat-progress-bar-fill::after {
+  background-color: var(--app-secondary-color) !important;
+}
+/* mat progress bar loader classes end here */
+
 /* mat toolbar classes start here */
 .mat-toolbar-single-row {
   height: 3.2em;
 }
+
 /* mat toolbar classes end here */
 
 /* mat card classes start here */
@@ -262,6 +393,7 @@ img {
   margin-left: 0;
   margin-right: 0;
 }
+
 /* mat card classes end here */
 
 /* mat grid classes start here */
@@ -276,157 +408,249 @@ img {
   height: 100% !important;
 }
 
-.mat-grid-tile .mat-figure{
+.mat-grid-tile .mat-figure {
   padding: 0.3em !important;
 }
 
 .mat-grid-list .mat-grid-tile .mat-form-field {
   max-width: 25em !important;
 }
+
 /* mat grid classes end here */
 
 /* mat form field classes start here */
+form {
+  width: var(--widthfull);
+}
+
+form .mat-flat-button {
+  background-color: var(--app-secondary-color);
+  color: var(--color-white);
+  width: var(--widthfull) !important;
+  height: 3.3em !important;
+  padding: 0.8em 1em;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  transition: 0.3s all ease-in-out;
+}
+
+form a,
+form .anchor-button {
+  text-transform: uppercase;
+  color: var(--color-white);
+  font-size: 0.7em;
+  margin-top: 1em;
+  background-color: transparent !important;
+  outline: none;
+  border: none;
+}
+
 .mat-form-field {
-  height: 2.2em !important;
-  width: 100%;
+  width: var(--widthfull);
+  height: 2.5em !important;
 }
 
-.mat-form-field .mat-form-field-subscript-wrapper {
-  margin-top: 2.3em !important;
-  margin-left: -0.8em !important;
+.mat-form-field-appearance-legacy .mat-form-field-ripple,
+.mat-form-field-appearance-legacy .mat-form-field-underline,
+.mat-form-field-appearance-legacy .mat-form-field-label,
+.mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon,
+.mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon {
+  color: var(--color-white);
 }
 
-.mat-paginator {
-  background: transparent !important;
+.mat-form-field-appearance-legacy .mat-form-field-ripple,
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: var(--color-white) !important;
 }
 
-.mat-form-field.mat-paginator-page-size-select {
-  min-width: auto !important;
+.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-ripple,
+.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-underline,
+.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-label,
+.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-prefix .mat-icon,
+.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-suffix .mat-icon {
+  color: var(--color-darker);
 }
 
-/* .mat-form-field.mat-focused .mat-form-field-ripple,
-.mat-tab-group.mat-primary .mat-ink-bar {
-  background-color: var(--app-secondary-theme) !important;
-} */
+.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-ripple,
+.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-underline {
+  background-color: var(--color-darker) !important;
+}
+
+.mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple,
+.mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-underline,
+.mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-label,
+.mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-prefix .mat-icon,
+.mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-suffix .mat-icon {
+  color: var(--app-secondary-color);
+}
+
+.mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple,
+.mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-underline {
+  background-color: var(--app-secondary-color) !important;
+}
+
+.mat-form-field-appearance-legacy.mat-form-field-invalid .mat-form-field-ripple,
+.mat-form-field-appearance-legacy.mat-form-field-invalid .mat-form-field-underline {
+  background-color: var(--color-danger) !important;
+}
+
+
+.mat-form-field.mat-focused:not(.ng-invalid) .mat-form-field-outline,
+.mat-form-field.mat-form-field-should-float:not(.ng-invalid) .mat-form-field-outline,
+.mat-form-field.mat-focused:not(.ng-invalid) .mat-form-field-label,
+.mat-form-field.mat-form-field-should-float:not(.ng-invalid) .mat-form-field-label,
+.mat-form-field.mat-focused:not(.ng-invalid) .mat-form-field-prefix .mat-icon,
+.mat-form-field.mat-focused:not(.ng-invalid) .mat-form-field-suffix .mat-icon,
+.mat-form-field.mat-form-field-should-float:not(.ng-invalid) .mat-form-field-prefix .mat-icon,
+.mat-form-field.mat-form-field-should-float:not(.ng-invalid) .mat-form-field-suffix .mat-icon,
+.mat-form-field.mat-focused:not(.ng-invalid) .mat-select-arrow,
+.mat-form-field.mat-form-field-should-float:not(.ng-invalid) .mat-select-arrow,
+.mat-option.mat-active {
+  color: var(--app-secondary-color) !important;
+}
+
+.mat-form-field-appearance-outline.mat-focused:has(.ng-invalid) .mat-form-field-outline,
+.mat-form-field-appearance-outline.mat-form-field-should-float:has(.ng-invalid) .mat-form-field-outline,
+.mat-form-field-appearance-outline.mat-focused:has(.ng-invalid) .mat-form-field-label,
+.mat-form-field-appearance-outline.mat-form-field-should-float:has(.ng-invalid) .mat-form-field-label,
+.mat-form-field-appearance-outline.mat-focused:has(.ng-invalid) .mat-form-field-prefix .mat-icon,
+.mat-form-field-appearance-outline.mat-focused:has(.ng-invalid) .mat-form-field-suffix .mat-icon,
+.mat-form-field-appearance-outline.mat-form-field-should-float:has(.ng-invalid) .mat-form-field-prefix .mat-icon,
+.mat-form-field-appearance-outline.mat-form-field-should-float:has(.ng-invalid) .mat-form-field-suffix .mat-icon,
+.mat-form-field-appearance-outline.mat-focused:has(.ng-invalid) .mat-select-arrow,
+.mat-form-field-appearance-outline.mat-form-field-should-float:has(.ng-invalid) .mat-select-arrow {
+  color: var(--color-danger) !important;
+}
+
+.mat-form-field-appearance-outline:not(.ng-invalid) .mat-form-field-ripple,
+.mat-form-field-appearance-outline:not(.ng-invalid) .mat-form-field-underline {
+  color: var(--app-secondary-color);
+  background-color: var(--app-secondary-color) !important;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-should-float:has(.ng-invalid) .mat-form-field-ripple,
+.mat-form-field-appearance-outline.mat-form-field-should-float:has(.ng-invalid) .mat-form-field-underline {
+  color: var(--color-danger);
+  background-color: var(--color-danger) !important;
+}
 
 .mat-form-field,
-.mat-form-field .mat-select,
+.mat-form-field-appearance-outline .mat-select,
 .mat-form-field-appearance-outline .mat-form-field-infix,
 .mat-form-field-appearance-outline .mat-form-field-flex,
 .mat-form-field-appearance-outline .mat-form-field-wrapper,
 .mat-form-field-appearance-outline .mat-form-field-outline,
+.mat-form-field-appearance-outline .mat-form-field-infix input.mat-input-element,
+.mat-form-field-appearance-outline .mat-form-field-prefix,
+.mat-form-field-appearance-outline .mat-form-field-suffix,
+.mat-form-field-appearance-outline .mat-form-field-label-wrapper,
+.mat-form-field-appearance-outline .mat-form-field-label,
 .mat-select-trigger {
   height: 100%;
   padding: 0;
   margin: 0 !important;
   top: 0 !important;
+  border-top: 0 !important;
+  box-sizing: border-box !important;
 }
 
-.mat-select-value {
-  max-width: none !important;
+.mat-form-field .mat-form-field-flex {
+  align-items: center !important;
 }
 
-.mat-select-trigger {
+.mat-form-field .mat-form-field-infix .mat-select-value,
+.mat-form-field .mat-form-field-infix .mat-select-trigger,
+.mat-form-field-appearance-outline .mat-form-field-label {
+  max-width: 100% !important;
+  width: 100% !important;
   display: flex !important;
-  justify-content: space-between;
-  align-items: center;
+  align-items: center !important;
 }
 
-.mat-form-field-infix {
-  border-top: none !important;
+.mat-form-field-wrapper .mat-form-field-label-wrapper {
+  overflow: visible !important;
 }
 
-.mat-form-field .mat-form-field-infix input {
+.mat-form-field.mat-focused .mat-form-field-ripple,
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+  transition: transform 500ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 100ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 500ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.mat-form-field-appearance-legacy .mat-input-element {
+  color: var(--color-white) !important;
+  caret-color: var(--color-white);
+}
+
+.mat-form-field-appearance-outline .mat-input-element {
+  color: var(--color-darker) !important;
+  caret-color: var(--color-darker);
+}
+
+.mat-form-field .mat-form-field-infix .mat-select-value,
+.mat-form-field .mat-form-field-infix .mat-input-element {
+  font-size: 0.8em !important;
+}
+
+.mat-form-field .mat-form-field-infix input.mat-input-element {
+  margin-top: 0.2em !important;
+}
+
+.mat-form-field .mat-form-field-infix .mat-select-value {
+  margin-top: 0.5em !important;
+}
+
+.mat-form-field .mat-form-field-prefix .mat-icon-button,
+.mat-form-field .mat-form-field-suffix .mat-icon-button  {
+  width: 1em !important;
   height: 100% !important;
 }
 
-.mat-form-field-appearance-outline .mat-form-field-flex {
-  padding: 0 .75em 0 .75em;
+.mat-form-field .mat-form-field-prefix .mat-icon,
+.mat-form-field .mat-form-field-suffix .mat-icon {
+  font-size: 120% !important;
+  cursor: pointer !important;
 }
 
-.mat-form-field-appearance-outline:hover .mat-select-trigger::after {
-  color: #000;
+.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
 }
 
-.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline,
-.mat-form-field-appearance-outline.mat-focused .mat-select-trigger::after,
-.mat-primary .mat-option.mat-selected:not(.mat-option-disabled),
-.mat-form-field.mat-focused .mat-form-field-label {
-  color: var(--app-secondary-color) !important;
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  bottom: 0 !important;
 }
 
-.mat-form-field.mat-form-field-invalid .mat-form-field-outline,
-.mat-form-field.mat-form-field-invalid .mat-select-trigger::after,
-.mat-primary .mat-option.mat-selected:not(.mat-option-disabled),
-.mat-form-field.mat-form-field-invalid .mat-form-field-label {
-  color: var(--color-danger) !important;
+.mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {
+  margin-top: 0 !important;
+  top: calc(100% - -0.5em) !important;
+  max-width: fit-content !important;
 }
 
-.mat-form-field-appearance-outline.mat-focused.mat-form-field-invalid .mat-form-field-label {
-  top: 2.4em !important;
+.mat-form-field.mat-focused:not(.ng-invalid) .mat-form-field-label,
+.mat-form-field.mat-form-field-should-float:not(.ng-invalid) .mat-form-field-label,
+.mat-form-field.mat-focused:has(.ng-invalid) .mat-form-field-label,
+.mat-form-field.mat-form-field-should-float:has(.ng-invalid) .mat-form-field-label {
+  transform: translateY(-0.8em) scale(0.75) !important;
 }
-
+.mat-form-field .mat-select-arrow-wrapper {
+  transform: none !important;
+}
+/* mat select */
 .mat-option.mat-selected::after {
   content: '✔';
   position: absolute;
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--app-secondary-theme);
+  color: var(--app-secondary-theme) !important;
 }
 
-.mat-select-arrow {
-  display: none;
+.mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+  font-size: 0.9em !important;
+  line-height: 3em !important;
+  height: 2.5em !important;
 }
-
-.mat-form-field.auto-serach .mat-form-field-infix {
-  top: -0.2em !important;
-  padding: 0 0.5em !important;
-}
-
-.mat-form-field.auto-serach .mat-form-field-suffix {
-  top: 0.2em !important;
-}
-
-.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
-  font-size: var(--font-xxsmall);
-}
-/* Hide the default mat-select arrow */
-.mat-select-arrow {
-  display: none;
-}
-
-.mat-form-field-appearance-outline.rounded .mat-form-field-outline-start {
-  border-radius: 28px 0 0 28px !important;
-  min-width: 28px !important;
-}
-
-.mat-form-field-appearance-outline.rounded .mat-form-field-outline-end {
-  border-radius: 0 28px 28px 0 !important;
-  min-width: 28px !important;
-}
-
-/* Add padding to move the label and input into the center to prevent overlapping the rounded border */
-.mat-form-field-appearance-outline.rounded .mat-form-field-flex {
-  padding: 0.4em 0.3em !important;
-  background: var(--color-white);
-  border-radius: 28px;
-}
-/* Add the expand_more icon instead of the default arrow */
-.mat-select-trigger::after {
-  position: relative;
-  font-family: 'Material Icons';
-  content: "expand_more";
-  font-size: 24px;
-  color: #808080;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* .mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
-  font-size: var(--font-xsmall) !important;
-} */
 /* mat form field classes end here */
 
 /* mat accrordian classes start here */
@@ -470,6 +694,7 @@ img {
 .mat-expansion-panel-body {
   padding: 0.8em !important;
 }
+
 /* mat accrordian classes end here */
 
 /* mat toggle classes start here */
@@ -500,6 +725,7 @@ img {
 .mat-slide-toggle-bar {
   border-radius: 10em !important;
 }
+
 /* mat toggle classes end here */
 
 /* mat some classes remove line height specify in this section classes start here */
@@ -523,6 +749,7 @@ img {
   vertical-align: inherit !important;
   height: auto !important;
 }
+
 /* mat some classes remove line height specify in this section classes end here */
 
 /* mat table classes start here  */
@@ -548,7 +775,7 @@ img {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  cursor: text;
+  cursor: pointer;
   overflow: visible;
 }
 
@@ -640,18 +867,24 @@ img {
 .mat-table-column-width-100 {
   max-width: 100%;
 }
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: var(--app-secondary-color) !important;
+}
 /* mat table classes end here  */
 
 /* mat tabs classes start here  */
 .mat-tab-label {
   height: 3em !important;
 }
+
 /* mat tabs classes end here  */
 
 /* transition classes start here */
 .transition {
   transition: 0.2s all ease-in-out;
 }
+
 /* transition classes start here */
 
 /* remove mat button ripple css start here */
@@ -659,48 +892,51 @@ img {
   --mat-ripple-color: transparent;
   pointer-events: none;
 }
+
 /* remove mat button ripple css end here */
 
 /* cursor classes start here */
 .cursor-pointer {
   cursor: pointer;
 }
+
 /* cursor classes end here */
 
 /* for font sizes classes start here  */
-body .font-xsmall {
+.font-xsmall {
   font-size: var(--font-xsmall) !important;
 }
 
-body .font-small {
+.font-small {
   font-size: var(--font-small) !important;
 }
 
-body .font-medium {
+.font-medium {
   font-size: var(--font-medium) !important;
 }
 
-body .font-large {
+.font-large {
   font-size: var(--font-large) !important;
 }
 
-body .font-fulllarge {
+.font-fulllarge {
   font-size: var(--font-fulllarge) !important;
   line-height: 1em;
   font-weight: 700;
 }
 
-body .font-xlarge {
+.font-xlarge {
   font-size: var(--font-xlarge) !important;
 }
 
-body .font-button {
+.font-button {
   font-size: var(--font-button) !important;
 }
 
-body .font-navicon {
+.font-navicon {
   font-size: var(--font-navicon) !important;
 }
+
 /* for font sizes classes end here  */
 
 /* color classes start here */
@@ -708,7 +944,7 @@ body .font-navicon {
   color: var(--app-linear);
 }
 
-.app-secondary-color {
+.color-app-secondary {
   color: var(--app-secondary-color);
 }
 
@@ -728,9 +964,14 @@ body .font-navicon {
   color: var(--color-lighter);
 }
 
+.color-lighter-2 {
+  color: var(--color-more-lighter);
+}
+
 .color-normal {
   color: var(--color-normal);
 }
+
 /* color classes end here */
 
 /* background color classes start here */
@@ -743,7 +984,7 @@ body .font-navicon {
 }
 
 .bgapp-secondary-color {
-  background-color: var(--app-secondary-color);
+  background-color: var(--app-secondary-color) !important;
 }
 
 .bgcolor-dark {
@@ -761,29 +1002,65 @@ body .font-navicon {
 .bgcolor-transparent {
   background-color: transparent !important;
 }
+
 /* background color classes end here */
 
 /* border classes start here */
+.border-white-all {
+  border: 1px solid var(--color-white) !important;
+}
+
 .border-grey-all-1 {
-  border: 1px solid var( --color-more-lighter);
+  border: 1px solid var(--color-more-lighter);
 }
 
 .border-grey-top-1 {
-  border-top: 1px solid var( --color-more-lighter);
+  border-top: 1px solid var(--color-more-lighter);
 }
 
 .border-grey-bottom-1 {
-  border-bottom: 1px solid var( --color-more-lighter);
+  border-bottom: 1px solid var(--color-more-lighter);
 }
 
 .border-grey-left-1 {
-  border-left: 1px solid var( --color-more-lighter);
+  border-left: 1px solid var(--color-more-lighter);
 }
 
 .border-grey-right-1 {
-  border-right: 1px solid var( --color-more-lighter);
+  border-right: 1px solid var(--color-more-lighter);
+}
+
+.border-danger-all {
+  border: 1px solid var(--color-danger) !important;
+}
+
+.border-app-all {
+  border-color: var(--app-secondary-color) !important;
 }
 /* border classes end here */
+
+/* mat dialog classes start here */
+/* .mat-dialog-container {
+  background-color: #bbbbbb50 !important;
+  backdrop-filter: blur(1em) !important;
+} */
+/* mat dialog classes end here */
+
+/* mat actions button classes start here */
+.mat-dialog-actions {
+  min-height: auto !important;
+  margin-bottom: 0 !important;
+}
+
+.mat-raised-button,
+.mat-warn {
+  min-width: 100px !important;
+}
+
+.mat-warn {
+  background: #ececec !important;
+}
+/* mat actions button classes end here */
 
 /* height classes start here */
 .h50vh {
@@ -799,25 +1076,22 @@ body .font-navicon {
 }
 
 .h80vh {
-  height: 8cqh;
+  height: 89dvh;
 }
 /* height classes end here */
-
-.header {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  min-height: 100vh;
-  top: 0;
-  left: 78px;
-  width: calc(100% - 78px);
-  transition: all 0.5s ease;
-  z-index: 2;
+.tbl-first-col {
+  max-width: 5em;
+  border-right: 1px solid rgba(0,0,0,.12);
+  margin-right: 2em;
 }
 
-.header.open {
-  left: 250px;
-  width: calc(100% - 250px);
+.mat-row {
+  cursor: pointer;
+  transition: 0.2ms all ease-in-out;
+}
+
+.mat-row:hover {
+  background-color: var(--color-more-lighter);
 }
 
 .snackbar-success {
@@ -826,4 +1100,61 @@ body .font-navicon {
 
 .snackbar-danger {
   background-color: var(--color-danger);
+}
+
+.z-index-1000 {
+  z-index: 1000;
+}
+/* font weight classes start here */
+.fw-in {
+  font-weight: inherit;
+}
+
+.fw-1 {
+  font-weight: 100;
+}
+
+.fw-2 {
+  font-weight: 200;
+}
+
+.fw-3 {
+  font-weight: 300;
+}
+
+.fw-4 {
+  font-weight: 400;
+}
+
+.fw-5 {
+  font-weight: 500;
+}
+
+.fw-6 {
+  font-weight: 600;
+}
+
+.fw-7 {
+  font-weight: 700;
+}
+
+.fw-8 {
+  font-weight: 800;
+}
+
+.fw-9 {
+  font-weight: 900;
+}
+/* font weight classes start here */
+
+/* Custom classes start here */
+.full-screen-container {
+  margin-top: -0.5em;
+}
+/* Custom classes end here */
+
+@media (max-width: 767px) {
+  :root {
+    --unit-fx: var(--unit-fy);
+  }
 }

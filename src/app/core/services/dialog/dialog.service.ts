@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
-// import { ConfirmationDialogComponent } from 'src/app/shared/featured/components/confirmation-dialog/confirmation-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -28,12 +27,12 @@ export class DialogService {
     return dialogRef.afterClosed();
   }
 
-  showNotification(message: string, isSuccess: boolean) {
+  showMessage(message: string, isSuccess: boolean) {
     this.snackBar.open(message, '', {
       verticalPosition:  "bottom",
       horizontalPosition: "center",
       panelClass: isSuccess === true ? "snackbar-success" :  "snackbar-danger",
-      duration : 400
+      duration : 2000
     });
   }
 

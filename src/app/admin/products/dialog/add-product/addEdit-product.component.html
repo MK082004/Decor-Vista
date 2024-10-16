@@ -12,17 +12,17 @@
 
     <div class="col-xs-12 col-md-12 col-lg-6 my-3">
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" required></textarea>
-        <mat-error *ngIf="productForm.get('description').hasError('required')">Description is required</mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-xs-12 col-md-12 col-lg-6 my-3">
-      <mat-form-field appearance="outline" class="w-100">
         <mat-label>SKU</mat-label>
         <input matInput formControlName="sku" required>
         <mat-error *ngIf="productForm.get('sku').hasError('required')">SKU is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-12 my-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" required></textarea>
+        <mat-error *ngIf="productForm.get('description').hasError('required')">Description is required</mat-error>
       </mat-form-field>
     </div>
 
@@ -66,7 +66,8 @@
         <mat-label>Price (100+)</mat-label>
         <input matInput formControlName="price100" type="number" required>
         <mat-error *ngIf="productForm.get('price100').hasError('required')">Price (100+) is required</mat-error>
-        <mat-error *ngIf="productForm.get('price100').hasError('min')">Price (100+) must be a positive number</mat-error>
+        <mat-error *ngIf="productForm.get('price100').hasError('min')">Price (100+) must be a positive
+          number</mat-error>
       </mat-form-field>
     </div>
 
@@ -83,30 +84,25 @@
     </div>
 
     <div class="col-xs-12 col-md-12 col-lg-6 my-3">
-      <!-- <mat-form-field appearance="outline" class="w-100">
-        <mat-label>File matInput</mat-label>
-        <button mat-icon-button matPrefix (click)="f_input.click()">
-          <mat-icon>attach_file</mat-icon>
-        </button>
-        <input type="text" readonly matInput formControlName="imageUrl" placeholder="No file chosen" />
-        <input
-          type="file"
-          hidden
-          #f_input
-          (click)="$event.stopPropagation()"
-          (change)="handleFileInputChange($event)"
-        />
+      <mat-form-field appearance="outline" class="w-100 imageField">
+        <mat-label>Select Product Images</mat-label>
+        <input matInput type="text" formControlName="imageUrl" readonly />
+        <input type="file" (change)="onFileSelected($event)" multiple style="display: none;" id="file-input" />
+        <mat-icon matSuffix (click)="onFileInputClick()">
+          attach_file
+        </mat-icon>
         <mat-error *ngIf="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched">
           This field is required
         </mat-error>
-      </mat-form-field> -->
+      </mat-form-field>
     </div>
 
     <mat-dialog-actions class="position-sticky bottom-0 mt-2">
       <div class="dialog-actions col-xs-12 col-md-12 col-lg-12 text-end">
-      <button mat-button type="button" color="warn" (click)="onCancel()">Cancel</button>
-      <button mat-raised-button class="bgapp-secondary-color color-white" type="submit">{{ productForm.get('id').value ? 'Update' : 'Add' }}</button>
-    </div>
+        <button mat-button type="button" color="warn" (click)="onCancel()">Cancel</button>
+        <button mat-raised-button class="bgapp-secondary-color color-white" type="submit">{{ productForm.get('id').value
+          ? 'Update' : 'Add' }}</button>
+      </div>
     </mat-dialog-actions>
   </form>
 </mat-dialog-content>

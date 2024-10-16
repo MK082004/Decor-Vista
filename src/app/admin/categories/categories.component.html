@@ -1,90 +1,177 @@
 <section>
   <app-page-toolbar [pageName]="'Categories'"></app-page-toolbar>
-  <mat-card>
+  <mat-card class="bgapp-secondary-color">
+    <mat-card class="rounded-top">
+      <form [formGroup]="categoryFilterForm" (ngSubmit)="onFilterSubmit()">
+        <div class="row">
+          <!-- Category Status -->
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 pl-0 d-flex align-items-center justify-content-center">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Category Status</mat-label>
+              <mat-select formControlName="categoryStatus">
+                <mat-option [value]="'true'">Active</mat-option>
+                <mat-option [value]="'false'">Inactive</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Start Date -->
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 pl-0 d-flex align-items-center justify-content-center">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Start Date</mat-label>
+              <input matInput [matDatepicker]="startPicker" formControlName="categoryStartDate"
+                placeholder="Select start date">
+              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+              <mat-datepicker #startPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- End Date -->
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 pl-0 d-flex align-items-center justify-content-center">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>End Date</mat-label>
+              <input matInput [matDatepicker]="endPicker" formControlName="categoryEndDate"
+                placeholder="Select end date">
+              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+              <mat-datepicker #endPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Category Search String -->
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 pl-0 d-flex align-items-center justify-content-center">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Category Search</mat-label>
+            <input matInput [formControl]="categorySearch" placeholder="Search category" (keyup)="searchCategories()">
+          </mat-form-field>
+        </div>
+
+
+        <!-- Submit Button -->
+        <div class="row px-3">
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 p-0 ms-auto">
+            <button mat-raised-button color="primary" type="submit">Filter</button>
+          </div>
+        </div>
+      </form>
+    </mat-card>
     <div class="full-screen-container mat-elevation-z8 bgColor-transparent rounded h-100">
-      <!-- HTML Template -->
-      <mat-card-header
-        class="position-relative d-flex align-items-center justify-content-between py-2 px-3 rounded-top">
+      <!-- Mat Table Header Start -->
+      <mat-card-header class="position-relative d-flex align-items-center gap-3 p-3 rounded-top">
         <mat-card-title class="m-0 ms-1 no-select d-flex align-items-center gap-3">
-          <h5>Categories View</h5>
+          <span>Categories View</span>
         </mat-card-title>
-        <mat-form-field appearance="outline" class="filter-input w-50">
-          <mat-label>Search Categories</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Type to filter..." />
-        </mat-form-field>
 
         <ng-container>
-          <ul class="d-flex">
+          <ul class="d-flex ms-auto">
             <li>
-              <mat-card-actions class="ms-auto p-0 m-0">
+              <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color p-3" matTooltip="Refresh"
+                (click)="refreshCategoryPage()">
+                <mat-icon class="font-medium">refresh</mat-icon>
+              </button>
+            </li>
+            <li>
 
-                <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color" matTooltip="Add Product"
-                  (click)="addCategory()">
-                  <mat-icon class="font-xlarge">add</mat-icon>
-                </button>
-              </mat-card-actions>
-
+              <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color p-3" matTooltip="Add Product"
+                (click)="addCategory()">
+                <mat-icon class="font-medium">add</mat-icon>
+              </button>
             </li>
           </ul>
         </ng-container>
 
         <hr class="position-absolute w-100 mb-0 start-0 bottom-0" />
       </mat-card-header>
+      <!-- Mat Table Header End -->
 
-      <div class="mat-elevation-z8">
-        <mat-table [dataSource]="dataSource" class="mat-table">
+      <!-- Mat Table Start -->
+      <div class="mat-card bg-white rounded-bottom" [style.border-radius]="0">
+        <div class="mat-elevation-z8 rounded">
+          <mat-table #categoriesTable [dataSource]="categoriesTableDataSource" matSort
+            (matSortChange)="onCategoriesSortChange($event)">
 
-          <!-- Product ID Column -->
-          <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-            <mat-cell *matCellDef="let cateogry"> {{ cateogry.id }} </mat-cell>
-          </ng-container>
+            <!-- Category Serial No Column -->
+            <ng-container matColumnDef="Sno">
+              <mat-header-cell *matHeaderCellDef class="tbl-first-col"> S.No </mat-header-cell>
+              <mat-cell *matCellDef="let category; let i = index" class="tbl-first-col"> {{ i + 1 }} </mat-cell>
+            </ng-container>
 
-          <!-- Title Column -->
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let cateogry"> {{ cateogry.name }} </mat-cell>
-          </ng-container>
+            <!-- Category Name Column (sortable) -->
+            <ng-container matColumnDef="categoryName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+              <mat-cell *matCellDef="let category" (dblclick)="onRowDoubleClick('categoryName', category)"> {{
+                category.categoryName }} </mat-cell>
+            </ng-container>
 
-          <!-- Display Order Column -->
-          <ng-container matColumnDef="displayOrder">
-            <mat-header-cell *matHeaderCellDef> Display Order </mat-header-cell>
-            <mat-cell *matCellDef="let cateogry"> {{ cateogry.displayOrder }} </mat-cell>
-          </ng-container>
+            <!-- Category Description Column (sortable) -->
+            <ng-container matColumnDef="categoryDescription">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+              <mat-cell *matCellDef="let category" (dblclick)="onRowDoubleClick('categoryDescription', category)"> {{
+                category.categoryDescription }} </mat-cell>
+            </ng-container>
 
-          <!-- Actions Column -->
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-            <mat-cell *matCellDef="let cateogry">
-              <mat-card-actions class="p-0 m-0">
+            <!-- Category Sort Order Column (sortable) -->
+            <ng-container matColumnDef="sortOrder">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Sort Order </mat-header-cell>
+              <mat-cell *matCellDef="let category" (dblclick)="onRowDoubleClick('sortOrder', category)"> {{
+                category.sortOrder }} </mat-cell>
+            </ng-container>
 
-                <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color" matTooltip="Edit Category"
-                  (click)="editCategory(cateogry)">
-                  <mat-icon class="font-xlarge" color="primary">edit</mat-icon> <!-- Static icon name -->
-                </button>
-              </mat-card-actions>
-              <mat-card-actions class="p-0 m-0">
+            <!-- Category Image Column (not sortable) -->
+            <ng-container matColumnDef="categoryImage">
+              <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+              <mat-cell *matCellDef="let category" (dblclick)="onRowDoubleClick('categoryImage', category)">
+                <img (click)="openImageDialog(category)" [src]="category.categoryImage" [alt]="category.categoryName"
+                  height="25em"
+                  onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Category+Image';">
+              </mat-cell>
+            </ng-container>
 
-                <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color" matTooltip="Delete Category"
-                  (click)="deleteCategory(cateogry)">
-                  <mat-icon class="font-xlarge color-danger">delete</mat-icon> <!-- Static icon name -->
-                </button>
-              </mat-card-actions>
-            </mat-cell>
-          </ng-container>
+            <!-- Actions Column (not sortable) -->
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+              <mat-cell *matCellDef="let category">
+                <mat-card-actions class="p-0 m-0">
+                  <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color" matTooltip="Edit Category"
+                    (click)="editCategory(category)">
+                    <mat-icon class="font-xlarge" color="primary">edit</mat-icon>
+                  </button>
+                </mat-card-actions>
+                <mat-card-actions class="p-0 m-0">
+                  <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color"
+                    matTooltip="Delete Category" (click)="deleteCategory(category)">
+                    <mat-icon class="font-xlarge color-danger">delete</mat-icon>
+                  </button>
+                </mat-card-actions>
+              </mat-cell>
+            </ng-container>
 
-          <!-- Header Row -->
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <!-- Data Rows -->
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
+            <!-- Header Row -->
+            <mat-header-row *matHeaderRowDef="categoriesColumns; sticky: true"></mat-header-row>
+            <!-- Data Rows -->
+            <mat-row *matRowDef="let row; columns: categoriesColumns;" matRipple [style.cursor]="'pointer'"></mat-row>
+          </mat-table>
 
-        <div *ngIf="categories?.length === 0" class="text-center mt-2"><span>No data found</span></div>
 
-        <!-- Paginator -->
-        <mat-paginator [length]="length" class="pb-3" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"
-          showFirstLastButtons></mat-paginator>
+          <div *ngIf="categoriesTableDataSource.isTblLoading || categoriesTableDataSource.renderedData.length == 0"
+            class="text-center mt-2 d-flex justify-content-center">
+            <mat-spinner *ngIf="categoriesTableDataSource.isTblLoading" diameter="40"></mat-spinner>
+          </div>
+
+          <div *ngIf="!categoriesTableDataSource.isTblLoading && categoriesTableDataSource.renderedData.length == 0"
+            class="text-center mt-2">
+            <span>No data found</span>
+          </div>
+
+          <!-- Paginator -->
+          <mat-paginator class="rounded bgColor-transparent pb-3" #categoriesPaginator
+            [length]="categoriesTableDataSource.itemCount" [pageIndex]="0" [pageSize]="5"
+            (page)="pageCategoriesChange()" [pageSizeOptions]="[5, 10, 25]">
+          </mat-paginator>
+        </div>
       </div>
+      <!-- Mat Table End -->
     </div>
   </mat-card>
 </section>
+<router-outlet></router-outlet>

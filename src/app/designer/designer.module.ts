@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { DesignerRoutingModule } from './designer-routing.module';
+import { PortfolioComponent } from './portfolio/portfolio.component';
+import { DesignerDashbaordComponent } from './designer-dashbaord/designer-dashbaord.component';
+import { SharedModule } from '../shared/shared.module';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PortfolioComponent,
+    DesignerDashbaordComponent,
+    AppointmentComponent,
+    ReviewsComponent
+  ],
   imports: [
-    CommonModule,
+    SharedModule,
     DesignerRoutingModule
   ]
 })

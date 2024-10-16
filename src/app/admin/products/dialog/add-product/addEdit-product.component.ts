@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoriesService } from 'src/app/admin/categories/categories.service';
 import { Product } from 'src/app/core/models/product.model';
-import { Category } from 'src/app/core/models/product.model';
 import { ProductService } from '../../product.service';
+import { CategoryModel } from 'src/app/core/models/category.model';
 
 @Component({
   selector: 'app-addEdit-product',
@@ -13,8 +13,8 @@ import { ProductService } from '../../product.service';
 })
 export class AddEditProductComponent implements OnInit {
   productForm: FormGroup;
-  categories: Category[] = [];
-  selectedFile: File | null = null;
+  categories: CategoryModel[] = [];
+  images: File[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -46,33 +46,31 @@ export class AddEditProductComponent implements OnInit {
         [Validators.required, Validators.min(0)],
       ],
       categoryId: [data ? data.categoryId : null, Validators.required],
-      imageUrl: [ data ? data.imageUrl : '', Validators.required ]
+      imageUrl: [data ? data.imageUrl : '', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.fetchCategories();
+    // this.fetchCategories();
   }
 
-  fetchCategories(): void {
-    this.categoriesService.getCategories();
-    this.categoriesService.categories$.subscribe(
-      (categories) => {
-        this.categories = categories.categories;
-      },
-      (error) => {
-        console.error('Failed to fetch categories:', error);
-      }
-    );
-  }
+  // fetchCategories(): void {
+  //   this.categoriesService.getCategories().subscribe(
+  //     (response) => {
+  //       this.categories = response?.categories;
+  //     },
+  //     (error) => {
+  //       console.error('Failed to fetch categories:', error);
+  //     }
+  //   );
+  // }
 
-  handleFileInputChange(fileList: FileList): void {
-    // this.file_store = fileList;
-    if (fileList.length) {
-      const fileNames = Array.from(fileList).map(file => file.name).join(', ');
-      this.productForm.controls['imageUrl'].setValue(fileNames);
-    } else {
-      this.productForm.controls['imageUrl'].setValue('');
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.images = Array.from(input.files);
+      const imageNames = this.images.map((file) => file.name).join(', ');
+      this.productForm.patchValue({ imageUrl: imageNames });
     }
   }
 
@@ -80,8 +78,6 @@ export class AddEditProductComponent implements OnInit {
     if (this.productForm.valid) {
       const formData = new FormData();
       const productData = this.productForm.getRawValue();
-
-      // Append product details to FormData
       formData.append('id', productData.id ? productData.id.toString() : null);
       formData.append('title', productData.title);
       formData.append('description', productData.description);
@@ -92,10 +88,22 @@ export class AddEditProductComponent implements OnInit {
       formData.append('price50', productData.price50.toString());
       formData.append('price100', productData.price100.toString());
       formData.append('categoryId', productData.categoryId.toString());
-      formData.append('imageUrl', this.selectedFile, this.selectedFile.name);
+      // const imageNamesArray = this.images
+      // .map((file) => file.name ? file : null)
+      // .filter(Boolean);
+      // imageNamesArray.forEach((file) => {
+      //   formData.append('imageUrl', file, file.name);
+      // });
       this.productService.addEditProduct(formData).subscribe((res) => {
         this.dialogRef.close(res);
       });
+    }
+  }
+
+  onFileInputClick(): void {
+    const fileInput = document.getElementById('file-input') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
     }
   }
 

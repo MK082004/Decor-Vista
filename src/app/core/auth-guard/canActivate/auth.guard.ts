@@ -1,3 +1,4 @@
+import { CryptoService } from './../../services/auth/crypto/crypto.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -9,62 +10,92 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
+import { UserMenuModel } from '../../models/userMenu.model';
 import { AuthService } from '../../services/auth/auth/auth.service';
-import { Role } from '../../enums/role.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  previousUrl: string;
+  private previousUrl: string;
 
   constructor(private authService: AuthService, private router: Router) {
-    router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.previousUrl = event.url;
-      });
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+      this.previousUrl = event.url;
+    });
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.verifyActivation(route, state);
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | boolean {
+    return this.checkAccess(route, state);
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.verifyActivation(route, state);
+  canActivateChild(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | boolean {
+    return this.checkAccess(route, state);
   }
 
-  verifyActivation(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean {
-    return this.authService.getCurrentUser().pipe(
+  private checkAccess(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | boolean {
+    const currentUrl = state.url.split('?')[0];
+    const isAuthModuleRoute = currentUrl.startsWith('/auth');
+    const encryptedParamTokenValue = route.params['tokenValue'];
+
+    return this.authService.getCurrentUserPermissions().pipe(
       take(1),
-      map((res) => {
-        const currentUrl = state.url.split('?')[0];  // Current route URL
-
-        if (!res || !res.userRole) {
-          // Redirect to login if the user is not authenticated
-          if (currentUrl !== '/signin' && currentUrl !== '/signup') {
-            return this.router.createUrlTree(['/signin']);
-          }
-          return true;  // Allow access to sign-in or sign-up pages
-        } else {
-          // Check the role and navigate accordingly
-          switch (res.userRole) {
-            case Role.admin:
-              if (currentUrl.startsWith('/admin')) {
-                return true;  // Allow access to admin pages
-              }
-              return this.router.createUrlTree(['/admin']);  // Redirect to admin page
-            case Role.designer:
-              if (currentUrl.startsWith('/designer')) {
-                return true;  // Allow access to designer pages
-              }
-              return this.router.createUrlTree(['/designer']);  // Redirect to designer page
-            default:
-              return this.router.createUrlTree(['/home']);  // Default redirect
-          }
-        }
+      map((permissions) => {
+        const userPermissions = permissions ?? [];
+        return this.handlePermissions(userPermissions, encryptedParamTokenValue, currentUrl, isAuthModuleRoute)
       })
     );
   }
 
+  private handlePermissions(
+    permissions: UserMenuModel[],
+    encryptedParamTokenValue: string,
+    currentUrl: string,
+    isAuthModuleRoute: boolean
+  ): boolean | UrlTree {
+    if (this.previousUrl !== undefined || this.previousUrl !== '/auth') {
+      if (encryptedParamTokenValue) {
+        return this.hasValidAccess(encryptedParamTokenValue) ? true : this.router.parseUrl(this.previousUrl);
+      }
+      if (permissions.length > 0 ) {
+        const extractedPermissions = this.extractUrlPermissions(permissions);
+        return extractedPermissions.includes(currentUrl) ? true : this.router.parseUrl(this.previousUrl);
+      }
+      else {
+        return isAuthModuleRoute ? true : this.router.parseUrl(this.previousUrl);
+      }
+    }
+    else {
+      return this.router.parseUrl('/not-found');
+    }
+  }
+
+  private hasValidAccess(encryptedParamTokenValue: string): boolean {
+    if (!encryptedParamTokenValue) return true;
+    const decryptedToken = this.authService.jwtDecodeToken<string>(encryptedParamTokenValue);
+    return (decryptedToken && this.authService.isValidJwt(encryptedParamTokenValue) && !this.authService.jwtTokenExpireationChecker(decryptedToken));
+  }
+
+  private extractUrlPermissions(permissions: UserMenuModel[]): string[] {
+    if (Array.isArray(permissions)) {
+      return permissions.reduce<string[]>((acc, menu: UserMenuModel) => {
+        if (menu.MenuUrl) acc.push(menu.MenuUrl);
+        menu.SubMenus.forEach((subMenu) => {
+          if (subMenu.SubMenuUrl) acc.push(subMenu.SubMenuUrl);
+        });
+        return acc;
+      }, []);
+    }
+
+    return [];
+  }
 }

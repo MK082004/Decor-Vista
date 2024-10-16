@@ -1,0 +1,61 @@
+<div class="form-wrapper row align-items-center justify-content-center">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 bg-form-wrap mx-auto">
+    <div class="top-form-header mb-5">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 text-center">
+        <h4 class="color-app-secondary fw-6 mb10 no-select">Welcome</h4>
+        <p class="color-white font-xsmall fw-3 text-uppercase no-select">Forgot password by {{ isEmailSelected ? 'email'
+          : 'phone number' }}</p>
+      </div>
+    </div>
+    <div class="bottom-form-fields">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex align-items-center justify-content-center">
+        <form #ngForgotPassForm="ngForm" [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmit()">
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex align-items-center justify-content-center mb-5">
+            <!-- Email -->
+            <mat-form-field class="example-full-width" *ngIf="isEmailSelected">
+              <mat-label>Email</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()">
+                <i class="bx bx-envelope"></i>
+              </mat-icon>
+              <input matInput type="email" preventSpace formControlName="userEmail">
+              <mat-error *ngIf="forgotPasswordForm.get('userEmail').hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="forgotPasswordForm.get('userEmail').hasError('email')">Please enter a valid
+                email</mat-error>
+            </mat-form-field>
+
+            <!-- Phone -->
+            <mat-form-field class="example-full-width" *ngIf="!isEmailSelected">
+              <mat-label>Phone Number</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()">
+                <i class="bx bx-phone"></i>
+              </mat-icon>
+              <input matInput type="text" formControlName="userPhoneNumber" numeric [maxlength]="14">
+              <mat-error *ngIf="forgotPasswordForm.get('userPhoneNumber').hasError('required')">Phone number is
+                required</mat-error>
+              <mat-error *ngIf="forgotPasswordForm.get('userPhoneNumber').hasError('minlength')">Minimum 11 digits
+                required</mat-error>
+              <mat-error *ngIf="forgotPasswordForm.get('userPhoneNumber').hasError('maxlength')">Maximum 11 digits
+                allowed</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex flex-column align-items-center justify-content-center">
+            <button mat-flat-button type="submit" [disabled]="isLoading || forgotPasswordForm.invalid">
+              <span *ngIf="isLoading" class="loader-ripple">
+                <div></div>
+                <div></div>
+              </span>
+              <span *ngIf="isLoading" class="loading-text">Processing<span class="dots"></span></span>
+              <span *ngIf="!isLoading">Continue</span>
+            </button>
+            <button [disabled]="isLoading" class="anchor-button no-select-cursor anchor-hover" type="button" (click)="toggleSearchMethod(); $event.stopPropagation()">
+              {{ isEmailSelected ? 'Continue by phone number instead' : 'Continue by email instead' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

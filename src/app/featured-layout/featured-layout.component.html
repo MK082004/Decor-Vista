@@ -1,0 +1,14 @@
+<ng-container *ngIf="loaderService.getLoaderState() | async">
+  <app-loader-progress-bar></app-loader-progress-bar>
+  <app-loader></app-loader>
+</ng-container>
+<app-header></app-header>
+<div class="container-fluid container-mt-5">
+    <!-- Cursor Animation -->
+    <div class="cursor1"></div>
+    <div class="cursor2"></div>
+  <!-- Scroll Smoother -->
+  <div class="has-smooth" id="has_smooth"></div>
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>

@@ -1,8 +1,0 @@
-<app-sidebar (toggleSidebar)="handleToggleSidebar($event)"></app-sidebar>
-<app-loader *ngIf="isLoading"></app-loader>
-<section class="header" [ngClass]="status ? 'open' : ''">
-  <app-dashboard-header class="headermain" [ngClass]="status ? 'open' : ''"></app-dashboard-header>
-  <div class="container-fluid mt-3">
-    <router-outlet></router-outlet>
-  </div>
-</section>

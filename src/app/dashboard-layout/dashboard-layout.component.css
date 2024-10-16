@@ -1,0 +1,49 @@
+.container-fluid {
+  margin-top: 3.8em !important;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.header.open {
+  left: 250px;
+  width: calc(100% - 250px);
+}
+
+app-dashboard-header.headermain {
+  position: fixed;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+app-dashboard-header.headermain.open {
+  left: 250px;
+  width: calc(100% - 250px);
+}
+
+@media (max-width: 767px) {
+  app-dashboard-header.headermain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100%);
+    z-index: 2;
+  }
+
+  app-dashboard-header.headermain.open {
+    left: 0;
+    width: calc(100%);
+  }
+}

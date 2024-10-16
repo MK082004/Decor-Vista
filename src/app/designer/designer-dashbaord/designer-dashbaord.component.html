@@ -1,0 +1,96 @@
+<section class="dashboard">
+  <div class="container-fluid">
+    <div class="row justify-content-center mt-3">
+      <!-- Grid List with Cards -->
+      <mat-grid-list cols="3" rowHeight="200px" gutterSize="15px" class="grid-container">
+        <!-- Portfolio Card -->
+        <mat-grid-tile>
+          <mat-card class="dashboard-card w-100">
+            <mat-card-header class="d-flex align-items-center px-2">
+              <mat-icon>palette</mat-icon>
+              <span class="card-title">Portfolio</span>
+            </mat-card-header>
+            <mat-card-content class="mt-3 px-2">
+              <p>Showcase of designer's projects: {{portfolioCount}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <a routerLink="/designer/portfolio" mat-button class="app-secondary-color bgColor-lighter">View Portfolio</a>
+            </mat-card-actions>
+          </mat-card>
+        </mat-grid-tile>
+
+        <!-- User Appointments Card -->
+        <mat-grid-tile>
+          <mat-card class="dashboard-card w-100">
+            <mat-card-header class="d-flex align-items-center px-2">
+              <mat-icon>event</mat-icon>
+              <span class="card-title">Appointments</span>
+            </mat-card-header>
+            <mat-card-content class="mt-3 px-2">
+              <p>Total Appointments: {{appointmentsCount}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <a routerLink="/designer/appointments" mat-button class="app-secondary-color bgColor-lighter">View Appointments</a>
+            </mat-card-actions>
+          </mat-card>
+        </mat-grid-tile>
+
+        <!-- Reviews Card -->
+        <mat-grid-tile>
+          <mat-card class="dashboard-card w-100">
+            <mat-card-header class="d-flex align-items-center px-2">
+              <mat-icon>star</mat-icon>
+              <span class="card-title">Reviews</span>
+            </mat-card-header>
+            <mat-card-content class="mt-3 px-2">
+              <p>Total Reviews: {{reviewsCount}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <a routerLink="/designer/reviews" mat-button class="app-secondary-color bgColor-lighter">View Reviews</a>
+            </mat-card-actions>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <!-- Users Table -->
+      <div class="col-12 mt-4 mat-card">
+        <div class="mat-elevation-z8">
+          <mat-table [dataSource]="userDataSource">
+            <!-- Serial Number Column -->
+            <ng-container matColumnDef="serialNo">
+              <mat-header-cell *matHeaderCellDef> Serial No. </mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </mat-cell>
+            </ng-container>
+
+            <!-- Client Name Column -->
+            <ng-container matColumnDef="clientName">
+              <mat-header-cell *matHeaderCellDef> Client Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.clientName}} </mat-cell>
+            </ng-container>
+
+            <!-- Project Column -->
+            <ng-container matColumnDef="projectName">
+              <mat-header-cell *matHeaderCellDef> Project </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.clientEmail}} </mat-cell>
+            </ng-container>
+
+            <!-- Header Row -->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <!-- Data Row -->
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+          <div class="text-end p-2">
+            <a routerLink="/designer/clients" mat-button class="ms-auto mt-2 app-secondary-color bgColor-lighter">View More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

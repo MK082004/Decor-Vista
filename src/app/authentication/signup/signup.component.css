@@ -1,0 +1,27 @@
+@media (min-width: 992px) {
+  .col-lg-4 {
+    width: 31.88%;
+  }
+
+  .col-lg-6 {
+    flex: 0 0 auto;
+    width: 48.88%;
+  }
+}
+
+@media (min-width: 767px) and (max-width: 992px) {
+  .col-lg-4 {
+    width: 31.7%;
+  }
+
+  .col-lg-6 {
+    flex: 0 0 auto;
+    width: 48.7%;
+  }
+}
+
+@media (max-width: 767px) {
+  .col-sm-12 {
+    width: 100%;
+  }
+}

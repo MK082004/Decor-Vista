@@ -1,0 +1,71 @@
+<section>
+  <app-page-toolbar [pageName]="'Orders'"></app-page-toolbar>
+  <mat-card class="bgapp-secondary-color w-100">
+    <div class="full-screen-container mat-elevation-z8 bgColor-transparent rounded h-100">
+      <!-- HTML Template -->
+      <mat-card-header class="position-relative d-flex align-items-center gap-3 py-3 px-3 rounded-top">
+        <mat-card-title class="m-0 ms-1 no-select d-flex align-items-center gap-3">
+          <span>Orders View</span>
+        </mat-card-title>
+        <mat-form-field appearance="outline" class="filter-input w-25">
+          <mat-label>Search Orders</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Type to filter..." />
+        </mat-form-field>
+
+        <hr class="position-absolute w-100 mb-0 start-0 bottom-0" />
+      </mat-card-header>
+      <div class="mat-elevation-z8 bg-white rounded">
+        <mat-table mat-table [dataSource]="dataSource" class="mat-table">
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{order.id}} </mat-cell>
+          </ng-container>
+
+          <!-- Customer Name Column -->
+          <ng-container matColumnDef="customerName">
+            <mat-header-cell *matHeaderCellDef> Customer Name </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{order.customerName}} </mat-cell>
+          </ng-container>
+
+          <!-- Item Column -->
+          <ng-container matColumnDef="item">
+            <mat-header-cell *matHeaderCellDef> Item </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{order.item}} </mat-cell>
+          </ng-container>
+
+          <!-- Price Column -->
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+            <mat-cell *matCellDef="let order"> ${{order.price}} </mat-cell>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let order"
+              [ngClass]="{'accepted': order.status === 'Accepted', 'rejected': order.status === 'Rejected'}">
+              {{order.status}}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let order">
+              <button mat-raised-button class="app-secondary-color me-3" (click)="acceptOrder(order)"
+                [disabled]="order.status !== 'Pending'">Accept</button>
+              <button mat-raised-button color="warn" (click)="rejectOrder(order)"
+                [disabled]="order.status !== 'Pending'">Reject</button>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Header Row -->
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <!-- Data Rows -->
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+  </mat-card>
+</section>

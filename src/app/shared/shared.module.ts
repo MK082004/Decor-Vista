@@ -1,33 +1,60 @@
+// Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
-import { HeaderComponent } from './featured/header/header.component';
-import { FooterComponent } from './featured/footer/footer.component';
-import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
-import { AppLoaderComponent } from './app-loader/app-loader.component';
-import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard.component';
-import { CapitalizePipe } from '../core/pipes/capitalize.pipe';
-import { PageToolbarComponent } from './page-toolbar/page-toolbar.component';
-// import { MaterialModule } from './material.module';
 
-// Components
+// Dashboard Components
+import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
+import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard.component';
+import { DashboardFooterComponent } from './dashboard/dashboard-footer/dashboard-footer.component';
+import { PageToolbarComponent } from './page-toolbar/page-toolbar.component';
 
 // Featured Components
+import { HeaderComponent } from './featured/header/header.component';
+import { FooterComponent } from './featured/footer/footer.component';
+
+// Genric Components
+import { AutoCompleteGenericComponent } from '../core/controls/auto-complete-generic/auto-complete-generic.component';
+
+// Loader Components
+import { AppLoaderComponent } from './app-loader/main-loader/app-loader.component';
+import { AppLoaderProgressBarComponent } from './app-loader/app-loader-progress-bar/app-loader-progress-bar.component';
 
 // Pipes
+import { CapitalizePipe } from '../core/pipes/capitalize.pipe';
+import { FirstLetterPipe } from '../core/pipes/first-letter.pipe';
+
+// Directives
+import { PreventSpaceDirective } from '../core/directives/prevent-space.directive';
+import { PreventCopyPasteDirective } from '../core/directives/prevent-copy-paste.directive';
+import { NumericDirective } from '../core/directives/numeric.directive';
+import { OtpInputDirective } from '../core/directives/otp-input.directive';
+
 @NgModule({
   declarations: [
+    // Components
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
     DashboardHeaderComponent,
+    DashboardFooterComponent,
     AppLoaderComponent,
+    AppLoaderProgressBarComponent,
+    PageToolbarComponent,
+    AutoCompleteGenericComponent,
+    // Pipes
     CapitalizePipe,
-    PageToolbarComponent
+    FirstLetterPipe,
+    // Directives
+    PreventSpaceDirective,
+    PreventCopyPasteDirective,
+    NumericDirective,
+    OtpInputDirective
   ],
   imports: [
+    // Modules
     CommonModule,
     RouterModule,
     FormsModule,
@@ -35,19 +62,30 @@ import { PageToolbarComponent } from './page-toolbar/page-toolbar.component';
     MaterialModule
   ],
   exports: [
-    // Export shared modules and components
+    // Export shared modules
     CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    // Export shared components
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
     DashboardHeaderComponent,
     AppLoaderComponent,
+    AppLoaderProgressBarComponent,
+    PageToolbarComponent,
+    AutoCompleteGenericComponent,
+    DashboardFooterComponent,
+    // Export shared pipes
     CapitalizePipe,
-    PageToolbarComponent
+    FirstLetterPipe,
+    // Export shared Directives
+    PreventSpaceDirective,
+    PreventCopyPasteDirective,
+    NumericDirective,
+    OtpInputDirective
   ]
 })
 export class SharedModule { }

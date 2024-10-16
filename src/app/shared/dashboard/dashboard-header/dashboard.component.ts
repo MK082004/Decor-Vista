@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClaimUserModel } from 'src/app/core/models/claimUser.model';
+import { UserModel } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth/auth/auth.service';
 import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 
@@ -10,22 +11,21 @@ import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 })
 export class DashboardHeaderComponent implements OnInit {
 
-  loginUser: ClaimUserModel;
-  profileButton = {
-    width: '37px',
-    height: '37px'
-  };
+  loginUser: UserModel;
+  profileButton = {width: '37px', height: '37px'};
+
   constructor(private notificationService: DialogService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.fetchUserData();
+    this.fetchCurrentUserDetails();
   }
 
-  fetchUserData() {
-    let res = this.authService.currentUserValue;
-    if (res) {
-      this.loginUser = res;
-    }
+  fetchCurrentUserDetails() {
+    this.authService.getCurrentUser().subscribe((res) => {
+      if (res) {
+        this.loginUser = res as UserModel;
+      }
+    });
   }
 
   logout() {

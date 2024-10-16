@@ -1,0 +1,67 @@
+<div class="form-wrapper row align-items-center justify-content-center">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 bg-form-wrap mx-auto">
+    <div class="top-form-header mb-5">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 text-center">
+        <h4 class="color-app-secondary fw-6 mb10 no-select">Welcome</h4>
+        <p class="color-white font-xsmall fw-3 text-uppercase no-select">Please Login To Dashboard</p>
+      </div>
+    </div>
+    <div class="bottom-form-fields">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex align-items-center justify-content-center">
+        <form #ngSigInForm="ngForm" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex align-items-center justify-content-center mb-5">
+            <mat-form-field class="example-full-width">
+              <mat-label>Username or Email</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()">
+                <i class="bx bx-user"></i>
+              </mat-icon>
+              <input matInput type="email" preventSpace formControlName="usernameOrEmail">
+              <mat-error *ngIf="signInForm.get('usernameOrEmail').hasError('required')">Email is
+                required</mat-error>
+              <mat-error *ngIf="signInForm.get('usernameOrEmail').hasError('email')">Please enter a valid email
+                address</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex align-items-center justify-content-center mb-0">
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()" (click)="hidePassword = !hidePassword">
+                <i [ngClass]="hidePassword ? 'bx bx-show' : 'bx bx-hide'"></i>
+              </mat-icon>
+              <input matInput [type]="hidePassword ? 'password' : 'text'" preventSpace formControlName="userPassword">
+              <mat-error *ngIf="signInForm.get('userPassword').hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="signInForm.get('userPassword').hasError('minlength')">
+                Minimum 5 characters required.
+              </mat-error>
+              <mat-error *ngIf="signInForm.get('userPassword').hasError('maxlength')">
+                Maximum 15 characters allowed.
+              </mat-error>
+              <mat-error
+                *ngIf="signInForm.get('userPassword').hasError('pattern') && !signInForm.get('userPassword').hasError('minlength') && !signInForm.get('userPassword').hasError('maxlength')">
+                Password must contain at least one uppercase letter, one lowercase letter, and one digit.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex align-items-center justify-content-end mb-3">
+            <a routerLink="/auth/forgot-password" class="no-select-cursor anchor-hover">Forgotten Your Password?</a>
+          </div>
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex flex-column align-items-center justify-content-center">
+            <button mat-flat-button type="submit" [disabled]="isLoading || signInForm.invalid">
+              <span *ngIf="isLoading" class="loader-ripple">
+                <div></div>
+                <div></div>
+              </span>
+              <span *ngIf="isLoading" class="loading-text">Credential authorizing<span class="dots"></span></span>
+              <span *ngIf="!isLoading">Login</span>
+            </button>
+            <a routerLink="/auth/signup" class="no-select-cursor anchor-hover">Don't have an account?</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

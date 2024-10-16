@@ -1,0 +1,33 @@
+<div *ngIf="orders.length > 0">
+  <h2>Orders</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Product Name</th>
+        <th>Count</th>
+        <th>Price</th>
+        <th>Order Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.productName }}</td>
+        <td>{{ order.count }}</td>
+        <td>{{ order.price }}</td>
+        <td>{{ order.orderStatus }}</td>
+        <td>
+          <button (click)="cancelOrder(order.id)">Cancel</button>
+          <button (click)="updateOrder(order)">Update</button>
+          <button (click)="startProcessing(order.id)">Start Processing</button>
+          <button (click)="shipOrder(order)">Ship</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="orders.length === 0">
+  <p>No orders found.</p>
+</div>

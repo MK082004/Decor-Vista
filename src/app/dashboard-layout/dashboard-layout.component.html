@@ -1,0 +1,12 @@
+<ng-container *ngIf="loaderService.getLoaderState() | async">
+  <app-loader-progress-bar></app-loader-progress-bar>
+  <app-loader></app-loader>
+</ng-container>
+<app-sidebar (toggleSidebar)="handleToggleSidebar($event)"></app-sidebar>
+<section class="header" [ngClass]="status ? 'open' : ''">
+  <app-dashboard-header class="headermain" [ngClass]="status ? 'open' : ''"></app-dashboard-header>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</section>
+<app-dashboard-footer></app-dashboard-footer>

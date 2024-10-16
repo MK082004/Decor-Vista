@@ -1,0 +1,23 @@
+<mat-label>{{label}}</mat-label>
+<mat-form-field [formGroup]="form" class="example-full-width" appearance="outline">
+    <input type="text" #input matInput [formControlName]="control" [matAutocomplete]="auto1" [maxlength]="maxlength"
+        (blur)="keyup()" [placeholder]="placeholder" (keypress)="keyPress($event)">
+    <mat-icon matSuffix>search</mat-icon>
+    <mat-autocomplete #auto1="matAutocomplete" (optionsScroll)="onScroll()" [displayWith]="displayWith.bind(this)"
+        (optionSelected)="optionSelected()">
+        <ng-container *ngIf="!form.get(control).hasError('noRecordFound')">
+            <mat-option class="multiline-mat-option" *ngFor="let option of filteredLookups$ | async" [value]="option">
+                {{display(option,name)}}
+            </mat-option>
+        </ng-container>
+    </mat-autocomplete>
+    <mat-error *ngIf="form && form.get(control).hasError('required')">
+        {{errorMessage}}
+    </mat-error>
+    <mat-error *ngIf="form && form.get(control).hasError('incorrect')">
+        Please select valid values
+    </mat-error>
+    <mat-error *ngIf="form && form.get(control).hasError('noRecordFound')">
+        No record found!
+    </mat-error>
+</mat-form-field>

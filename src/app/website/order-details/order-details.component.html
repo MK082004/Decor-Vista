@@ -1,0 +1,32 @@
+<div class="order-details">
+  <h2>Order Details</h2>
+  <div *ngIf="orderDetails">
+    <p>Order ID: {{ orderDetails.id }}</p>
+    <p>Product Name: {{ orderDetails.productName }}</p>
+    <p>Product ID: {{ orderDetails.productId }}</p>
+    <p>Count: {{ orderDetails.count }}</p>
+    <p>Price: {{ orderDetails.price }}</p>
+    <p>Application User ID: {{ orderDetails.applicationUserId }}</p>
+    <p>Order Date: {{ orderDetails.orderDate | date }}</p>
+    <p>Shipped Date: {{ orderDetails.shippedDate | date }}</p>
+    <p>Order Total: {{ orderDetails.orderTotal }}</p>
+    <p>Order Status: {{ orderDetails.orderStatus }}</p>
+    <p>Payment Status: {{ orderDetails.paymentStatus }}</p>
+    <p>Tracking Number: {{ orderDetails.trackingNumber }}</p>
+    <p>Carrier: {{ orderDetails.carrier }}</p>
+    <p>Payment Date: {{ orderDetails.paymentDate | date }}</p>
+    <p>Payment Due Date: {{ orderDetails.paymentDueDate | date }}</p>
+    <p>Session ID: {{ orderDetails.sessionId }}</p>
+    <p>Payment Intent ID: {{ orderDetails.paymentIntentId }}</p>
+    <p>Phone Number: {{ orderDetails.phoneNumber }}</p>
+    <p>Street Address: {{ orderDetails.streetAddress }}</p>
+    <p>City: {{ orderDetails.city }}</p>
+    <p>State: {{ orderDetails.state }}</p>
+    <p>Postal Code: {{ orderDetails.postalCode }}</p>
+    <p>Name: {{ orderDetails.name }}</p>
+  </div>
+
+  <div *ngIf="!orderDetails">
+    <p>Loading order details...</p>
+  </div>
+</div>

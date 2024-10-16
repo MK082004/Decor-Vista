@@ -1,5 +1,5 @@
 export class ApiResponseModel {
   data: any;
-  isSuccessfull: boolean;
+  isSuccessful: boolean;
   message: string;
 }

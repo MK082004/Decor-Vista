@@ -1,7 +1,7 @@
-<div class="wrapper position-relative p-4">
+<div class="wrapper position-relative p-3">
   <h2 mat-dialog-title class="fw-bold text-center">{{data.title}}</h2>
   <div class="icon-wrap" *ngIf="data.icon">
-    <mat-icon class="rotate-270">{{data.icon}}</mat-icon>
+    <mat-icon [ngClass]="{'rotate-270': data.icon === 'logout'}">{{data.icon}}</mat-icon>
   </div>
   <mat-dialog-content class="text-center">
     <p class="font-small p-2">{{data.message}}</p>

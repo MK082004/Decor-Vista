@@ -1,8 +1,9 @@
+import { ResetOtpModel } from './../../../models/resetOtp.model';
 import { Role } from './../../../enums/role.enum';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, throwError, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ApiResponseModel } from 'src/app/core/models/apiResponse.model';
 import { ApiService } from '../../api/api.service';
 import { JwtService } from '../jwt/jwt.service';
@@ -11,16 +12,19 @@ import { LoginModel } from 'src/app/core/models/login.model';
 import { UserMenuModel } from 'src/app/core/models/userMenu.model';
 import { ClaimUserModel } from 'src/app/core/models/claimUser.model';
 import { RegisterModel } from 'src/app/core/models/register.model';
+import { RoleNavigation } from 'src/app/core/enums/roleNavigation.enum';
+import { VerifyOtpModel } from 'src/app/core/models/verifyOtp.model';
+import { ResetPasswordModel } from 'src/app/core/models/resetPassword.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  public storageCurrentUser = 'accessUser';
-  public storageCurrentUserPermissions = 'accessUserPermissions';
-  private baseServerUrl = `Accounts`;
-  private currentUserSubject$ = new BehaviorSubject<ClaimUserModel>(null);
-  private currentUserPermissions$ = new BehaviorSubject<UserMenuModel[]>([]);
+  private storageCurrentUser = 'accessUser';
+  private storageCurrentUserPermissions = 'accessUserPermissions';
+  private baseServerUrl = `Account`;
+  private currentUserSubject$: BehaviorSubject<ClaimUserModel> = new BehaviorSubject<ClaimUserModel>(new ClaimUserModel());
+  private currentUserPermissions$: BehaviorSubject<UserMenuModel[]> = new BehaviorSubject<UserMenuModel[]>([]);
 
   constructor(
     private router: Router,
@@ -28,6 +32,7 @@ export class AuthService {
     private jwtService: JwtService,
     private apiService: ApiService
   ) {
+
     this.currentUserSubject$ = new BehaviorSubject<ClaimUserModel>(
       this.getEncryptedItemToSession(this.storageCurrentUser)
     );
@@ -35,112 +40,153 @@ export class AuthService {
     this.currentUserPermissions$ = new BehaviorSubject<UserMenuModel[]>(
       this.getEncryptedItemToSession(this.storageCurrentUserPermissions)
     );
-
-      // let encryptDataNote = localStorage.getItem(this.encryptKey('NotificationData'));
-
-      // if (encryptDataNote) {
-      //   const decryptedData = this.decryptData(encryptDataNote);
-      //   this.NotifictionsData$.next(decryptedData);
-      // }
   }
 
   loginUser(loginUser: LoginModel): Observable<ApiResponseModel> {
-    return this.apiService
-      .postRequest<ApiResponseModel>(`${this.baseServerUrl}/LoginUser`, loginUser)
+    return this.apiService.postRequest<ApiResponseModel>(`${this.baseServerUrl}/login`, loginUser)
       .pipe(
         map((response: ApiResponseModel) => {
-          const jwtToken = response.data;
-          if (jwtToken !== null) {
-            try {
-              const claimUser = this.jwtService.decodeToken<ClaimUserModel>(jwtToken.token);
-              this.currentUserSubject$.next(claimUser);
-              this.setEncryptedItemToSession(this.storageCurrentUser, claimUser);
-
-              // Navigate to the appropriate route based on the role
-              this.handleUserNavigation(claimUser);
-            } catch (decodeError) {
-              console.error('Token decoding failed:', decodeError.message || decodeError);
-              this.logout();
-            }
+          if (response) {
+            this.setJwtToken(response?.data?.token);
+            return response;
           }
-          return response;
-        }),
-        catchError((error) => {
-          console.error('Login failed:', error.message || error);
-          return throwError(() => error);
         })
       );
   }
 
   registerUser(registerUser: RegisterModel): Observable<ApiResponseModel> {
     return this.apiService
-    .postRequest<ApiResponseModel>(`${this.baseServerUrl}/RegisterUser`, registerUser)
+    .postRequest<ApiResponseModel>(`${this.baseServerUrl}/register`, registerUser)
     .pipe(
       map((response: ApiResponseModel) => {
-        const jwtToken = response.data;
-        if (jwtToken !== null) {
-          try {
-            const claimUser = this.jwtService.decodeToken<ClaimUserModel>(jwtToken.token);
-            this.currentUserSubject$.next(claimUser);
-            this.setEncryptedItemToSession(this.storageCurrentUser, claimUser);
-
-            // Navigate to the appropriate route based on the role
-            this.handleUserNavigation(claimUser);
-          } catch (decodeError) {
-            console.error('Token decoding failed:', decodeError.message || decodeError);
-            this.logout();
-          }
+        if (response) {
+          return response;
         }
-        return response;
-      }),
-      catchError((error) => {
-        console.error('Login failed:', error.message || error);
-        return throwError(() => error);
       })
     );
   }
 
-
-  public get currentUserValue(): ClaimUserModel | null {
-    return this.currentUserSubject$.value;
+  forgotPasswordAuth(model :ResetOtpModel): Observable<ApiResponseModel> {
+    return this.apiService.postRequest<ApiResponseModel>(`${this.baseServerUrl}/send-password-reset-otp`, model)
+    .pipe(
+      map((response: ApiResponseModel) => {
+        if (response) {
+          return response;
+        }
+      })
+    );
   }
 
-  public get currentUserRole(): string | null {
-    return this.currentUserSubject$.value
-      ? this.currentUserSubject$.value.userRole
-      : null;
+  resetPassword(model :ResetPasswordModel): Observable<ApiResponseModel> {
+    return this.apiService.postRequest<ApiResponseModel>(`${this.baseServerUrl}/send-password-reset-otp`, model)
+    .pipe(
+      map((response: ApiResponseModel) => {
+        if (response) {
+          return response;
+        }
+      })
+    );
   }
 
-  public getCurrentUser(): Observable<ClaimUserModel | null> {
+  verifyOtp(model: VerifyOtpModel): Observable<ApiResponseModel> {
+    return this.apiService.postRequest<ApiResponseModel>(`${this.baseServerUrl}/verify-password-reset-otp`, model)
+    .pipe(
+      map((response: ApiResponseModel) => {
+        if (response) {
+          return response;
+        }
+      })
+    );
+  }
+
+  verifyToken(token: string): Observable<ApiResponseModel> {
+    return this.apiService.getRequest<ApiResponseModel>(`${this.baseServerUrl}/verify-token?token=${token}`)
+    .pipe(
+      map((response: ApiResponseModel) => {
+        if (response) {
+          return response;
+        }
+      })
+    );
+  }
+
+  verifyAccount(token: string): Observable<ApiResponseModel> {
+    return this.apiService.getRequest<ApiResponseModel>(`${this.baseServerUrl}/verify-account?token=${token}`)
+    .pipe(
+      map((response: ApiResponseModel) => {
+        if (response) {
+          return response;
+        }
+      })
+    );
+  }
+
+  private setJwtToken(jwtToken: string) {
+    if (jwtToken) {
+      const claimUser = this.decodeToken<ClaimUserModel>(jwtToken);
+      claimUser.token = jwtToken;
+      if (typeof claimUser.userPermissions === 'string') {
+        claimUser.userPermissions = JSON.parse(claimUser.userPermissions);
+      }
+      const userPermissions = claimUser.userPermissions;
+      this.currentUserSubject$.next(claimUser);
+      this.currentUserPermissions$.next(userPermissions);
+      this.setEncryptedItemToSession(this.storageCurrentUser, claimUser);
+      this.setEncryptedItemToSession(this.storageCurrentUserPermissions, userPermissions);
+      this.handleUserNavigation(claimUser);
+    }
+  }
+
+  private decodeToken<T>(jwtToken: string): T {
+    return this.jwtService.decodeToken<T>(jwtToken)
+  }
+
+  public jwtDecodeToken<T>(jwtToken: string): T {
+    return this.decodeToken<T>(jwtToken);
+  }
+
+  public jwtTokenExpireationChecker(jwtToken: string): boolean {
+    return this.jwtService.isTokenExpired(jwtToken);
+  }
+
+  public isValidJwt(jwtToken: string): boolean {
+    return this.jwtService.isValidJwt(jwtToken);
+  }
+
+  public publicSetJwtTokenAccess(jwtToken: string) {
+    this.setJwtToken(jwtToken);
+  }
+
+  public getCurrentUser(): Observable<ClaimUserModel> {
     return this.currentUserSubject$.asObservable();
   }
 
-  public getCurrentUserPermissions(): Observable<UserMenuModel[] | []> {
+  public getCurrentUserPermissions(): Observable<UserMenuModel[]> {
     return this.currentUserPermissions$.asObservable();
   }
 
-  setEncryptedItemToSession(sessionKey: string, data: any) {
+  private setEncryptedItemToSession(sessionKey: string, data: any) {
     this.storageService.secureStorage.setItem(sessionKey, data);
   }
 
-  getEncryptedItemToSession(sessionKey: string) {
+  private getEncryptedItemToSession(sessionKey: string) {
     return this.storageService.secureStorage.getItem(sessionKey);
   }
 
-  handleUserNavigation(claimUser: ClaimUserModel) {
+  private handleUserNavigation(claimUser: ClaimUserModel) {
     if (claimUser) {
-      switch (claimUser.userRole) {
+      switch (claimUser.userRoleName) {
         case Role.admin:
-          this.router.navigate(['/admin']);  // Navigate to admin dashboard
+          this.router.navigate([RoleNavigation.Admin]);
           break;
         case Role.designer:
-          this.router.navigate(['/designer']);  // Navigate to designer dashboard
+          this.router.navigate([RoleNavigation.Designer]);
           break;
         case Role.user:
-          this.router.navigate(['/home']);  // Navigate to the home page
+          this.router.navigate([RoleNavigation.User]);
           break;
         default:
-          this.router.navigate(['/signin']);  // Redirect to sign-in
+          this.router.navigate([RoleNavigation.Default]);
           break;
       }
     }
@@ -148,69 +194,9 @@ export class AuthService {
 
   logout() {
     this.storageService.secureStorage.clear();
-    this.currentUserSubject$.next(null);
+    this.currentUserSubject$.next(new ClaimUserModel());
     this.currentUserPermissions$.next([]);
     this.router.navigate(['/home']);
     return of({ success: false });
   }
-
-  // GetLoginUserNotifications(userId: number) {
-  //   this.http
-  //     .get<ApiResponseModel>(
-  //       this.baseServerUrl +
-  //         `Accounts/GetLoginUserNotifications?userId=${userId}`
-  //     )
-  //     .subscribe((res) => {
-  //       const encryptedData = this.encryptData(res.data);
-  //       localStorage.setItem(
-  //         this.encryptKey('NotificationData'),
-  //         encryptedData
-  //       );
-  //       const decryptedData = this.decryptData(encryptedData);
-  //       this.NotifictionsData$.next(decryptedData);
-  //     });
-  //   }
-
-  // UpdateLoginUserData(user: UserModel) {
-  //   let formData: FormData = new FormData();
-  //   formData.append('UserId', user.userId.toString());
-  //   formData.append('userFirstName', user.userFirstName.toString());
-  //   formData.append('userLastName', user.userLastName.toString());
-  //   formData.append('userFatherName', user.userFatherName.toString());
-  //   formData.append('userEmail', user.userEmail.toString());
-  //   formData.append('userPhoneNumberCode', user.userPhoneNumberCode.toString());
-  //   formData.append('userPhoneNumber', user.userPhoneNumber.toString());
-  //   formData.append('userDob', user.userDob.toISOString());
-  //   formData.append('userAddress', user.userAddress.toString());
-  //   formData.append('userCountry', user.userCountry.toString());
-  //   formData.append('userCity', user.userCity.toString());
-  //   formData.append(
-  //     'userPermanentAddress',
-  //     user.userPermanentAddress.toString()
-  //   );
-  //   formData.append(
-  //     'userPermanentCountry',
-  //     user.userPermanentCountry.toString()
-  //   );
-  //   formData.append('userPermanentCity', user.userPermanentCity.toString());
-  //   if (user.userImage != null) {
-  //     formData.append(
-  //       'userImage',
-  //       user.userImage,
-  //       user.userImage.name.toString()
-  //     );
-  //   }
-
-  //   return this.http
-  //     .post<ApiResponseModel>(
-  //       this.baseServerUrl + 'Accounts/UpdateLoginUserData',
-  //       formData
-  //     )
-  //     .pipe(
-  //       catchError((error) => {
-  //         console.error('Error occurred:', error);
-  //         return throwError(error);
-  //       })
-  //     );
-  // }
 }

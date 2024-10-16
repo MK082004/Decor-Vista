@@ -1,3 +1,5 @@
+import { CategoryModel } from "./category.model";
+
 export class Product {
   id: number;
   title: string;
@@ -9,22 +11,22 @@ export class Product {
   price50: number;
   price100: number;
   categoryId: number;
-  category: Category;
-  imageUrl: string;
+  category: CategoryModel;
+  imageUrl: string[];
 
   constructor(
-    id: number = null,
+    id: number = 0,
     title: string = '',
     description: string = '',
     sku: string = '',
     author: string = '',
-    listPrice: number = null,
-    price: number = null,
-    price50: number = null,
-    price100: number = null,
-    categoryId: number = null,
-    category: Category = new Category(),
-    imageUrl: string = ''
+    listPrice: number = 0,
+    price: number = 0,
+    price50: number = 0,
+    price100: number = 0,
+    categoryId: number = 0,
+    category: CategoryModel = new CategoryModel(),
+    imageUrl: string[] = []
   ) {
     this.id = id;
     this.title = title;
@@ -43,23 +45,5 @@ export class Product {
 
 export class ProductsApiModel {
   products: Product[] = [];
-  count: number;
-}
-
-export class Category {
-  id: number;
-  name: string;
-  displayOrder: number;
-
-  constructor(id: number = null, name: string = '', displayOrder: number = 0) {
-    this.id = id;
-    this.name = name;
-    this.displayOrder = displayOrder;
-  }
-}
-
-
-export class CategoryApiModel {
-  categories: Category[] = [];
   count: number;
 }

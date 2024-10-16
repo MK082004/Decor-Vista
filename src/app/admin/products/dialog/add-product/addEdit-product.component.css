@@ -1,4 +1,12 @@
-::ng-deep .mat-form-field .mat-form-field-prefix {
-  top: 0 !important;
-  font-size: 0.8em !important;
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: var(--color-darker) !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+  color: var(--color-darker);
+}
+
+.mat-form-field-appearance-legacy .mat-input-element {
+  color: var(--color-darker) !important;
+  caret-color: var(--color-darker);
 }

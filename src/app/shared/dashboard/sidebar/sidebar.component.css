@@ -16,25 +16,26 @@
 }
 
 .sidebar .logo {
-  height: 3em;
+  height: 4em;
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.sidebar .logo img:first-child {
-  width: 3em;
-  height: 100%;
+.sidebar .logo a {
+  width: 0;
   opacity: 0;
   transition: all 0.5s ease;
 }
 
-.sidebar.open .logo img:first-child {
+.sidebar.open .logo a {
+  width: 4em;
+  height: 100%;
   opacity: 1;
   transition: all 0.5s ease;
 }
 
-.sidebar .logo img:last-child {
+.sidebar .logo>img {
   position: absolute;
   top: 50%;
   right: 0.9em;

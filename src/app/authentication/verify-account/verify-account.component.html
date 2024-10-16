@@ -1,0 +1,18 @@
+<div class="form-wrapper row align-items-center justify-content-center">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 bg-form-wrap mx-auto text-center">
+    <div class="mb-3">
+      <img *ngIf="responseFlag && !isLoading" height="50em" src="/assets/images/brands/verified.png" alt="verified" />
+      <img *ngIf="!responseFlag && !isLoading" height="50em" src="/assets/images/brands/cancel.png" alt="verified" />
+    </div>
+    <h6 *ngIf="responseMessage" [class]="responseFlag ? 'color-white' : 'color-danger'" >{{responseMessage}}</h6>
+    <div class="d-flex align-items-center justify-content-center mb-2">
+      <span *ngIf="isLoading" class="loader-ripple color-white">
+        <div></div>
+        <div></div>
+      </span>
+      <span *ngIf="isLoading" class="loading-text color-white">Verifying your account please waiting<span class="dots"></span></span>
+    </div>
+    <p *ngIf="currentUserName" class="color-white">{{responseFlag ? 'Congratulations' : 'Sorry'}}, <strong class="name">{{currentUserName}}</strong>!</p>
+    <p class="color-lighter font-xxsmall">We are verified your account. Please stay tuned for further updates.</p>
+  </div>
+</div>

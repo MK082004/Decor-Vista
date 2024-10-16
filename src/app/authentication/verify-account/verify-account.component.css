@@ -1,0 +1,14 @@
+.font-xxsmall {
+  font-size: 0.8em !important;
+}
+
+.color-lighter {
+  color: #fcfcfcbe;
+}
+
+.content-wrapper header {
+  position: absolute !important;
+  top: 2em !important;
+  left: 50%;
+  transform: translate(-50%);
+}

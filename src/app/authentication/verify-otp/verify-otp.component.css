@@ -1,0 +1,43 @@
+.content-wrapper header {
+  position: relative !important;
+  top: -5.3em !important;
+}
+
+.form-wrapper {
+  margin-top: -3em;
+}
+
+/* OTP STYLING START HERE */
+.otp-input-fields {
+  margin: auto;
+  box-shadow: 0px 0px 8px 0px var(--app-secondary-color-hover);
+  max-width: 100%;
+  width: 100%;
+  padding: 2em 1.5em;
+  border-radius: 0.5em;
+
+  input {
+      height: 3.3em;
+      width: 16.666%;
+      background-color: transparent;
+      padding: 0 !important;
+      color: var(--color-white);
+      border-radius: 0.5em;
+      border: 1px solid var(--app-secondary-color);
+      text-align: center;
+      outline: none;
+      font-size: 1em;
+      &:focus {
+          border-width: 2px;
+      }
+  }
+}
+/* OTP STYLING START HERE */
+
+@media (max-width: 767px) {
+  .otp-input-fields {
+    input {
+      height: 2.3em;
+    }
+  }
+}

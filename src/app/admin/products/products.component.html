@@ -4,23 +4,23 @@
     <div class="full-screen-container mat-elevation-z8 bgColor-transparent rounded h-100">
       <!-- HTML Template -->
       <mat-card-header
-        class="position-relative d-flex align-items-center justify-content-between py-2 px-3 rounded-top">
+        class="position-relative d-flex align-items-center gap-3 py-3 px-3 rounded-top">
         <mat-card-title class="m-0 ms-1 no-select d-flex align-items-center gap-3">
-          <h5>Products View</h5>
+          <span>Products View</span>
         </mat-card-title>
-        <mat-form-field appearance="outline" class="filter-input w-50">
+        <mat-form-field appearance="outline" class="filter-input w-25">
           <mat-label>Search Products</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="Type to filter..." />
         </mat-form-field>
 
         <ng-container>
-          <ul class="d-flex">
+          <ul class="d-flex ms-auto">
             <li>
               <mat-card-actions class="ms-auto p-0 m-0">
 
                 <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color" matTooltip="Add Product"
                   (click)="addProduct()">
-                  <mat-icon class="font-xlarge">add</mat-icon> <!-- Static icon name -->
+                  <mat-icon class="font-xlarge">add</mat-icon>
                 </button>
               </mat-card-actions>
 
@@ -104,14 +104,14 @@
 
                 <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color" matTooltip="Edit Product"
                   (click)="editProduct(product)">
-                  <mat-icon class="font-xlarge color-blue">edit</mat-icon> <!-- Static icon name -->
+                  <mat-icon class="font-xlarge color-blue">edit</mat-icon>
                 </button>
               </mat-card-actions>
               <mat-card-actions class="ms-auto p-0 m-0">
 
                 <button mat-icon-button class="mat-custom-button ms-1 app-secondary-color" matTooltip="Delete Product"
                   (click)="deleteProduct(product)">
-                  <mat-icon class="font-xlarge color-danger">delete</mat-icon> <!-- Static icon name -->
+                  <mat-icon class="font-xlarge color-danger">delete</mat-icon>
                 </button>
               </mat-card-actions>
             </mat-cell>
@@ -123,8 +123,7 @@
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
 
-        <div *ngIf="products.length === 0" class="text-center mt-2"><span>No data found</span></div>
-
+        <div *ngIf="dataSource?.filteredData.length === 0" class="text-center mt-2"><span>No data found</span></div>
         <!-- Paginator -->
         <mat-paginator [length]="length" class="pb-3" [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"
           showFirstLastButtons></mat-paginator>

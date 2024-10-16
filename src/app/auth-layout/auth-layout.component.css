@@ -1,0 +1,39 @@
+.mat-select-panel {
+  background: #ffffff08 !important;
+  backdrop-filter: blur(1em);
+}
+
+/* .cdk-overlay-pane {
+  min-width: calc(267* var(--unit-fx)) !important;
+  top: calc(324* var(--unit-fx)) !important;
+  left: calc(882* var(--unit-fx)) !important;
+  transform: none !important;
+} */
+
+.mat-option.mat-active {
+  color: var(--app-secondary-color) !important;
+}
+
+.mat-select-trigger::after {
+  color: var(--color-white) !important;
+  font-size: 1.3em !important;
+  top: 0.3em;
+  right: -0.8em;
+}
+
+.mat-option,
+.mat-select-value {
+  color: var(--color-white);
+  font-size: 0.8em;
+}
+
+.mat-select-arrow {
+  display: none;
+}
+
+
+@media (max-width: 767px) {
+  .content-wrapper .form-wrapper {
+    padding: 0 0.5em;
+  }
+}

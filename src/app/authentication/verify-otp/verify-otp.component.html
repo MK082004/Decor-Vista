@@ -1,0 +1,38 @@
+<div class="form-wrapper row align-items-center justify-content-center">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 bg-form-wrap mx-auto">
+    <div class="top-form-header mb-5">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 text-center">
+        <h5 class="color-app-secondary fw-6 mb10 no-select">OTP VERIFICATION</h5>
+        <p class="color-white font-xsmall fw-3 text-uppercase no-select">An OTP has been sent to {{maskedValue}}</p>
+      </div>
+    </div>
+    <div class="bottom-form-fields">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex align-items-center justify-content-center">
+        <form #ngVerifyOtpForm="ngForm" [formGroup]="verifyOtpForm" (ngSubmit)="onSubmit()">
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex flex-column align-items-center justify-content-center">
+            <div class="otp-input-fields d-flex justify-content-center mb-3" formArrayName="otp">
+              <ng-container *ngFor="let control of otpControls; let i = index">
+                <input id="otp-input-{{i}}" type="number" [maxlength]="1" class="otp-input mx-1" [formControlName]="i"
+                  [appOtpInput]="i" (focus)="selectInput(i)"
+                  [ngClass]="{'border-danger-all': otpControls[i].invalid && otpControls[i].touched}" />
+              </ng-container>
+            </div>
+            <button mat-flat-button type="submit" [disabled]="isLoading || verifyOtpForm.invalid">
+              <span *ngIf="isLoading" class="loader-ripple">
+                <div></div>
+                <div></div>
+              </span>
+              <span *ngIf="isLoading" class="loading-text">Processing<span class="dots"></span></span>
+              <span *ngIf="!isLoading">Verify</span>
+            </button>
+            <button [disabled]="isLoading || !canResendOtp" class="anchor-button no-select-cursor anchor-hover"
+              type="button" (click)="resendOtp(); $event.stopPropagation()">
+              {{ canResendOtp ? 'Now you can resend otp.' : 'You can resend OTP in ' + countdown + ' seconds.' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,7 @@
 
 .icon-wrap {
   position: absolute;
-  top: -1.4em;
+  top: -3em;
   left: 50%;
   transform: translateX(-50%);
   background-color: #f44336;
@@ -21,14 +21,13 @@
   align-content: center;
 }
 
+::ng-deep .mat-dialog-container {
+  overflow: visible;
+}
+
 .icon-wrap i {
   transform: rotate(270deg);
   font-size: 1.3em;
-}
-
-::ng-deep .mat-dialog-container {
-  padding: 0;
-  overflow: visible;
 }
 
 .p-4 {

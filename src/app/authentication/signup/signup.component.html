@@ -1,0 +1,226 @@
+<div class="form-wrapper row align-items-center justify-content-center">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 bg-form-wrap mx-auto">
+    <div class="top-form-header mb-5">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 text-center">
+        <h4 class="color-app-secondary fw-6 mb10 no-select">Welcome</h4>
+        <p class="color-white font-xsmall fw-3 text-uppercase no-select">Please Register To Enjoy Your Journey With
+          Decor Vista</p>
+      </div>
+    </div>
+    <div class="bottom-form-fields">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex align-items-center justify-content-center">
+        <form  #ngSignUpForm="ngForm" [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="d-flex flex-wrap gap-3">
+
+          <!-- User First Name -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-4 m-0 p-0 d-flex align-items-center justify-content-center mb-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>First Name</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()">
+                <i class="bx bx-user"></i>
+              </mat-icon>
+              <input matInput type="text" preventSpace formControlName="userFirstName">
+              <mat-error *ngIf="signUpForm.get('userFirstName').hasError('required')">First name is required</mat-error>
+              <mat-error *ngIf="signUpForm.get('userFirstName').hasError('minlength')">Minimum 3 characters
+                required</mat-error>
+              <mat-error *ngIf="signUpForm.get('userFirstName').hasError('maxlength')">Maximum 10 characters
+                allowed</mat-error>
+              <mat-error *ngIf="signUpForm.get('userFirstName').hasError('pattern')">Only letters allowed</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- User Last Name -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-4 m-0 p-0 d-flex align-items-center justify-content-center mb-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Last Name</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()">
+                <i class="bx bx-user"></i>
+              </mat-icon>
+              <input matInput type="text" preventSpace formControlName="userLastName">
+              <mat-error *ngIf="signUpForm.get('userLastName').hasError('required')">Last name is required</mat-error>
+              <mat-error *ngIf="signUpForm.get('userLastName').hasError('minlength')">Minimum 3 characters
+                required</mat-error>
+              <mat-error *ngIf="signUpForm.get('userLastName').hasError('maxlength')">Maximum 10 characters
+                allowed</mat-error>
+              <mat-error *ngIf="signUpForm.get('userLastName').hasError('pattern')">Only letters allowed</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Username -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-4 m-0 p-0 d-flex align-items-center justify-content-center mb-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Username</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()">
+                <i class="bx bx-user"></i>
+              </mat-icon>
+              <input matInput type="text" preventSpace formControlName="username">
+              <mat-error *ngIf="signUpForm.get('username').hasError('required')">Username is required</mat-error>
+              <mat-error *ngIf="signUpForm.get('username').hasError('minlength')">Minimum 3 characters
+                required</mat-error>
+              <mat-error *ngIf="signUpForm.get('username').hasError('maxlength')">Maximum 10 characters
+                allowed</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Email -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-4 m-0 p-0 d-flex align-items-center justify-content-center mb-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()">
+                <i class="bx bx-envelope"></i>
+              </mat-icon>
+              <input matInput type="email" preventSpace formControlName="userEmail">
+              <mat-error *ngIf="signUpForm.get('userEmail').hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="signUpForm.get('userEmail').hasError('email')">Please enter a valid email</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Phone Number -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-4 m-0 p-0 d-flex align-items-center justify-content-center mb-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Phone Number</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()">
+                <i class="bx bx-phone"></i>
+              </mat-icon>
+              <input matInput type="text" formControlName="userPhoneNumber" numeric [maxlength]="13">
+              <mat-error *ngIf="signUpForm.get('userPhoneNumber').hasError('required')">Phone number is
+                required</mat-error>
+              <mat-error *ngIf="signUpForm.get('userPhoneNumber').hasError('minlength')">Minimum 11 digits
+                required</mat-error>
+              <mat-error *ngIf="signUpForm.get('userPhoneNumber').hasError('maxlength')">Maximum 11 digits
+                allowed</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Role -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-4 m-0 p-0 d-flex align-items-center justify-content-center mb-4">
+            <mat-form-field>
+              <mat-label>Role</mat-label>
+              <mat-select formControlName="userRole">
+                <mat-option *ngFor="let role of userRoles" [value]="role.userRoleId">
+                  {{ role.userRoleName }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="signUpForm.get('userRole').hasError('required')">Role is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- State Selection -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-6 m-0 p-0 d-flex align-items-center justify-content-center mb-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>State</mat-label>
+              <mat-select formControlName="userState" (selectionChange)="onStateChange($event.value)">
+                <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="signUpForm.get('userState').hasError('required')">State is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- City Selection -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-6 m-0 p-0 d-flex align-items-center justify-content-center mb-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>City <sup *ngIf="!signUpForm.get('userState').value">(Select first State)</sup></mat-label>
+              <mat-select formControlName="userCity">
+                <mat-option *ngFor="let city of getCitiesForSelectedState()" [value]="city">{{ city }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="signUpForm.get('userCity').hasError('required')">City is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Street Input -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex align-items-center justify-content-center mb-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Street <sup *ngIf="!signUpForm.get('userState').value">(Select first State)</sup></mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()">
+                <i class="bx bx-map"></i>
+              </mat-icon>
+              <input matInput type="text" preventSpace formControlName="userStreet">
+              <mat-error *ngIf="signUpForm.get('userStreet').hasError('required')">Street is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-4 m-0 p-0 d-flex align-items-center justify-content-center mb-5">
+            <mat-form-field class="example-full-width">
+              <mat-label>Postal Code</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()">
+                <i class="bx bx-envelope"></i>
+              </mat-icon>
+              <input matInput type="text" preventSpace formControlName="userPostalCode">
+              <mat-error *ngIf="signUpForm.get('userPostalCode').hasError('required')">Postal code is
+                required</mat-error>
+              <mat-error *ngIf="signUpForm.get('userPostalCode').hasError('pattern')">Invalid postal code</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Password -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-4 m-0 p-0 d-flex align-items-center justify-content-center mb-5">
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()" (click)="hidePassword = !hidePassword">
+                <i [ngClass]="hidePassword ? 'bx bx-hide' : 'bx bx-show'"></i>
+              </mat-icon>
+              <input matInput [type]="hidePassword ? 'password' : 'text'" preventCopyPaste preventSpace
+                formControlName="userPassword">
+              <mat-error *ngIf="signUpForm.get('userPassword').hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="signUpForm.get('userPassword').hasError('minlength')">
+                Minimum 5 characters required.
+              </mat-error>
+              <mat-error *ngIf="signUpForm.get('userPassword').hasError('maxlength')">
+                Maximum 15 characters allowed.
+              </mat-error>
+              <mat-error
+                *ngIf="signUpForm.get('userPassword').hasError('pattern') && !signUpForm.get('userPassword').hasError('minlength') && !signUpForm.get('userPassword').hasError('maxlength')">
+                Password must contain at least one uppercase letter, one lowercase letter, and one digit.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Confirm Password -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-4 m-0 p-0 d-flex align-items-center justify-content-center mb-5">
+            <mat-form-field class="example-full-width">
+              <mat-label>Confirm Password</mat-label>
+              <mat-icon matSuffix (click)="$event.stopPropagation()"
+                (click)="hideConfirmPassword = !hideConfirmPassword">
+                <i [ngClass]="hideConfirmPassword ? 'bx bx-hide' : 'bx bx-show'"></i>
+              </mat-icon>
+              <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" preventCopyPaste preventSpace
+                formControlName="userConfirmPassword">
+              <mat-error *ngIf="signUpForm.get('userConfirmPassword').hasError('passwordMismatch') ? false : signUpForm.get('userConfirmPassword').hasError('required')">Confirm password is
+                required</mat-error>
+              <mat-error *ngIf="signUpForm.get('userConfirmPassword').hasError('passwordMismatch')">Passwords do not
+                match</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Submit Button -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-0 p-0 d-flex flex-column align-items-center justify-content-center">
+            <button mat-flat-button type="submit" [disabled]="isLoading || signUpForm.invalid">
+              <span *ngIf="isLoading" class="loader-ripple">
+                <div></div>
+                <div></div>
+              </span>
+              <span *ngIf="isLoading" class="loading-text">Processing your registration<span class="dots"></span></span>
+              <span *ngIf="!isLoading">Register</span>
+            </button>
+            <a routerLink="/auth/signin" class="no-select-cursor anchor-hover">I Already have and account?</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

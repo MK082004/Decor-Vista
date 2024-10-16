@@ -1,46 +1,35 @@
 <!-- SIDEBAR SECTION STARTS HERE -->
 <aside>
-  <div class="sidebar" [ngClass]="status ? 'open' : ''">
+  <div class="sidebar" id="side" [ngClass]="status ? 'open' : ''">
     <div class="logo">
-      <img src="../../../../assets/images/logo/Decor-Vista.png" alt="logo-image">
-      <img class="no-select" src="../../../../assets/images/bar.png" alt="menu-toggle" (click)="clickEvent()">
+      <a href=""><img src="/assets/images/logo/Decor-Vista.png" alt="logo-image"></a>
+      <img class="no-select" src="/assets/images/brands/bar.png" alt="menu-toggle" (click)="clickEvent()">
     </div>
 
     <ul class="nav_links">
-      <!-- Dashboard Link -->
-      <li>
-        <a class="btns" [routerLink]="['/', loginUser.userRole, 'dashboard']" routerLinkActive="active">
-          <mat-icon class="no-cursor">dashboard</mat-icon>
-          <span class="links no-cursor">Dashboard</span>
-        </a>
-        <span class="close_links no-select">Dashboard</span>
-      </li>
+      <li *ngFor="let item of permissions; let i = index"
+          (click)="!status && item.SubMenus.length > 0 ? clickEvent() : (item.SubMenus.length > 0 ? toggleSubMenu(i) : null)">
+        <a class="btns" [routerLink]="item.MenuUrl || ''" [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon class="no-cursor">{{item.MenuIcon}}</mat-icon>
+          <span class="links no-cursor">{{item.MenuName}}</span>
 
-      <!-- Orders Link -->
-      <li>
-        <a class="btns" [routerLink]="['/', loginUser.userRole, 'orders']" routerLinkActive="active">
-          <mat-icon class="no-cursor">cart</mat-icon>
-          <span class="links no-cursor">Orders</span>
+          <mat-icon class="ms-auto no-cursor" *ngIf="item.SubMenus.length > 0">
+            {{ expandedStates[i] ? 'remove' : 'add' }}
+          </mat-icon>
         </a>
-        <span class="close_links no-select">Orders</span>
-      </li>
 
-      <!-- Category Link -->
-      <li>
-        <a class="btns" [routerLink]="['/', loginUser.userRole, 'category']" routerLinkActive="active">
-          <mat-icon class="no-cursor">category</mat-icon>
-          <span class="links no-cursor">Category</span>
-        </a>
-        <span class="close_links no-select">Category</span>
-      </li>
+        <ul class="subMenus" *ngIf="item.SubMenus.length > 0" [ngClass]="{'collapsed': !expandedStates[i]}">
+          <li *ngFor="let subItem of item.SubMenus">
+            <a [routerLink]="subItem.SubMenuUrl" [routerLinkActive]="['active']"
+              [routerLinkActiveOptions]="{ exact: true }">
+              <mat-icon class="no-cursor">{{subItem.SubMenuIcon}}</mat-icon>
+              <span class="links no-cursor">{{subItem.SubMenuName}}</span>
+            </a>
+          </li>
+        </ul>
 
-      <!-- Products Link -->
-      <li>
-        <a class="btns" [routerLink]="['/', loginUser.userRole, 'products']" routerLinkActive="active">
-          <mat-icon class="no-cursor">cart</mat-icon>
-          <span class="links no-cursor">Products</span>
-        </a>
-        <span class="close_links no-select">Products</span>
+        <span class="close_links no-select">{{item.MenuName}}</span>
       </li>
 
       <!-- Profile Section -->
@@ -48,13 +37,14 @@
         <div class="profile_desc">
           <div class="name_portal">
             <div class="name no-select">
-              {{ loginUser.userName }}
+              {{ loginUser?.userFirstName | capitalize }} {{ loginUser?.userLastName | capitalize }}
             </div>
           </div>
         </div>
+
         <mat-icon class="color-white log_out cursor-pointer ms-auto" (click)="logout()">logout</mat-icon>
       </li>
     </ul>
   </div>
 </aside>
-<!-- SIDEBAR SECTION ENDS HERE -->
+<!-- SIDEBAR SECTION ENd -->

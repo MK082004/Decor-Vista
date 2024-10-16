@@ -1,0 +1,6 @@
+<div class="payment-confirmation">
+  <h2>Payment Successful!</h2>
+  <p>Your order ID is: {{ orderHeaderId }}</p>
+  <p>Thank you for your purchase!</p>
+  <a routerLink="/order/OrderDetails" [queryParams]="{ orderId: orderHeaderId }">View Order Details</a>
+</div>

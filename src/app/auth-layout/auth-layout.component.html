@@ -1,1 +1,20 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf="loaderService.getLoaderState() | async">
+  <app-loader-progress-bar></app-loader-progress-bar>
+</ng-container>
+<section class="auth-wrapper">
+  <header>
+    <div class="logo">
+      <a routerLink="/"><img class="logo" src="/assets/images/logo/Decor-Vista.png" alt="decor vista logo"></a>
+    </div>
+  </header>
+  <div class="container">
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  <footer class="w-100">
+    <div class="d-flex align-items-center justify-content-center">
+        <p class="color-lighter-2 font-xsmall no-select">&copy; {{currentYear}} Decor Vista Official</p>
+    </div>
+  </footer>
+</section>
