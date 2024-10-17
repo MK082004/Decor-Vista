@@ -41,7 +41,7 @@ a {
 }
 
 sup {
-  top: -0.3em;
+  top: -0.3rem;
 }
 
 .no-select {
@@ -98,7 +98,7 @@ body .loader-ripple {
 .dots::after {
   content: '';
   display: inline-block;
-  width: 1em;
+  width: 1rem;
   text-align: left;
   animation: dots 1.5s steps(4, end) infinite;
 }
@@ -145,15 +145,15 @@ body .loader-ripple {
 }
 
 ::-webkit-scrollbar {
-  width: 0.2em;
+  width: 0.2rem;
   overflow-y: scroll;
   box-shadow: inset 0 0 5px var(--color-white);
-  height: 0.5em;
+  height: 0.5rem;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--app-secondary-color);
-  border-radius: 0.1em;
+  border-radius: 0.1rem;
 }
 
 ul,
@@ -190,10 +190,11 @@ input:-webkit-autofill:active {
   --color-lighter: #858585;
   --color-more-lighter: #f2f8fd;
   --color-darker: rgb(39, 39, 39);
-  --font-xsmall: 0.7em;
-  --font-small: 1em;
-  --font-medium: 2em;
-  --font-large: 3em;
+  --font-xsmall: 0.7rem;
+  --font-small: 1rem;
+  --font-medium: 2rem;
+  --font-large: 3rem;
+  --font-mat-icon: 1.433rem;
   --max-widthpx: 980px;
   --max-widthper: 83.3333%;
   --heightfull: 100%;
@@ -284,17 +285,17 @@ img {
 }
 
 .auth-wrapper .container {
-  margin-top: 10em;
+  margin-top: 10rem;
 }
 
 .auth-wrapper .logo {
-  height: 6.5em;
+  height: 6.5rem;
 }
 
 .auth-wrapper header {
   position: fixed;
   top: 0;
-  padding-top: 1.5em;
+  padding-top: 1.5rem;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -316,8 +317,8 @@ img {
 .auth-wrapper .form-wrapper > .bg-form-wrap {
   background-color: #3b3b3b18;
   backdrop-filter: blur(0.3em);
-  padding: 2em;
-  border-radius: 0.4em;
+  padding: 2rem;
+  border-radius: 0.4rem;
 }
 /* auth layout Styling  */
 
@@ -336,7 +337,7 @@ img {
 
 /* mat toolbar classes start here */
 .mat-toolbar-single-row {
-  height: 3.2em;
+  height: 3.2rem;
 }
 
 /* mat toolbar classes end here */
@@ -344,6 +345,8 @@ img {
 /* mat card classes start here */
 .mat-card-header {
   background-color: #f8f8f8;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  border: 1px solid #d8d8d8;
 }
 
 .mat-card-header .mat-card-header-text {
@@ -381,6 +384,8 @@ img {
   height: 35px !important;
   border-radius: 50%;
   background: var(--color-white) !important;
+  box-shadow: inset rgb(0 0 0 / 9%) 0px 0px 3px 1px;
+  border: 2px dotted var(--app-secondary-color);
 }
 
 .mat-card-content>:last-child:not(.mat-card-footer) {
@@ -399,7 +404,7 @@ img {
 /* mat grid classes start here */
 .mat-grid-list {
   padding-bottom: 0 !important;
-  height: 3em;
+  height: 3rem;
 }
 
 .mat-grid-tile {
@@ -428,8 +433,8 @@ form .mat-flat-button {
   color: var(--color-white);
   width: var(--widthfull) !important;
   height: 3.3em !important;
-  padding: 0.8em 1em;
-  letter-spacing: 0.11em;
+  padding: 0.8em 1rem;
+  letter-spacing: 0.11rem;
   text-transform: uppercase;
   transition: 0.3s all ease-in-out;
 }
@@ -438,8 +443,8 @@ form a,
 form .anchor-button {
   text-transform: uppercase;
   color: var(--color-white);
-  font-size: 0.7em;
-  margin-top: 1em;
+  font-size: 0.7rem;
+  margin-top: 1rem;
   background-color: transparent !important;
   outline: none;
   border: none;
@@ -463,19 +468,6 @@ form .anchor-button {
   background-color: var(--color-white) !important;
 }
 
-.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-ripple,
-.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-underline,
-.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-label,
-.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-prefix .mat-icon,
-.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-suffix .mat-icon {
-  color: var(--color-darker);
-}
-
-.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-ripple,
-.mat-form-field-appearance-legacy.field-theme-black .mat-form-field-underline {
-  background-color: var(--color-darker) !important;
-}
-
 .mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple,
 .mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-underline,
 .mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-label,
@@ -485,7 +477,9 @@ form .anchor-button {
 }
 
 .mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-ripple,
-.mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-underline {
+.mat-form-field-appearance-legacy.mat-focused:not(.mat-form-field-invalid) .mat-form-field-underline,
+.mat-form-field-appearance-legacy.mat-form-field-should-float:not(.mat-form-field-invalid) .mat-form-field-ripple,
+.mat-form-field-appearance-legacy.mat-form-field-should-float:not(.mat-form-field-invalid) .mat-form-field-underline {
   background-color: var(--app-secondary-color) !important;
 }
 
@@ -494,6 +488,18 @@ form .anchor-button {
   background-color: var(--color-danger) !important;
 }
 
+.field-theme-black .mat-form-field-ripple,
+.field-theme-black .mat-form-field-underline,
+.field-theme-black .mat-form-field-label,
+.field-theme-black .mat-form-field-prefix .mat-icon,
+.field-theme-black .mat-form-field-suffix .mat-icon {
+  color: var(--color-darker);
+}
+
+.field-theme-black .mat-form-field-ripple,
+.field-theme-black .mat-form-field-underline {
+  background-color: var(--color-darker) !important;
+}
 
 .mat-form-field.mat-focused:not(.ng-invalid) .mat-form-field-outline,
 .mat-form-field.mat-form-field-should-float:not(.ng-invalid) .mat-form-field-outline,
@@ -583,7 +589,8 @@ form .anchor-button {
   caret-color: var(--color-white);
 }
 
-.mat-form-field-appearance-outline .mat-input-element {
+.mat-form-field-appearance-outline .mat-input-element,
+.field-theme-black .mat-input-element {
   color: var(--color-darker) !important;
   caret-color: var(--color-darker);
 }
@@ -633,8 +640,19 @@ form .anchor-button {
 .mat-form-field.mat-form-field-should-float:has(.ng-invalid) .mat-form-field-label {
   transform: translateY(-0.8em) scale(0.75) !important;
 }
+
 .mat-form-field .mat-select-arrow-wrapper {
   transform: none !important;
+}
+
+.mat-form-field.custom-border .mat-form-field-outline-start {
+  border-radius: 28px 0 0 28px !important;
+  min-width: 28px !important;
+}
+
+.mat-form-field.custom-border .mat-form-field-outline-end {
+  border-radius: 0 28px 28px 0 !important;
+  min-width: 28px !important;
 }
 /* mat select */
 .mat-option.mat-selected::after {
@@ -770,7 +788,7 @@ form .anchor-button {
 
 .mat-header-cell,
 .mat-cell, .mat-footer-cell {
-  font-size: 0.8em;
+  font-size: 0.8rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -919,24 +937,9 @@ form .anchor-button {
   font-size: var(--font-large) !important;
 }
 
-.font-fulllarge {
-  font-size: var(--font-fulllarge) !important;
-  line-height: 1em;
-  font-weight: 700;
+.font-mat-icon {
+  font-size: var(--font-mat-icon) !important;
 }
-
-.font-xlarge {
-  font-size: var(--font-xlarge) !important;
-}
-
-.font-button {
-  font-size: var(--font-button) !important;
-}
-
-.font-navicon {
-  font-size: var(--font-navicon) !important;
-}
-
 /* for font sizes classes end here  */
 
 /* color classes start here */
@@ -1080,9 +1083,9 @@ form .anchor-button {
 }
 /* height classes end here */
 .tbl-first-col {
-  max-width: 5em;
+  max-width: 5rem;
   border-right: 1px solid rgba(0,0,0,.12);
-  margin-right: 2em;
+  margin-right: 2rem;
 }
 
 .mat-row {
@@ -1149,7 +1152,7 @@ form .anchor-button {
 
 /* Custom classes start here */
 .full-screen-container {
-  margin-top: -0.5em;
+  margin-top: -0.5rem;
 }
 /* Custom classes end here */
 
