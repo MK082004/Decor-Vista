@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TableDataSource } from './table-data-source';
 
-describe('TableDataSource', () => {
-  let component: TableDataSource;
-  let fixture: ComponentFixture<TableDataSource>;
+import { CategoriesLogComponent } from './categories-log.component';
+
+describe('CategoriesLogComponent', () => {
+  let component: CategoriesLogComponent;
+  let fixture: ComponentFixture<CategoriesLogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableDataSource ]
+      declarations: [ CategoriesLogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableDataSource);
+    fixture = TestBed.createComponent(CategoriesLogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

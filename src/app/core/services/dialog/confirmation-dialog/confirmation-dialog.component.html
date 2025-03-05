@@ -1,5 +1,5 @@
 <div class="wrapper position-relative p-3">
-  <h2 mat-dialog-title class="fw-bold text-center">{{data.title}}</h2>
+  <h5 class="fw-bold text-center">{{data.title}}</h5>
   <div class="icon-wrap" *ngIf="data.icon">
     <mat-icon [ngClass]="{'rotate-270': data.icon === 'logout'}">{{data.icon}}</mat-icon>
   </div>
@@ -7,9 +7,9 @@
     <p class="font-small p-2">{{data.message}}</p>
   </mat-dialog-content>
   <mat-dialog-actions class="d-flex justify-content-center">
-    <button mat-button (click)="onCancel()" class="cancel-button w-50 rounded-0">{{data.cancleButtonNametext ?
-      data.cancleButtonNametext : 'No'}}</button>
-    <button mat-raised-button color="warn" class="w-50 mx-0 rounded-0" (click)="onConfirm()">Yes {{data.okButtonNametext
-      ? data.okButtonNametext+'!' : ''}}</button>
+    <button mat-button (click)="onCancel()" class="cancel-button w-50 rounded-0">{{data.cancleButtonTitle ?
+      data.cancleButtonTitle : 'No'}}</button>
+    <button mat-raised-button color="warn" class="w-50 mx-0 rounded-0" (click)="onConfirm()">Yes {{data.confirmButtonTitle 
+      ? data.confirmButtonTitle +'!' : ''}}</button>
   </mat-dialog-actions>
 </div>

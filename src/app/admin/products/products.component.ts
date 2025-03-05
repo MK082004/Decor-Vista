@@ -5,7 +5,7 @@ import { Product } from 'src/app/core/models/product.model';
 import { ProductService } from './product.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { AddEditProductComponent } from './dialog/add-product/addEdit-product.component';
-import { DialogService } from 'src/app/core/services/dialog/dialog.service';
+import { DialogData, DialogService } from 'src/app/core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-products',
@@ -97,7 +97,15 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   deleteProduct(product: Product) {
-    this.notificationService.notifiedStatusRequestDialog('Delete Product', `Are you sure you want to Delete? this product ${product.title}`, '550px', 'Ok', 'Cancel', 'delete').subscribe((res) => {
+    let model: DialogData = {
+      title: 'Delete Product',
+      message: `Are you sure you want to Delete? this product ${product.title}`,
+      maxWidth: '550px',
+      confirmButtonTitle: 'Ok',
+      cancleButtonTitle: 'Cancel',
+      icon: 'delete'
+    };
+    this.notificationService.notifiedStatusRequestDialog(model).subscribe((res) => {
       if (res) {
         this.productService.deleteProduct(product.id).subscribe(res => {
           if (res) {

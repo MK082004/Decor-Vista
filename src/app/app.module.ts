@@ -32,6 +32,7 @@ import { ConfirmationDialogComponent } from './core/services/dialog/confirmation
 
 // for material core
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { JwtInterceptor } from './core/interceptors/jwt-interceptor/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,6 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
     TitleService,
     Title,
     AppLoaderService,
-    AppLoaderService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,
@@ -63,6 +63,11 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
       multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
     },
     {
       provide: ErrorStateMatcher,

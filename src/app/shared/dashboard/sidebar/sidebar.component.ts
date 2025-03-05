@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserModel } from 'src/app/core/models/user.model';
 import { UserMenuModel } from 'src/app/core/models/userMenu.model';
 import { AuthService } from 'src/app/core/services/auth/auth/auth.service';
-import { DialogService } from 'src/app/core/services/dialog/dialog.service';
+import { DialogData, DialogService } from 'src/app/core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -37,8 +37,6 @@ export class SidebarComponent implements OnInit {
   fetchCurrentUserPermissions() {
     this.authService.getCurrentUserPermissions().subscribe((res) => {
       if (res) {
-        console.log('res', res);
-
         res.forEach((menu) => {
           if (menu.MenuIcon !== null && menu.IsActive === true) {
             const activeSubMenus = menu.SubMenus.filter((subMenu) => subMenu.IsActive && subMenu.SubMenuIcon !== null);
@@ -79,15 +77,16 @@ export class SidebarComponent implements OnInit {
   }
 
   logout(): void {
+    let model: DialogData = {
+      title: 'Logout Account',
+      message: 'Are you sure you want to logout? Once you logout you need to login again. Are you Ok?',
+      maxWidth: '550px',
+      confirmButtonTitle: 'Logout',
+      cancleButtonTitle: 'Cancel',
+      icon: 'logout'
+    };
     this.notificationService
-      .notifiedStatusRequestDialog(
-        'Logout Account',
-        'Are you sure you want to logout? Once you logout you need to login again. Are you Ok?',
-        '550px',
-        'Logout',
-        'Cancel',
-        'logout'
-      )
+      .notifiedStatusRequestDialog(model)
       .subscribe((res) => {
         if (res) {
           this.authService.logout();

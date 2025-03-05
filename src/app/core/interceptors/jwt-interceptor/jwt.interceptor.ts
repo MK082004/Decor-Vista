@@ -22,7 +22,8 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     this.athService.getCurrentUser().subscribe((res) => {
       if (res && res.token) {
-        if (this.athService.jwtTokenExpireationChecker(res.token)) {
+        const decodeToken: string = this.athService.jwtDecodeToken(res.token);
+        if (this.athService.jwtTokenExpireationChecker(decodeToken)) {
           this.athService.logout();
           this.notificationService.showMessage("Session Expired - Login To Continue", false);
         }

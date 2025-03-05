@@ -11,6 +11,10 @@ const routes: Routes = [
       {
         path: 'add-category',
         component: AddEditCategoryComponent,
+      },
+      {
+        path: 'edit-category',
+        component: AddEditCategoryComponent,
       }
     ]
   }

@@ -31,6 +31,8 @@ import { PreventSpaceDirective } from '../core/directives/prevent-space.directiv
 import { PreventCopyPasteDirective } from '../core/directives/prevent-copy-paste.directive';
 import { NumericDirective } from '../core/directives/numeric.directive';
 import { OtpInputDirective } from '../core/directives/otp-input.directive';
+import { MinMaxValueDirective } from '../core/directives/min-max-value.directive';
+import { DynamicTableComponent } from './dynamic-components/Grids/basic-level/dynamic-table/dynamic-table.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { OtpInputDirective } from '../core/directives/otp-input.directive';
     PreventSpaceDirective,
     PreventCopyPasteDirective,
     NumericDirective,
-    OtpInputDirective
+    OtpInputDirective,
+    MinMaxValueDirective,
+    DynamicTableComponent
   ],
   imports: [
     // Modules
@@ -78,6 +82,7 @@ import { OtpInputDirective } from '../core/directives/otp-input.directive';
     PageToolbarComponent,
     AutoCompleteGenericComponent,
     DashboardFooterComponent,
+    DynamicTableComponent,
     // Export shared pipes
     CapitalizePipe,
     FirstLetterPipe,
@@ -85,7 +90,8 @@ import { OtpInputDirective } from '../core/directives/otp-input.directive';
     PreventSpaceDirective,
     PreventCopyPasteDirective,
     NumericDirective,
-    OtpInputDirective
+    OtpInputDirective,
+    MinMaxValueDirective
   ]
 })
 export class SharedModule { }

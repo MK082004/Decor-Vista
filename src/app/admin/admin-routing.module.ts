@@ -6,7 +6,6 @@ import { ProductsComponent } from './products/products.component';
 import { AdminDasboardComponent } from './admin-dasboard/admin-dasboard.component';
 import { OrdersComponent } from './orders/orders.component';
 import { BlogComponent } from './blog/blog.component';
-import { AddEditCategoryComponent } from './categories/dialog/add-edit-category/add-edit-category.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

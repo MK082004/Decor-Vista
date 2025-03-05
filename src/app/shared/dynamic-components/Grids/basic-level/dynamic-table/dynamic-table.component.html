@@ -1,0 +1,107 @@
+<mat-card class="rounded-bottom" [style.border-radius]="0">
+  <div class="mat-elevation-z8 rounded">
+    <mat-table #sort [dataSource]="matTableDataSource" matSort (matSortChange)="onSortChangeHandler($event)">
+
+      <!-- Loop through columns and generate them dynamically -->
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnKey">
+        <!-- Header cell with conditional border-right class -->
+        <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="[column.columnClass || '', column.columnHeaderClass ||'']">
+          {{ column.columnLabel }}
+        </mat-header-cell>
+
+        <!-- Data cell with conditional border-right class -->
+        <mat-cell *matCellDef="let row; let i = index" [class]="column.columnClass">
+          <ng-container [ngSwitch]="column.columnType">
+            <ng-container *ngSwitchCase="columnTypeDefine.STRING">
+              {{ row[column.columnKey] }}
+            </ng-container>
+            <ng-container *ngSwitchCase="columnTypeDefine.NUMBER">
+              {{ column.columnKey === 'sNo' ? (pagintor.pageIndex * pagintor.pageSize) + i + 1 : row[column.columnKey]
+              }}
+            </ng-container>
+            <ng-container *ngSwitchCase="columnTypeDefine.DATE">
+              {{ row[column.columnKey] | date: DATE_FORMAT }}
+            </ng-container>
+            <ng-container *ngSwitchCase="columnTypeDefine.DATETIME">
+              {{ row[column.columnKey] | date: DATE_TIME_FOMRAT }}
+            </ng-container>
+            <ng-container *ngSwitchCase="columnTypeDefine.BOOLEAN">
+              <mat-slide-toggle [checked]="row[column.columnKey]" (click)="$event.stopPropagation(); $event.preventDefault(); handleActive(row)"></mat-slide-toggle>
+            </ng-container>
+            <ng-container *ngSwitchCase="columnTypeDefine.IMAGE">
+              <img [src]="row[column.columnKey] ? row[column.columnKey] : 'https://via.placeholder.com/150'"
+                height="25em" alt="">
+            </ng-container>
+            <ng-container *ngSwitchCase="columnTypeDefine.ACTIONS">
+              <ng-container *ngIf="column.showActionButtons">
+                <mat-card-actions class="p-0 m-0">
+                  <!-- Action Buttons -->
+                  <button type="button" *ngIf="column.buttons?.includes('edit')" mat-icon-button
+                    class="mat-custom-button ms-1 app-secondary-color" matTooltip="Edit Category"
+                    (click)="handleEdit(row)">
+                    <mat-icon class="font-mat-icon" color="primary">edit</mat-icon>
+                  </button>
+                </mat-card-actions>
+                <mat-card-actions class="p-0 m-0">
+                  <button type="button" *ngIf="column.buttons?.includes('delete')" mat-icon-button
+                    class="mat-custom-button ms-1 app-danger-color" matTooltip="Delete Category"
+                    (click)="handleDelete(row)">
+                    <mat-icon class="font-mat-icon" color="warn">delete</mat-icon>
+                  </button>
+                </mat-card-actions>
+                <mat-card-actions class="p-0 m-0">
+                  <button type="button" *ngIf="column.buttons?.includes('view')" mat-icon-button
+                    class="mat-custom-button ms-1 app-primary-color" matTooltip="View Category"
+                    (click)="handleView(row)">
+                    <mat-icon class="font-mat-icon" color="accent">visibility</mat-icon>
+                  </button>
+                </mat-card-actions>
+                <mat-card-actions class="p-0 m-0">
+                  <button type="button" *ngIf="column.buttons?.includes('archive')" mat-icon-button
+                    class="mat-custom-button ms-1 app-info-color" matTooltip="Archive Category"
+                    (click)="handleArchive(row)">
+                    <mat-icon class="font-mat-icon" color="primary">archive</mat-icon>
+                  </button>
+                </mat-card-actions>
+                <mat-card-actions class="p-0 m-0">
+                  <button type="button" *ngIf="column.buttons?.includes('archive')" mat-icon-button
+                    class="mat-custom-button ms-1 app-info-color" matTooltip="Archive Category"
+                    (click)="handleArchive(row)">
+                    <mat-icon class="font-mat-icon" color="primary">archive</mat-icon>
+                  </button>
+                </mat-card-actions>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Header Row -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <!-- Data Rows -->
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+
+    <!-- Table Loader -->
+    <ng-container *ngIf="matTableDataSource.isTblLoading && matTableDataSource.renderedData.length == 0">
+      <div class="text-center mt-1 d-flex justify-content-center">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </ng-container>
+
+    <!-- Table No Data Found Text -->
+    <ng-container *ngIf="!matTableDataSource.isTblLoading && matTableDataSource.renderedData.length == 0">
+      <div class="text-center mt-1 no-select">
+        <span>No data found</span>
+      </div>
+    </ng-container>
+
+    <!-- Paginator -->
+    <mat-paginator class="rounded bgColor-transparent pb-3" #pagintor [length]="matTableDataSource.itemCount"
+      [pageIndex]="0" [pageSize]="5" (page)="pageChange()" [pageSizeOptions]="[5, 10, 25]">
+    </mat-paginator>
+
+  </div>
+</mat-card>

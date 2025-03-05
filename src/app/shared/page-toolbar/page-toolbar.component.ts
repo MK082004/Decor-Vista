@@ -19,9 +19,12 @@ export class PageToolbarComponent {
 
   private extractUserRole(): void {
     const currentUrl = this.router.url;
-    const segments = currentUrl.split('/').filter(segment => segment.length > 0);
-    if (segments.length > 1) {
-      this.currentUrlWithoutRole = segments.slice(1).join('/');
+    // const segments = currentUrl.split('/').filter(segment => segment.length > 0);
+    // if (segments.length > 1) {
+    //   this.currentUrlWithoutRole = segments.slice(1).join('/');
+    // }
+    if (currentUrl.length > 1) {
+      this.currentUrlWithoutRole = currentUrl;
     }
   }
 

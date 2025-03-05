@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponseModel } from 'src/app/core/models/apiResponse.model';
+import { CategoryAddEditDeleteModel } from 'src/app/core/models/category.model';
 import { ApiService } from 'src/app/core/services/api/api.service';
 
 @Injectable({
@@ -20,10 +21,14 @@ export class CategoriesService {
   }
 
   updateCategory(category: FormData): Observable<ApiResponseModel> {
-    return this.apiService.postRequest<ApiResponseModel>(`${this.baseServerUrl}/updateCategory`, category);
+    return this.apiService.putRequest<ApiResponseModel>(`${this.baseServerUrl}/updateCategory`, category);
+  }
+
+  updateCategoryStatus(category: CategoryAddEditDeleteModel): Observable<ApiResponseModel> {
+    return this.apiService.putRequest<ApiResponseModel>(`${this.baseServerUrl}/setActiveStatus`, category);
   }
 
   deleteCategory(categoryId: number): Observable<ApiResponseModel> {
-    return this.apiService.deleteRequest<ApiResponseModel>(`${this.baseServerUrl}/deleteCategory`, categoryId);
-  }
+    return this.apiService.deleteRequest<ApiResponseModel>(`${this.baseServerUrl}/deleteCategory/${categoryId}`);
+  }  
 }

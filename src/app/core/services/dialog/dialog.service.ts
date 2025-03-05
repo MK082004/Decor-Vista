@@ -10,20 +10,13 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 export class DialogService {
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
-  notifiedStatusRequestDialog(title?: string, message?: string, maxWidth?: string, okButtonNametext?: string, cancleButtonNametext?: string, icon?: string): Observable<boolean> {
+  notifiedStatusRequestDialog(dialogData: DialogData): Observable<boolean> {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: maxWidth,
-      data: {
-        title: title,
-        message: message,
-        maxWidth: maxWidth,
-        okButtonNametext: okButtonNametext,
-        cancleButtonNametext: cancleButtonNametext,
-        icon: icon,
-      },
+      width: dialogData.maxWidth,
+      data: dialogData,
       autoFocus: false
     });
-
+  
     return dialogRef.afterClosed();
   }
 
@@ -36,4 +29,13 @@ export class DialogService {
     });
   }
 
+}
+
+export interface DialogData {
+  title?: string;
+  message?: string;
+  maxWidth?: string;
+  confirmButtonTitle?: string;
+  cancleButtonTitle?: string;
+  icon?: string;
 }

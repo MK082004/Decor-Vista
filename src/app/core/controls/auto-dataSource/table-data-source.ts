@@ -2,7 +2,6 @@ import { DataSource } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
 import { BehaviorSubject, merge, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { ApiService } from '../../services/api/api.service';
 import { TableDataModel } from '../../models/auto-table-data-source.model';
 import {
@@ -11,7 +10,8 @@ import {
   GridParamsInterface,
 } from '../../interfaces/auto-table-data-source.interface';
 import { APIType, FieldType } from '../../enums/auto-table-data-source.enum';
-import { CommonHelper } from '../../helpers/common.helper';
+import { map } from 'rxjs/operators';
+import { DialogService } from '../../services/dialog/dialog.service';
 
 export class TableDataSource extends DataSource<any> {
   getRecords$: BehaviorSubject<DataInterface> = new BehaviorSubject({
@@ -35,7 +35,6 @@ export class TableDataSource extends DataSource<any> {
 
   constructor(
     public tableDataModel: TableDataModel,
-    public commonHelper: CommonHelper,
     public apiService: ApiService
   ) {
     super();
@@ -63,7 +62,6 @@ export class TableDataSource extends DataSource<any> {
   }
 
   getData(skip?: number, take?: number): void {
-    const randomDelay = this.commonHelper.getRandomDelay();
     if (this.tableDataModel.hasDatasource) {
       this.getRecords$.next({
         count: this.tableDataModel.dataSource.length,
@@ -89,18 +87,18 @@ export class TableDataSource extends DataSource<any> {
           fieldValue: this.tableDataModel.sort.direction,
         };
       }
-      // setTimeout(() => {
         this.apiService.postRequest<DataInterface>(baseUrl, grigParams)
           .subscribe((result) => {
             this.isTblLoading = false;
             this.getRecords$.next({ count: result.count, data: result.data });
+          }, (error: HttpErrorResponse) => {
+            this.isTblLoading = false;
+            return throwError(error);
           });
-      // }, randomDelay * 1000);
     } else if (this.tableDataModel.apiType == APIType.GET) {
       if (this.data.length === 0) {
         let baseUrl =
           this.tableDataModel.apiUrl + '?' + this.tableDataModel.queryParam;
-        // setTimeout(() => {
           this.apiService.getRequest<any>(baseUrl).subscribe((result) => {
             this.isTblLoading = false;
             let dataResponse = [];
@@ -113,8 +111,10 @@ export class TableDataSource extends DataSource<any> {
               count: dataResponse.length,
               data: dataResponse,
             });
+          }, (error: HttpErrorResponse) => {
+            this.isTblLoading = false;
+            return throwError(error);
           });
-        // }, randomDelay * 1000);
       }
     }
   }
@@ -194,12 +194,6 @@ export class TableDataSource extends DataSource<any> {
             return this.renderedData;
           }
           return this.data;
-        }),
-        catchError((error) => {
-          if (error.status === 401 || error.status === 403) {
-            // handle error
-          }
-          return throwError(error);
         })
       );
     } else {
@@ -221,12 +215,6 @@ export class TableDataSource extends DataSource<any> {
             this.itemCount = res.count;
           });
           return this.data;
-        }),
-        catchError((error) => {
-          if (error.status === 401 || error.status === 403) {
-            // handle error
-          }
-          return throwError(error);
         })
       );
     }

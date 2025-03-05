@@ -1,0 +1,17 @@
+export enum DateFormater {
+    ISO_8601 = 'yyyy-MM-dd',                // ISO 8601 format (e.g., 2025-02-02)
+    US_DATE = 'MM/dd/yyyy',                 // US date format (e.g., 02/02/2025)
+    EU_DATE = 'dd/MM/yyyy',                 // European date format (e.g., 02/02/2025)
+    ISO_8601_ALT = 'yyyy/MM/dd',            // Alternative ISO 8601 format (e.g., 2025/02/02)
+    DAY_MONTH_YEAR_ABBR = 'dd-MMM-yyyy',    // Day-Month-Year with Month abbreviation (e.g., 02-Feb-2025)
+    MONTH_DAY_YEAR_ABBR = 'MMM dd, yyyy',  // Month abbreviation, Day, Year format (e.g., Feb 02, 2025)
+    ISO_8601_WITH_TIME = 'yyyy-MM-dd HH:mm:ss', // ISO 8601 format with time (e.g., 2025-02-02 13:45:30)
+    US_DATE_WITH_TIME = 'MM-dd-yyyy hh:mm:ss a', // 12-hour format with AM/PM (e.g., 02-02-2025 01:45:30 PM)
+    GERMAN_DATE = 'dd.MM.yyyy',            // German date format (e.g., 02.02.2025)
+    PERIOD_SEPARATED_DATE = 'yyyy.MM.dd',  // Alternative with periods (e.g., 2025.02.02)
+    ISO_8601_WITH_UTC = 'yyyy-MM-ddTHH:mm:ssZ', // ISO 8601 with UTC (e.g., 2025-02-02T13:45:30Z)
+    SHORT_DATE = 'dd/MM/yy',                // Short form date (e.g., 02/02/25)
+    MONTH_YEAR = 'MM-yyyy',                 // Month and year format (e.g., 02-2025)
+    YEAR_MONTH = 'yyyy-MM',                 // Year and month format (e.g., 2025-02)
+    TIME_ONLY = 'HH:mm:ss'                  // Time only in 24-hour format (e.g., 13:45:30)
+}

@@ -1,7 +1,7 @@
 import { FieldType } from "../enums/auto-table-data-source.enum";
 
 export interface FieldInterface {
-  fieldName: string,
+  fieldName: string;
   fieldValue: string;
   fieldType: FieldType
 }

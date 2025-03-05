@@ -1,4 +1,3 @@
-import { CryptoService } from './../../services/auth/crypto/crypto.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -6,7 +5,7 @@ import {
   NavigationEnd,
   Router,
   RouterStateSnapshot,
-  UrlTree,
+  UrlTree
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';

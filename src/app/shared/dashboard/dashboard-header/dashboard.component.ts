@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClaimUserModel } from 'src/app/core/models/claimUser.model';
 import { UserModel } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth/auth/auth.service';
-import { DialogService } from 'src/app/core/services/dialog/dialog.service';
+import { DialogData, DialogService } from 'src/app/core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -29,7 +29,16 @@ export class DashboardHeaderComponent implements OnInit {
   }
 
   logout() {
-    this.notificationService.notifiedStatusRequestDialog('Logout Account', 'Are you sure you want to logout? Once you logout you need to login again. Are you Ok?', '550px', 'Logout', 'Cancle', 'logout')
+    let model: DialogData = {
+      title: 'Logout Account',
+      message: 'Are you sure you want to logout? Once you logout you need to login again. Are you Ok?',
+      maxWidth: '550px',
+      confirmButtonTitle: 'Logout',
+      cancleButtonTitle: 'Cancel',
+      icon: 'logout'
+    };
+    
+    this.notificationService.notifiedStatusRequestDialog(model)
       .subscribe((res) => {
         if (res) {
           this.authService.logout();
